@@ -2,6 +2,8 @@
   Peter Hope, Oliver Koch-Paiz, Emma Smith (Team #6)
 
 # Requirements Link:
+https://docs.google.com/document/d/1gp3EA5ta17OGkYqQ1hmNi3T8rje5z1upFuFe_i_KtAo/edit?usp=sharing
+
 # Design and UI Link (scroll past requirements):
 https://docs.google.com/document/d/1gp3EA5ta17OGkYqQ1hmNi3T8rje5z1upFuFe_i_KtAo/edit?usp=sharing
 
