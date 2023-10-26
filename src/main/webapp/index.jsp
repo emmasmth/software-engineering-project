@@ -21,7 +21,7 @@
         .p_font_large
         {
             font-family: "American Typewriter", sans-serif;
-            font-size: large;
+            font-size: 25px;
         }
 
         .p_font_medium
