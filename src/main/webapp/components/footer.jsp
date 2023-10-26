@@ -12,8 +12,11 @@
     <style>
         .gray-footer
         {
+            height: 10vh;
+            width: 100%;
             background-color: darkgray;
             color: black;
+            margin-top: -30px;
             padding: 10px;
             text-align: center;
             font-family: Copperplate, sans-serif;

@@ -12,6 +12,7 @@
     <style>
         .gray-header
         {
+            height: 75px;
             background-color: darkgray;
             color: black;
             padding: 10px;
@@ -21,7 +22,17 @@
             font-family: Copperplate, sans-serif;
             font-size: 20px;
             letter-spacing: 6px;
+            position: fixed;
         }
+
+        @media screen and (max-width: 768px)
+        {
+            .gray-header
+            {
+                font-size: 16px;
+            }
+        }
+
     </style>
 </head>
 <body>

@@ -36,13 +36,13 @@
             font-size: small;
         }
 
-        .container
+        .box-container
         {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 80vh;
         }
 
         .white-box
@@ -57,7 +57,15 @@
             text-align: center;
             width: 50%;
             height: 50%;
-            margin-top: -400px;
+            margin-top: 10%;
+        }
+
+        @media screen and (max-width: 768px)
+        {
+            .white-box
+            {
+                margin-top: 50px;
+            }
         }
 
         .button-click
@@ -93,7 +101,7 @@
 </head>
 <body class="body">
     <jsp:include page="components/background.jsp"/>
-    <div class = "container">
+    <div class = "box-container">
         <div class = "white-box">
             <div class = "p_header_font">
                 <p>How to Play:</p>
@@ -130,6 +138,6 @@
         <button class="button-click" onclick="window.location.href = 'continue.jsp';">Continue</button>
     </div>
     <!-- need to work on spacing -->
-    <jsp:include page="components/footer.jsp"/>
+    <!-- if we want a footer, put it here -->
 </body>
 </html>
