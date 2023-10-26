@@ -2,15 +2,15 @@
   Created by IntelliJ IDEA.
   User: emmasmith
   Date: 10/25/23
-  Time: 6:56 PM
+  Time: 11:35 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Welcome to Blackjack</title>
+    <title>Footer</title>
     <style>
-        .gray-header
+        .gray-footer
         {
             background-color: darkgray;
             color: black;
@@ -23,8 +23,8 @@
     </style>
 </head>
 <body>
-    <div class = "gray-header" >
-        <h1>Welcome to Blackjack</h1>
-    </div>
+<div class = "gray-footer" >
+    <h1>Thanks for playing!</h1>
+</div>
 </body>
 </html>
