@@ -15,9 +15,11 @@
             background-color: darkgray;
             color: black;
             padding: 10px;
+            margin-bottom: 130px;
+            width: 100%;
             text-align: center;
             font-family: Copperplate, sans-serif;
-            font-size: 28px;
+            font-size: 20px;
             letter-spacing: 6px;
         }
     </style>

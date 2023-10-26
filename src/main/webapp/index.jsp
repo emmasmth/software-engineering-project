@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Instructions</title>
+    <title>Blackjack</title>
     <jsp:include page="components/header.jsp"/>
     <style>
 
@@ -57,6 +57,7 @@
             text-align: center;
             width: 50%;
             height: 50%;
+            margin-top: -400px;
         }
 
         .button-click
@@ -128,8 +129,7 @@
         <!-- https://www.w3schools.com/css/css3_buttons.asp -->
         <button class="button-click" onclick="window.location.href = 'continue.jsp';">Continue</button>
     </div>
+    <!-- need to work on spacing -->
     <jsp:include page="components/footer.jsp"/>
-
-
 </body>
 </html>
