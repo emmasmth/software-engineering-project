@@ -10,11 +10,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <jsp:include page="components/header.jsp"/>
 </head>
 <body>
+<jsp:include page="components/title.jsp"/>
+<jsp:include page="components/menu.jsp"/>
 
-<a href="hello-servlet">Hello Servlet</a>
 
 <div class="container">
   <h2 class="text-center offset-1 text-info">Registration</h2>
@@ -52,7 +53,7 @@
       </div>
 
       <div class="col-1 mt-3 d-grid">
-        <button class="btn btn-outline-info" type="button" href="">Home</button>
+        <button class="btn btn-outline-info" type="button" href="index.jsp">Home</button>
       </div>
     </div>
 
@@ -64,7 +65,8 @@
 
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
+
+<jsp:include page="components/footer.jsp"/>
 </body>
 </html>

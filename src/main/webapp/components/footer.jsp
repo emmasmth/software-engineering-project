@@ -6,28 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Footer</title>
-    <style>
-        .gray-footer
-        {
-            height: 10vh;
-            width: 100%;
-            background-color: darkgray;
-            color: black;
-            margin-top: -30px;
-            padding: 10px;
-            text-align: center;
-            font-family: Copperplate, sans-serif;
-            font-size: 28px;
-            letter-spacing: 6px;
-        }
-    </style>
-</head>
-<body>
-<div class = "gray-footer" >
-    <h1>Thanks for playing!</h1>
+<div class="mt-2 p-4 bg-dark text-white text-center">
+    <h4>Thanks for playing!</h4>
 </div>
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

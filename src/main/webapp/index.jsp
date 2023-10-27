@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Blackjack</title>
     <jsp:include page="components/header.jsp"/>
     <style>
 
@@ -98,9 +97,14 @@
         }
 
     </style>
+
 </head>
 <body class="body">
+    <jsp:include page="components/title.jsp"/>
     <jsp:include page="components/background.jsp"/>
+    <jsp:include page="components/menu.jsp"/>
+
+
     <div class = "box-container">
         <div class = "white-box">
             <div class = "p_header_font">
@@ -139,5 +143,6 @@
     </div>
     <!-- need to work on spacing -->
     <!-- if we want a footer, put it here -->
+    <jsp:include page="components/footer.jsp"/>
 </body>
 </html>
