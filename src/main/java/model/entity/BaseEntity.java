@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-package swe.model.entity;
+package model.entity;
 
 public abstract class BaseEntity
 {

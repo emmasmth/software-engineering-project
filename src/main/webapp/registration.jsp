@@ -16,15 +16,15 @@
 <jsp:include page="components/title.jsp"/>
 <jsp:include page="components/menu.jsp"/>
 
-
+<a href="ServletTemplate">asd</a>
 <div class="container">
   <h2 class="text-center offset-1 text-info">Registration</h2>
-  <form>
+  <form method="post" action="RegistrationServlet">
 
     <div class="row justify-content-center mb-1">
       <label class="col-1" for="name">Name: </label>
       <div class="col-4">
-        <input class="form-control " type="text" id="name"/>
+        <input class="form-control " type="text" id="name" name="name"/>
       </div>
     </div>
 
@@ -32,14 +32,14 @@
     <div class="row justify-content-center mb-1">
       <label class="col-1" for="username">Email: </label>
       <div class="col-4">
-        <input class="form-control" type="email" id="username"/>
+        <input class="form-control" type="email" id="username" name="username"/>
       </div>
     </div>
 
     <div class="row justify-content-center mb-1">
       <label class="col-1" for="pass">Password: </label>
       <div class="col-4">
-        <input class="form-control" type="password" id="pass"/>
+        <input class="form-control" type="password" id="pass" name="password"/>
       </div>
     </div>
 
@@ -53,7 +53,7 @@
       </div>
 
       <div class="col-1 mt-3 d-grid">
-        <button class="btn btn-outline-info" type="button" href="index.jsp">Home</button>
+        <a class="btn btn-outline-info" href="index.jsp">Home</a>
       </div>
     </div>
 

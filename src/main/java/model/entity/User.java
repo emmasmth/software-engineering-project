@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-package swe.model.entity;
+package model.entity;
 
 // imports
 import javax.persistence.*;
-
+@Entity
 public class User extends BaseEntity
 {
     @Id @Column (name = "idUser") @GeneratedValue(strategy = GenerationType.IDENTITY)
