@@ -18,7 +18,6 @@ public class RegistrationServletTest {
     public void testPost() throws IOException, ServletException {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
-
         Registration register = mock(Registration.class);
         when(register.registerUser(any(User.class))).thenReturn(new User());
 

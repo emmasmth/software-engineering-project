@@ -39,6 +39,19 @@ public class RegistrationTest {
 
     }
 
+    @Test public void loginUserTest(){
+        String username = "test@gmail.com";
+        String pass = "test123";
+        User newUser = new User(1, "Test", username, pass, User.USER_PERMISSION);
+        UserDAO mockDAO = mock(UserDAO.class);
 
+        when(mockDAO.findUserFromUsername(anyString())).thenReturn(newUser);
+        Registration registration = new Registration();
+        registration.setDAO(mockDAO);
+
+        User logged = registration.loginUser(username, pass);
+
+        assertEquals(logged.getLogin(), newUser.getLogin());
+    }
 
 }

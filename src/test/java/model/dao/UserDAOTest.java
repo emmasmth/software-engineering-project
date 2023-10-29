@@ -115,4 +115,12 @@ public class UserDAOTest {
                 () -> assertNotNull(registered.getPassword())
                 );
     }
+
+    @Test public void testLogin(){
+        User newUser = createUserEntity();
+
+        dao.create(newUser);
+        User checkLogged = dao.findUserFromUsername(newUser.getLogin());
+        assertNotNull(checkLogged.getID());
+    }
 }

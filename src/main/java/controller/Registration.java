@@ -22,5 +22,13 @@ public class Registration {
         }
     }
 
+    public User loginUser(String login, String password){
+        User find = dao.findUserFromUsername(login);
+        if(find != null && find.getPassword().equals(password)){
+            return find;
+        }
+        return null;
+    }
+
 }
 
