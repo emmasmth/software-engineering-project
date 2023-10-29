@@ -5,11 +5,12 @@
              version="3.0">
     <persistence-unit name="standardPersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>model.entity.User</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/blackjack?useSSL=false" />
             <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="Frosty123#" />
+            <property name="javax.persistence.jdbc.password" value="PASSWORD" />
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
             <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect" /> -->
