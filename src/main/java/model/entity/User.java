@@ -154,6 +154,16 @@ public class User extends BaseEntity
         this.ties++;
     }
 
+    /**
+     * getRecord method
+     * @return a string of the users W/L/D record
+     */
+    public String getRecord(){
+        return("Your record (W/L/D)" + getWins() + "/" + getLosses() + "/" + getTies());
+    }
+
+
+
 
 
     @Override
