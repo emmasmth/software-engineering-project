@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > User</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model.entity</a>
+</div>
+
+<h1>Coverage Summary for Class: User (model.entity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">User</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (31/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;// SPDX-License-Identifier: MIT
+&nbsp;package model.entity;
+&nbsp;
+&nbsp;// imports
+&nbsp;import javax.persistence.*;
+&nbsp;@Entity
+&nbsp;public class User extends BaseEntity
+&nbsp;{
+<b class="fc">&nbsp;    @Id @Column (name = &quot;idUser&quot;) @GeneratedValue(strategy = GenerationType.IDENTITY)</b>
+&nbsp;    private Integer ID = null;
+&nbsp;    @Column (unique = true) // Login must be unique for each record in DB
+&nbsp;    private String Login;
+&nbsp;    private String Name;
+&nbsp;    private String Password;
+&nbsp;    private int Permission;
+&nbsp;
+&nbsp;    // keyword transient, meaning that the data member will not be serialized.
+&nbsp;    public transient static final int USER_PERMISSION = 1;
+&nbsp;    public transient static final int ADMIN_PERMISSION = 2;
+&nbsp;
+&nbsp;
+&nbsp;    public User()
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.Permission = USER_PERMISSION;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public User(Integer ID, String name, String login, String password, int permission)
+<b class="fc">&nbsp;    {</b>
+<b class="fc">&nbsp;        this.ID = ID;</b>
+<b class="fc">&nbsp;        Name = name;</b>
+<b class="fc">&nbsp;        Login = login;</b>
+<b class="fc">&nbsp;        Password = password;</b>
+<b class="fc">&nbsp;        Permission = permission;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function gets a User&#39;s ID.
+&nbsp;     * @return an Integer, the User&#39;s ID.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public Integer getID()
+&nbsp;    {
+<b class="fc">&nbsp;        return ID;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function sets a User&#39;s ID to the argument passed in.
+&nbsp;     * @param ID, an Integer that should be the new value of the User&#39;s ID.
+&nbsp;     */
+&nbsp;    public void setID(Integer ID)
+&nbsp;    {
+<b class="fc">&nbsp;        this.ID = ID;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function sets a User&#39;s Name to the argument passed in.
+&nbsp;     * @param name, a String that should be the new value of the User&#39;s Name.
+&nbsp;     */
+&nbsp;    public void setName(String name){
+<b class="fc">&nbsp;        Name = name;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function gets a User&#39;s name.
+&nbsp;     * @return a String, the User&#39;s name.
+&nbsp;     */
+&nbsp;    public String getName()
+&nbsp;    {
+<b class="fc">&nbsp;        return Name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function gets a User&#39;s login.
+&nbsp;     * @return a String, the User&#39;s login.
+&nbsp;     */
+&nbsp;    public String getLogin()
+&nbsp;    {
+<b class="fc">&nbsp;        return Login;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function sets a User&#39;s login to the argument passed in.
+&nbsp;     * @param login, a String that should be the new value of the User&#39;s login.
+&nbsp;     */
+&nbsp;    public void setLogin(String login)
+&nbsp;    {
+<b class="fc">&nbsp;        Login = login;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function gets a User&#39;s password.
+&nbsp;     * @return a String, the User&#39;s password.
+&nbsp;     */
+&nbsp;    public String getPassword()
+&nbsp;    {
+&nbsp;        // FIXME : is it okay for this to be public?
+<b class="fc">&nbsp;        return Password;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function sets a User&#39;s password to be the argument passed in.
+&nbsp;     * @param password, a String that should be the new value of the User&#39;s password.
+&nbsp;     */
+&nbsp;    public void setPassword(String password)
+&nbsp;    {
+<b class="fc">&nbsp;        Password = password;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function gets a User&#39;s permission.
+&nbsp;     * @return an int, the User&#39;s permission.
+&nbsp;     */
+&nbsp;    public int getPermission()
+&nbsp;    {
+<b class="fc">&nbsp;        return Permission;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPermission(int permission)
+&nbsp;    {
+<b class="fc">&nbsp;        Permission = permission;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;
+<b class="fc">&nbsp;        if (Permission == USER_PERMISSION)</b>
+&nbsp;        {
+<b class="fc">&nbsp;            return &quot;Player&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if (Permission == ADMIN_PERMISSION)</b>
+&nbsp;        {
+<b class="fc">&nbsp;            return &quot;Admin&quot;;</b>
+&nbsp;        }
+&nbsp;        else
+&nbsp;        {
+<b class="fc">&nbsp;            return &quot;Unknown&quot;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-10-28 21:33</div>
+</div>
+</body>
+</html>

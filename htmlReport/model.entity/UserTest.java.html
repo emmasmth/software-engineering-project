@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UserTest Coverage Results, UserDAOTest.createUser Coverage Results, UserDAOTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.entity</a> &gt; <span class="el_source">UserTest.java</span></div><h1>UserTest.java</h1><pre class="source lang-java linenums">package model.entity;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+<span class="fc" id="L6">public class UserTest {</span>
+
+    @Test public void blankUser (){
+<span class="fc" id="L9">        User user = new User();</span>
+<span class="fc" id="L10">        assertAll(</span>
+<span class="fc" id="L11">                () -&gt; assertNull(user.getID()),</span>
+<span class="fc" id="L12">                () -&gt; assertNull(user.getName()),</span>
+<span class="fc" id="L13">                () -&gt; assertNull(user.getLogin()),</span>
+<span class="fc" id="L14">                () -&gt; assertNull(user.getPassword()),</span>
+<span class="fc" id="L15">                () -&gt; assertEquals(user.getPermission(), User.USER_PERMISSION),</span>
+<span class="fc" id="L16">                () -&gt; assertEquals(user.toString(), &quot;Player&quot;)</span>
+        );
+
+<span class="fc" id="L19">    }</span>
+
+    @Test public void newUser (){
+<span class="fc" id="L22">        User newUser = new User(5, &quot;Oliver&quot;, &quot;oliver@gmail.com&quot;, &quot;Pr123&quot;, User.ADMIN_PERMISSION);</span>
+<span class="fc" id="L23">        assertAll(</span>
+<span class="fc" id="L24">                () -&gt; assertEquals(newUser.getID(), 5),</span>
+<span class="fc" id="L25">                () -&gt; assertEquals(newUser.getName(), &quot;Oliver&quot;),</span>
+<span class="fc" id="L26">                () -&gt; assertEquals(newUser.getLogin(), &quot;oliver@gmail.com&quot;),</span>
+<span class="fc" id="L27">                () -&gt; assertEquals(newUser.getPassword(), &quot;Pr123&quot;),</span>
+<span class="fc" id="L28">                () -&gt; assertEquals(newUser.getPermission(), User.ADMIN_PERMISSION),</span>
+<span class="fc" id="L29">                () -&gt; assertEquals(newUser.toString(), &quot;Admin&quot;)</span>
+        );
+<span class="fc" id="L31">    }</span>
+
+    @Test public void newUserUsingMethods (){
+<span class="fc" id="L34">        User newUser = new User();</span>
+<span class="fc" id="L35">        newUser.setID(3);</span>
+<span class="fc" id="L36">        newUser.setName(&quot;Test&quot;);</span>
+<span class="fc" id="L37">        newUser.setLogin(&quot;test@gmail.com&quot;);</span>
+<span class="fc" id="L38">        newUser.setPassword(&quot;Test123&quot;);</span>
+<span class="fc" id="L39">        newUser.setPermission(User.ADMIN_PERMISSION);</span>
+<span class="fc" id="L40">        assertAll(</span>
+<span class="fc" id="L41">                () -&gt; assertEquals(newUser.getID(), 3),</span>
+<span class="fc" id="L42">                () -&gt; assertEquals(newUser.getName(), &quot;Test&quot;),</span>
+<span class="fc" id="L43">                () -&gt; assertEquals(newUser.getLogin(), &quot;test@gmail.com&quot;),</span>
+<span class="fc" id="L44">                () -&gt; assertEquals(newUser.getPassword(), &quot;Test123&quot;),</span>
+<span class="fc" id="L45">                () -&gt; assertEquals(newUser.getPermission(), User.ADMIN_PERMISSION),</span>
+<span class="fc" id="L46">                () -&gt; assertEquals(newUser.toString(), &quot;Admin&quot;)</span>
+        );
+<span class="fc" id="L48">    }</span>
+
+    @Test public void permissionNotRecognized(){
+<span class="fc" id="L51">        User newUser = new User();</span>
+<span class="fc" id="L52">        newUser.setPermission(9);</span>
+<span class="fc" id="L53">        assertEquals(newUser.toString(), &quot;Unknown&quot;);</span>
+
+<span class="fc" id="L55">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

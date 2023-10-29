@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayGameTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RegistrationTest Coverage Results, PlayGameTest Coverage Results, CardTest Coverage Results, BlackjackTest Coverage Results, RegistrationServletTest Coverage Results, LogoutServletTest Coverage Results, LoginServletTest Coverage Results, UserDAOTest Coverage Results, UserTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">PlayGameTest.java</span></div><h1>PlayGameTest.java</h1><pre class="source lang-java linenums">package controller;
+
+import static org.mockito.Mockito.*;
+
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+<span class="nc" id="L18">public class PlayGameTest {</span>
+
+//setup for testing terminal output
+<span class="nc" id="L21">    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();</span>
+<span class="nc" id="L22">    private final PrintStream originalOut = System.out;</span>
+    @BeforeEach
+    public void setUp() {
+<span class="nc" id="L25">        System.setOut(new PrintStream(outContent));</span>
+<span class="nc" id="L26">    }</span>
+    @AfterEach
+    public void tearDown() {
+<span class="nc" id="L29">        System.setOut(originalOut);</span>
+<span class="nc" id="L30">    }</span>
+
+
+
+//dealInitialCards method testing
+    @Test
+    public void testDealInitialCards() {
+<span class="nc" id="L37">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L38">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L39">        PlayGame playGame = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L41">        Card mockCard1 = new Card('H', &quot;10&quot;);</span>
+<span class="nc" id="L42">        Card mockCard2 = new Card('D', &quot;9&quot;);</span>
+<span class="nc" id="L43">        Card mockCard3 = new Card('C', &quot;8&quot;);</span>
+<span class="nc" id="L44">        Card mockCard4 = new Card('S', &quot;7&quot;);</span>
+<span class="nc" id="L45">        ArrayList&lt;Card&gt; playerHand = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L46">        ArrayList&lt;Card&gt; dealerHand = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L48">        when(mockGame.drawCard()).thenReturn(mockCard1, mockCard2, mockCard3, mockCard4);</span>
+<span class="nc" id="L49">        when(mockGame.getPlayerHand()).thenReturn(playerHand);</span>
+<span class="nc" id="L50">        when(mockGame.getDealerHand()).thenReturn(dealerHand);</span>
+
+<span class="nc" id="L52">        doAnswer(invocation -&gt; {</span>
+<span class="nc" id="L53">            Card card = invocation.getArgument(0);</span>
+<span class="nc" id="L54">            playerHand.add(card);</span>
+<span class="nc" id="L55">            return null;</span>
+<span class="nc" id="L56">        }).when(mockGame).addCardToPlayer(any(Card.class));</span>
+
+<span class="nc" id="L58">        doAnswer(invocation -&gt; {</span>
+<span class="nc" id="L59">            Card card = invocation.getArgument(0);</span>
+<span class="nc" id="L60">            dealerHand.add(card);</span>
+<span class="nc" id="L61">            return null;</span>
+<span class="nc" id="L62">        }).when(mockGame).addCardToDealer(any(Card.class));</span>
+
+<span class="nc" id="L64">        playGame.dealInitialCards();</span>
+
+<span class="nc" id="L66">        verify(mockGame, times(2)).addCardToPlayer(any(Card.class));</span>
+<span class="nc" id="L67">        verify(mockGame, times(2)).addCardToDealer(any(Card.class));</span>
+<span class="nc" id="L68">        verify(mockGame).addCardToPlayer(mockCard1);</span>
+<span class="nc" id="L69">        verify(mockGame).addCardToPlayer(mockCard3);</span>
+<span class="nc" id="L70">        verify(mockGame).addCardToDealer(mockCard2);</span>
+<span class="nc" id="L71">        verify(mockGame).addCardToDealer(mockCard4);</span>
+<span class="nc" id="L72">    }</span>
+
+
+//checkNaturals method testing
+    @Test
+    public void testCheckNaturalsTie() {
+<span class="nc" id="L78">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L79">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L80">        PlayGame playGame = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L82">        when(mockGame.getPlayerTotal()).thenReturn(21);</span>
+<span class="nc" id="L83">        when(mockGame.getDealerTotal()).thenReturn(21);</span>
+
+<span class="nc" id="L85">        playGame.checkNaturals();</span>
+
+<span class="nc" id="L87">        verify(mockGame).getPlayerTotal();</span>
+<span class="nc" id="L88">        verify(mockGame).getDealerTotal();</span>
+
+<span class="nc" id="L90">        assertEquals(1, playGame.getGameOutcome());</span>
+<span class="nc" id="L91">    }</span>
+    @Test
+    public void testCheckNaturalsPlayer() {
+<span class="nc" id="L94">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L95">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L96">        PlayGame playGame = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L98">        when(mockGame.getPlayerTotal()).thenReturn(21);</span>
+<span class="nc" id="L99">        when(mockGame.getDealerTotal()).thenReturn(2);</span>
+
+<span class="nc" id="L101">        playGame.checkNaturals();</span>
+
+<span class="nc" id="L103">        verify(mockGame, times(2)).getPlayerTotal();</span>
+<span class="nc" id="L104">        verify(mockGame).getDealerTotal();</span>
+<span class="nc" id="L105">        assertEquals(2, playGame.getGameOutcome());</span>
+<span class="nc" id="L106">    }</span>
+    @Test
+    public void testCheckNaturalsDealer() {
+<span class="nc" id="L109">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L110">        Scanner mockScanner = mock(Scanner.class);</span>
+
+<span class="nc" id="L112">        PlayGame playGame = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L114">        when(mockGame.getPlayerTotal()).thenReturn(2);</span>
+<span class="nc" id="L115">        when(mockGame.getDealerTotal()).thenReturn(21);</span>
+
+<span class="nc" id="L117">        playGame.checkNaturals();</span>
+
+
+<span class="nc" id="L120">        verify(mockGame, times(2)).getPlayerTotal();</span>
+<span class="nc" id="L121">        verify(mockGame, times(1)).getDealerTotal();</span>
+<span class="nc" id="L122">        assertEquals(3, playGame.getGameOutcome());</span>
+<span class="nc" id="L123">    }</span>
+    @Test
+    public void testCheckNaturalsNeither() {
+<span class="nc" id="L126">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L127">        Scanner mockScanner = mock(Scanner.class);</span>
+
+<span class="nc" id="L129">        PlayGame playGame = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L131">        when(mockGame.getPlayerTotal()).thenReturn(2);</span>
+<span class="nc" id="L132">        when(mockGame.getDealerTotal()).thenReturn(2);</span>
+
+<span class="nc" id="L134">        playGame.checkNaturals();</span>
+
+<span class="nc" id="L136">        verify(mockGame, times(2)).getPlayerTotal();</span>
+<span class="nc" id="L137">        verify(mockGame, times(1)).getDealerTotal();</span>
+<span class="nc" id="L138">        assertEquals(0, playGame.getGameOutcome());</span>
+<span class="nc" id="L139">    }</span>
+
+
+//playerTurn method testing
+    @Test
+    public void testPlayerTurnHit() {
+<span class="nc" id="L145">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L146">        Scanner mockScanner = new Scanner(&quot;h\ns\n&quot;);</span>
+<span class="nc" id="L147">        PlayGame gameUnderTest = new PlayGame(mockGame, mockScanner);</span>
+<span class="nc" id="L148">        when(mockGame.drawCard()).thenReturn(new Card('H',&quot;5&quot;)); // return some valid card</span>
+
+<span class="nc" id="L150">        gameUnderTest.playerTurn();</span>
+<span class="nc" id="L151">        verify(mockGame, times(1)).addCardToPlayer(any(Card.class));</span>
+<span class="nc" id="L152">    }</span>
+    @Test
+    public void testPlayerTurnHitGet21() {
+<span class="nc" id="L155">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L156">        Scanner mockScanner = new Scanner(&quot;h\ns\n&quot;);</span>
+<span class="nc" id="L157">        PlayGame gameUnderTest = new PlayGame(mockGame, mockScanner);</span>
+<span class="nc" id="L158">        List&lt;Card&gt; mockPlayerHand = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L160">        when(mockGame.getPlayerHand()).thenReturn((ArrayList&lt;Card&gt;) mockPlayerHand);</span>
+<span class="nc" id="L161">        when(mockGame.calculateHandTotal((ArrayList&lt;Card&gt;) mockPlayerHand)).thenReturn(21);</span>
+
+<span class="nc" id="L163">        int result = gameUnderTest.playerTurn();</span>
+<span class="nc" id="L164">        assertEquals(0, result);</span>
+<span class="nc" id="L165">    }</span>
+    @Test
+    public void testPlayerTurnHitBust() {
+<span class="nc" id="L168">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L169">        Scanner mockScanner = new Scanner(&quot;h\ns\n&quot;);</span>
+<span class="nc" id="L170">        PlayGame gameUnderTest = new PlayGame(mockGame, mockScanner);</span>
+<span class="nc" id="L171">        List&lt;Card&gt; mockPlayerHand = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L173">        when(mockGame.getPlayerHand()).thenReturn((ArrayList&lt;Card&gt;) mockPlayerHand);</span>
+<span class="nc" id="L174">        when(mockGame.calculateHandTotal((ArrayList&lt;Card&gt;) mockPlayerHand)).thenReturn(23);</span>
+
+<span class="nc" id="L176">        int result = gameUnderTest.playerTurn();</span>
+<span class="nc" id="L177">        assertEquals(1, result);</span>
+<span class="nc" id="L178">    }</span>
+    @Test
+    public void testPlayerTurnStand() {
+<span class="nc" id="L181">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L182">        Scanner mockScanner = new Scanner(&quot;s\n&quot;);</span>
+<span class="nc" id="L183">        PlayGame gameUnderTest = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L185">        gameUnderTest.playerTurn();</span>
+
+<span class="nc" id="L187">        verify(mockGame, never()).addCardToPlayer(any(Card.class));</span>
+<span class="nc" id="L188">    }</span>
+
+
+//dealerTurn method testing
+    @Test
+    public void testDealerTurnAddCardOnceWhenTotalIs16() {
+<span class="nc" id="L194">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L195">        PlayGame gameUnderTest = new PlayGame(mockGame, null);</span>
+
+<span class="nc" id="L197">        when(mockGame.calculateHandTotal(mockGame.getDealerHand())).thenReturn(16, 17); // the second return is for after adding a card</span>
+<span class="nc" id="L198">        doNothing().when(mockGame).addCardToDealer(any(Card.class));</span>
+
+<span class="nc" id="L200">        when(mockGame.drawCard()).thenReturn(new Card('H', &quot;3&quot;));  // you can replace with any valid card</span>
+
+<span class="nc" id="L202">        gameUnderTest.dealerTurn();</span>
+
+<span class="nc" id="L204">        verify(mockGame, times(1)).addCardToDealer(any(Card.class));</span>
+<span class="nc" id="L205">    }</span>
+    @Test
+    public void testDealerTurnNoAddCardWhenTotalIs17() {
+<span class="nc" id="L208">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L209">        PlayGame gameUnderTest = new PlayGame(mockGame, null);</span>
+
+<span class="nc" id="L211">        when(mockGame.calculateHandTotal(mockGame.getDealerHand())).thenReturn(17);</span>
+<span class="nc" id="L212">        doNothing().when(mockGame).addCardToDealer(any(Card.class));</span>
+
+<span class="nc" id="L214">        gameUnderTest.dealerTurn();</span>
+
+<span class="nc" id="L216">        verify(mockGame, never()).addCardToDealer(any(Card.class));</span>
+<span class="nc" id="L217">    }</span>
+
+//determineWinner method testing
+    @Test
+    public void testDetermineWinner_DealerWins() {
+<span class="nc" id="L222">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L223">        PlayGame gameUnderTest = new PlayGame(mockGame, null);</span>
+
+<span class="nc" id="L225">        when(mockGame.calculateHandTotal(any(ArrayList.class))).thenReturn(20, 21);</span>
+
+<span class="nc" id="L227">        gameUnderTest.determineWinner();</span>
+
+<span class="nc" id="L229">        assertEquals(3, gameUnderTest.getGameOutcome());</span>
+<span class="nc" id="L230">    }</span>
+    @Test
+    public void testDetermineWinner_PlayerWins() {
+<span class="nc" id="L233">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L234">        PlayGame gameUnderTest = new PlayGame(mockGame, null);</span>
+
+<span class="nc" id="L236">        when(mockGame.calculateHandTotal(any(ArrayList.class))).thenReturn(21, 20);</span>
+
+<span class="nc" id="L238">        gameUnderTest.determineWinner();</span>
+
+<span class="nc" id="L240">        assertEquals(2, gameUnderTest.getGameOutcome());</span>
+<span class="nc" id="L241">    }</span>
+    @Test
+    public void testDetermineWinner_Tie() {
+<span class="nc" id="L244">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L245">        PlayGame gameUnderTest = new PlayGame(mockGame, null);</span>
+
+<span class="nc" id="L247">        when(mockGame.calculateHandTotal(any(ArrayList.class))).thenReturn(20, 20);</span>
+
+<span class="nc" id="L249">        gameUnderTest.determineWinner();</span>
+
+<span class="nc" id="L251">        assertEquals(1, gameUnderTest.getGameOutcome());</span>
+<span class="nc" id="L252">    }</span>
+
+
+//endGame method testing
+    @Test
+    public void testEndGame_Tie() {
+<span class="nc" id="L258">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L259">        PlayGame gameUnderTest = new PlayGame(mockGame, null);</span>
+
+<span class="nc" id="L261">        when(mockGame.getPlayerTotal()).thenReturn(20);</span>
+<span class="nc" id="L262">        when(mockGame.getDealerTotal()).thenReturn(20);</span>
+
+<span class="nc" id="L264">        gameUnderTest.endGame(1);</span>
+
+<span class="nc" id="L266">        String expectedOutput = &quot;Game Over!\nYou: 20 Dealer: 20\nIt's a tie!\n&quot;;</span>
+<span class="nc" id="L267">        assertEquals(expectedOutput, outContent.toString());</span>
+<span class="nc" id="L268">    }</span>
+    @Test
+    public void testEndGame_PlayerWins() {
+<span class="nc" id="L271">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L272">        PlayGame gameUnderTest = new PlayGame(mockGame, null);</span>
+
+<span class="nc" id="L274">        when(mockGame.getPlayerTotal()).thenReturn(21);</span>
+<span class="nc" id="L275">        when(mockGame.getDealerTotal()).thenReturn(20);</span>
+
+<span class="nc" id="L277">        gameUnderTest.endGame(2);</span>
+
+<span class="nc" id="L279">        String expectedOutput = &quot;Game Over!\nYou: 21 Dealer: 20\nPlayer wins!\n&quot;;</span>
+<span class="nc" id="L280">        assertEquals(expectedOutput, outContent.toString());</span>
+<span class="nc" id="L281">    }</span>
+    @Test
+    public void testEndGame_DealerWins() {
+<span class="nc" id="L284">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L285">        PlayGame gameUnderTest = new PlayGame(mockGame, null);</span>
+
+<span class="nc" id="L287">        when(mockGame.getPlayerTotal()).thenReturn(19);</span>
+<span class="nc" id="L288">        when(mockGame.getDealerTotal()).thenReturn(20);</span>
+
+<span class="nc" id="L290">        gameUnderTest.endGame(3);</span>
+
+<span class="nc" id="L292">        String expectedOutput = &quot;Game Over!\nYou: 19 Dealer: 20\nDealer wins!\n&quot;;</span>
+<span class="nc" id="L293">        assertEquals(expectedOutput, outContent.toString());</span>
+<span class="nc" id="L294">    }</span>
+
+
+//play method testing
+    @Test
+    public void testPlayNaturals() {
+<span class="nc" id="L300">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L301">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L302">        PlayGame gameUnderTest = spy(new PlayGame(mockGame, mockScanner));</span>
+
+<span class="nc" id="L304">        gameUnderTest.gameOutcome = 1;</span>
+
+<span class="nc" id="L306">        doNothing().when(gameUnderTest).dealInitialCards();</span>
+<span class="nc" id="L307">        doNothing().when(gameUnderTest).checkNaturals();</span>
+<span class="nc" id="L308">        doNothing().when(gameUnderTest).dealerTurn();</span>
+<span class="nc" id="L309">        doNothing().when(gameUnderTest).determineWinner();</span>
+<span class="nc" id="L310">        doNothing().when(gameUnderTest).endGame(anyInt());</span>
+
+<span class="nc" id="L312">        gameUnderTest.play();</span>
+
+<span class="nc" id="L314">        verify(gameUnderTest).dealInitialCards();</span>
+<span class="nc" id="L315">        verify(gameUnderTest).checkNaturals();</span>
+<span class="nc" id="L316">        verify(gameUnderTest, never()).playerTurn();</span>
+<span class="nc" id="L317">        verify(gameUnderTest, never()).dealerTurn();</span>
+<span class="nc" id="L318">        verify(gameUnderTest, never()).determineWinner();</span>
+<span class="nc" id="L319">        verify(gameUnderTest).endGame(1); // Tie due to both having naturals</span>
+<span class="nc" id="L320">    }</span>
+    @Test
+    public void testPlayNoNaturalsPlayerBust() {
+<span class="nc" id="L323">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L324">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L325">        PlayGame gameUnderTest = spy(new PlayGame(mockGame, mockScanner));</span>
+
+<span class="nc" id="L327">        gameUnderTest.gameOutcome = 0;</span>
+
+<span class="nc" id="L329">        doNothing().when(gameUnderTest).dealInitialCards();</span>
+<span class="nc" id="L330">        doNothing().when(gameUnderTest).checkNaturals();</span>
+<span class="nc" id="L331">        doNothing().when(gameUnderTest).dealerTurn();</span>
+<span class="nc" id="L332">        doNothing().when(gameUnderTest).determineWinner();</span>
+<span class="nc" id="L333">        doNothing().when(gameUnderTest).endGame(anyInt());</span>
+<span class="nc" id="L334">        doReturn(1).when(gameUnderTest).playerTurn();</span>
+
+<span class="nc" id="L336">        gameUnderTest.play();</span>
+
+<span class="nc" id="L338">        verify(gameUnderTest).dealInitialCards();</span>
+<span class="nc" id="L339">        verify(gameUnderTest).checkNaturals();</span>
+<span class="nc" id="L340">        verify(gameUnderTest, never()).dealerTurn();</span>
+<span class="nc" id="L341">        verify(gameUnderTest).determineWinner();</span>
+<span class="nc" id="L342">        verify(gameUnderTest).endGame(gameUnderTest.gameOutcome); // Dealer Wins bc of Player bust</span>
+<span class="nc" id="L343">    }</span>
+    @Test
+    public void testPlayNoNaturalsPlayerNoBust() {
+<span class="nc" id="L346">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L347">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L348">        PlayGame gameUnderTest = spy(new PlayGame(mockGame, mockScanner));</span>
+
+<span class="nc" id="L350">        gameUnderTest.gameOutcome = 0;</span>
+
+<span class="nc" id="L352">        doNothing().when(gameUnderTest).dealInitialCards();</span>
+<span class="nc" id="L353">        doNothing().when(gameUnderTest).checkNaturals();</span>
+<span class="nc" id="L354">        doNothing().when(gameUnderTest).dealerTurn();</span>
+<span class="nc" id="L355">        doNothing().when(gameUnderTest).determineWinner();</span>
+<span class="nc" id="L356">        doNothing().when(gameUnderTest).endGame(anyInt());</span>
+<span class="nc" id="L357">        doReturn(0).when(gameUnderTest).playerTurn();</span>
+
+<span class="nc" id="L359">        gameUnderTest.play();</span>
+
+<span class="nc" id="L361">        verify(gameUnderTest).dealInitialCards();</span>
+<span class="nc" id="L362">        verify(gameUnderTest).checkNaturals();</span>
+<span class="nc" id="L363">        verify(gameUnderTest).dealerTurn();</span>
+<span class="nc" id="L364">        verify(gameUnderTest).determineWinner();</span>
+<span class="nc" id="L365">        verify(gameUnderTest).endGame(gameUnderTest.gameOutcome); // Dealer Wins bc of Player bust</span>
+<span class="nc" id="L366">    }</span>
+
+
+//PrintHand method testing
+    @Test
+    public void testPrintHandPlayer() {
+<span class="nc" id="L372">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L373">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L374">        PlayGame gameUnderTest = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L376">        List&lt;Card&gt; mockPlayerHand = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L377">        mockPlayerHand.add(new Card('H', &quot;6&quot;));</span>
+<span class="nc" id="L378">        mockPlayerHand.add(new Card('D', &quot;5&quot;));</span>
+<span class="nc" id="L379">        when(mockGame.getPlayerHand()).thenReturn((ArrayList&lt;Card&gt;) mockPlayerHand);</span>
+<span class="nc" id="L380">        when(mockGame.getPlayerTotal()).thenReturn(11); // 6 + 5</span>
+
+<span class="nc" id="L382">        gameUnderTest.printHand(&quot;player&quot;);</span>
+
+<span class="nc" id="L384">        String expectedOutput = &quot;Your hand: [6H, 5D] (11)\n&quot;;</span>
+<span class="nc" id="L385">        assertEquals(expectedOutput, outContent.toString());</span>
+<span class="nc" id="L386">    }</span>
+    @Test
+    public void testPrintHandPlayerEmpty() {
+<span class="nc" id="L389">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L390">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L391">        PlayGame gameUnderTest = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L393">        List&lt;Card&gt; mockPlayerHand = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L394">        when(mockGame.getPlayerHand()).thenReturn((ArrayList&lt;Card&gt;) mockPlayerHand);</span>
+<span class="nc" id="L395">        when(mockGame.getPlayerTotal()).thenReturn(0);</span>
+
+<span class="nc" id="L397">        gameUnderTest.printHand(&quot;player&quot;);</span>
+
+<span class="nc" id="L399">        String expectedOutput = &quot;Player hand is empty\n&quot;;</span>
+<span class="nc" id="L400">        assertEquals(expectedOutput, outContent.toString());</span>
+<span class="nc" id="L401">    }</span>
+    @Test
+    public void testPrintHandDealer() {
+<span class="nc" id="L404">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L405">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L406">        PlayGame gameUnderTest = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L408">        List&lt;Card&gt; mockDealerHand = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L409">        mockDealerHand.add(new Card('H', &quot;6&quot;));</span>
+<span class="nc" id="L410">        mockDealerHand.add(new Card('D', &quot;5&quot;));</span>
+<span class="nc" id="L411">        when(mockGame.getDealerHand()).thenReturn((ArrayList&lt;Card&gt;) mockDealerHand);</span>
+<span class="nc" id="L412">        when(mockGame.getDealerTotal()).thenReturn(11); // 6 + 5</span>
+
+<span class="nc" id="L414">        gameUnderTest.printHand(&quot;dealer&quot;);</span>
+
+<span class="nc" id="L416">        String expectedOutput = &quot;Dealer hand: [6H, 5D] (11)\n&quot;;</span>
+<span class="nc" id="L417">        assertEquals(expectedOutput, outContent.toString());</span>
+<span class="nc" id="L418">    }</span>
+    @Test
+    public void testPrintHandDealerEmpty() {
+<span class="nc" id="L421">        Blackjack mockGame = mock(Blackjack.class);</span>
+<span class="nc" id="L422">        Scanner mockScanner = mock(Scanner.class);</span>
+<span class="nc" id="L423">        PlayGame gameUnderTest = new PlayGame(mockGame, mockScanner);</span>
+
+<span class="nc" id="L425">        List&lt;Card&gt; mockDealerHand = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L426">        when(mockGame.getDealerHand()).thenReturn((ArrayList&lt;Card&gt;) mockDealerHand);</span>
+<span class="nc" id="L427">        when(mockGame.getDealerTotal()).thenReturn(0);</span>
+
+<span class="nc" id="L429">        gameUnderTest.printHand(&quot;dealer&quot;);</span>
+
+<span class="nc" id="L431">        String expectedOutput = &quot;Dealer hand is empty\n&quot;;</span>
+<span class="nc" id="L432">        assertEquals(expectedOutput, outContent.toString());</span>
+<span class="nc" id="L433">    }</span>
+
+
+}
+
+
+
+
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

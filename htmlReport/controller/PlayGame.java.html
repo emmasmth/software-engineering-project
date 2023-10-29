@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RegistrationTest Coverage Results, PlayGameTest Coverage Results, CardTest Coverage Results, BlackjackTest Coverage Results, RegistrationServletTest Coverage Results, LogoutServletTest Coverage Results, LoginServletTest Coverage Results, UserDAOTest Coverage Results, UserTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">PlayGame.java</span></div><h1>PlayGame.java</h1><pre class="source lang-java linenums">package controller;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * PlayGame class
+ * simulates the playing of a blackjack game
+ */
+public class PlayGame {
+
+    //private Blackjack game;
+    private Scanner scanner;
+<span class="nc" id="L14">    int gameOutcome = 0; //flag for game outcome</span>
+<span class="nc" id="L15">    Blackjack game = new Blackjack();</span>
+
+    /**
+     * default constructor
+     */
+<span class="nc" id="L20">    public PlayGame() {</span>
+<span class="nc" id="L21">        game = new Blackjack();</span>
+<span class="nc" id="L22">        scanner = new Scanner(System.in);</span>
+<span class="nc" id="L23">    }</span>
+
+    /**
+     * constructor for testing with mockito
+     * @param game
+     * @param scanner
+     */
+<span class="nc" id="L30">    public PlayGame(Blackjack game, Scanner scanner) {</span>
+<span class="nc" id="L31">        this.game = game;</span>
+<span class="nc" id="L32">        this.scanner = scanner;</span>
+<span class="nc" id="L33">    }</span>
+
+    public int getGameOutcome(){
+<span class="nc" id="L36">        return gameOutcome;</span>
+    }
+
+    /**
+     * play method
+     * main play progression function
+     */
+    public void play() {
+<span class="nc" id="L44">        System.out.println(&quot;Welcome to Blackjack!&quot;);</span>
+
+        // Deal initial cards
+<span class="nc" id="L47">        dealInitialCards();</span>
+
+        // Check for naturals
+<span class="nc" id="L50">        checkNaturals();</span>
+
+        //if neither won yet
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (gameOutcome == 0) {</span>
+            // Player's turn
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (playerTurn() == 0) {</span>
+                //if player didn't bust
+                //Dealer's turn
+<span class="nc" id="L58">                dealerTurn();</span>
+            }
+            // Determine the winner
+<span class="nc" id="L61">            determineWinner();</span>
+        }
+        //announce winner
+<span class="nc" id="L64">        endGame(gameOutcome);</span>
+
+<span class="nc" id="L66">        scanner.close();</span>
+<span class="nc" id="L67">    }</span>
+
+    /**
+     * dealInitialCards
+     * adds first 2 cards to dealer and player hands
+     */
+    public void dealInitialCards() {
+        //deal two cards to player and dealer
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        for (int i = 0; i &lt; 2; i++) {</span>
+<span class="nc" id="L76">            game.addCardToPlayer(game.drawCard());</span>
+<span class="nc" id="L77">            game.addCardToDealer(game.drawCard());</span>
+        }
+        //shows each hand
+<span class="nc" id="L80">        printHand(&quot;player&quot;);</span>
+<span class="nc" id="L81">        System.out.println(&quot;Dealer's visible card: &quot; + game.getDealerHand().get(0));</span>
+<span class="nc" id="L82">    }</span>
+
+    /**
+     * checkNaturals
+     * checks if player or dealer won with initial cards
+     */
+    public void checkNaturals() {
+<span class="nc bnc" id="L89" title="All 4 branches missed.">        if(game.getPlayerTotal() == 21 &amp;&amp; game.getDealerTotal()==21){</span>
+<span class="nc" id="L90">            gameOutcome = 1; //tie</span>
+        }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        else if (game.getPlayerTotal() == 21) {</span>
+<span class="nc" id="L93">            gameOutcome = 2; //player win</span>
+        }
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        else if (game.getDealerTotal() == 21) {</span>
+<span class="nc" id="L96">            gameOutcome = 3; //dealer win</span>
+        }
+        else
+<span class="nc" id="L99">            gameOutcome = 0; //neither - continue game</span>
+<span class="nc" id="L100">    }</span>
+
+    /**
+     * playerTurn
+     * give player options to hit or stand for their turn
+     * return int - 0=continue play, 1=player busted
+     */
+    public int playerTurn() {
+        //Blackjack game = new Blackjack();
+        //repeat player's turn until stand or bust
+        while (true) {
+<span class="nc" id="L111">            System.out.println(&quot;Do you want to (h)it or (s)tand?&quot;);</span>
+<span class="nc" id="L112">            char choice = scanner.nextLine().charAt(0);</span>
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (choice == 'h') {</span>
+<span class="nc" id="L115">                game.addCardToPlayer(game.drawCard());</span>
+<span class="nc" id="L116">                printHand(&quot;player&quot;);</span>
+                //player got 21 - automatic move on
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                if(game.calculateHandTotal(game.getPlayerHand()) == 21){</span>
+<span class="nc" id="L119">                    break;</span>
+                }
+                //player busted
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                if (game.calculateHandTotal(game.getPlayerHand()) &gt; 21) {</span>
+<span class="nc" id="L123">                    System.out.println(&quot;Busted!&quot;);</span>
+<span class="nc" id="L124">                    return(1);</span>
+                }
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            } else if (choice == 's') {</span>
+<span class="nc" id="L127">                break;</span>
+            }
+<span class="nc" id="L129">        }</span>
+<span class="nc" id="L130">        return(0);</span>
+    }
+
+    /**
+     * dealerTurn
+     * will keep hitting until total is 17+
+     */
+    public void dealerTurn() {
+        //Blackjack game = new Blackjack();
+<span class="nc" id="L139">        System.out.println(&quot;Dealer's turn...&quot;);</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        while (game.calculateHandTotal(game.getDealerHand()) &lt; 17) {</span>
+<span class="nc" id="L141">            game.addCardToDealer(game.drawCard());</span>
+<span class="nc" id="L142">            printHand(&quot;dealer&quot;);</span>
+        }
+<span class="nc" id="L144">    }</span>
+
+    /**
+     * determineWinner
+     * checks both player and dealer hand totals and determines the winner
+     */
+    public void determineWinner() {
+<span class="nc" id="L151">        int playerTotal = game.calculateHandTotal(game.getPlayerHand());</span>
+<span class="nc" id="L152">        int dealerTotal = game.calculateHandTotal(game.getDealerHand());</span>
+<span class="nc" id="L153">        System.out.println(&quot;player: &quot; + playerTotal);</span>
+<span class="nc" id="L154">        System.out.println(&quot;dealer: &quot; + dealerTotal);</span>
+<span class="nc bnc" id="L155" title="All 6 branches missed.">        if (playerTotal &gt; 21 || (dealerTotal &lt;= 21 &amp;&amp; dealerTotal &gt; playerTotal)) {</span>
+<span class="nc" id="L156">            gameOutcome = 3; // dealer win</span>
+<span class="nc bnc" id="L157" title="All 4 branches missed.">        } else if (dealerTotal &gt; 21 || playerTotal &gt; dealerTotal) {</span>
+<span class="nc" id="L158">            gameOutcome = 2; // player win</span>
+        } else {
+<span class="nc" id="L160">            gameOutcome = 1; // tie</span>
+        }
+<span class="nc" id="L162">        System.out.println(&quot;end: &quot; + gameOutcome);</span>
+<span class="nc" id="L163">    }</span>
+
+    /**
+     * endGame
+     * prints who won and will add game to history
+     * @param winner int for who won (1=tie, 2=player, 3=dealer)
+     */
+    public void endGame(int winner){
+<span class="nc" id="L171">        System.out.println(&quot;Game Over!&quot;);</span>
+<span class="nc" id="L172">        System.out.println(&quot;You: &quot; + game.getPlayerTotal() + &quot; Dealer: &quot; + game.getDealerTotal());</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">        if (winner == 1){</span>
+<span class="nc" id="L174">            System.out.println(&quot;It's a tie!&quot;);</span>
+            //add tie to user history
+        }
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        if (winner == 2){</span>
+<span class="nc" id="L178">            System.out.println(&quot;Player wins!&quot;);</span>
+            //add win to user history
+        }
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        if (winner == 3){</span>
+<span class="nc" id="L182">            System.out.println(&quot;Dealer wins!&quot;);</span>
+            //add loss to user history
+        }
+<span class="nc" id="L185">    }</span>
+
+    /**
+     * printHand
+     * prints the cards in the hand and its total
+     */
+    public void printHand(String hand) {
+<span class="nc bnc" id="L192" title="All 2 branches missed.">        if(hand.equals(&quot;player&quot;)) {</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">            if (!game.getPlayerHand().isEmpty()) {</span>
+<span class="nc" id="L194">                System.out.println(&quot;Your hand: &quot; + game.getPlayerHand() + &quot; (&quot; + game.getPlayerTotal() + &quot;)&quot;);</span>
+            }
+            else {
+<span class="nc" id="L197">                System.out.println(&quot;Player hand is empty&quot;);</span>
+            }
+        }
+        else {
+<span class="nc bnc" id="L201" title="All 2 branches missed.">            if(!game.getDealerHand().isEmpty()) {</span>
+<span class="nc" id="L202">                System.out.println(&quot;Dealer hand: &quot; + game.getDealerHand() + &quot; (&quot; + game.getDealerTotal() + &quot;)&quot;);</span>
+            }
+            else {
+<span class="nc" id="L205">                System.out.println(&quot;Dealer hand is empty&quot;);</span>
+            }
+        }
+<span class="nc" id="L208">    }</span>
+
+
+    public static void main(String[] args) {
+<span class="nc" id="L212">        PlayGame playGame = new PlayGame();</span>
+<span class="nc" id="L213">        playGame.play();</span>
+<span class="nc" id="L214">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

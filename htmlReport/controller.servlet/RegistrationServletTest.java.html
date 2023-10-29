@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RegistrationServletTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">RegistrationTest Coverage Results, PlayGameTest Coverage Results, CardTest Coverage Results, BlackjackTest Coverage Results, RegistrationServletTest Coverage Results, LogoutServletTest Coverage Results, LoginServletTest Coverage Results, UserDAOTest Coverage Results, UserTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">RegistrationServletTest.java</span></div><h1>RegistrationServletTest.java</h1><pre class="source lang-java linenums">package controller.servlet;
+
+import controller.Registration;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import model.dao.UserDAO;
+import model.entity.User;
+import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+<span class="nc" id="L15">public class RegistrationServletTest {</span>
+
+    @Test
+    public void testPost() throws IOException, ServletException {
+<span class="nc" id="L19">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="nc" id="L20">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="nc" id="L21">        Registration register = mock(Registration.class);</span>
+<span class="nc" id="L22">        when(register.registerUser(any(User.class))).thenReturn(new User());</span>
+
+<span class="nc" id="L24">        RegistrationServlet servlet = new RegistrationServlet(register);</span>
+
+<span class="nc" id="L26">        when(request.getParameter(&quot;name&quot;)).thenReturn(&quot;Test&quot;);</span>
+<span class="nc" id="L27">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;test@gmail.com&quot;);</span>
+<span class="nc" id="L28">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;Test123&quot;);</span>
+
+<span class="nc" id="L30">        doNothing().when(response).sendRedirect(anyString());</span>
+
+<span class="nc" id="L32">        servlet.doPost(request, response);</span>
+
+<span class="nc" id="L34">        assertDoesNotThrow(</span>
+<span class="nc" id="L35">                () -&gt; verify(response).sendRedirect(&quot;index.jsp&quot;)</span>
+        );
+<span class="nc" id="L37">    }</span>
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
