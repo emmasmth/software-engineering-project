@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User extends BaseEntity
 {
-    @Id @Column (name = "idUser") @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @Column (name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID = null;
     @Column (unique = true) // Login must be unique for each record in DB
     private String Login;
