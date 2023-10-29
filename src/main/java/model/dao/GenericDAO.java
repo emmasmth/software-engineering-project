@@ -2,6 +2,7 @@
 package model.dao;
 
 import model.entity.BaseEntity;
+import model.entity.User;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;

@@ -4,6 +4,8 @@ package model.entity;
 // imports
 import javax.persistence.*;
 @Entity
+@Table(name = "user", schema = "blackjack")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User extends BaseEntity
 {
     @Id @Column (name = "idUser") @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,12 +103,11 @@ public class User extends BaseEntity
         Permission = permission;
     }
 
-    @Override
-    public String toString() {
+    public String getPermissionAsString() {
 
         if (Permission == USER_PERMISSION)
         {
-            return "Player";
+            return "User";
         }
         else if (Permission == ADMIN_PERMISSION)
         {
@@ -120,3 +121,17 @@ public class User extends BaseEntity
     }
 
 }
+
+
+/**
+ *
+ * create table user(
+ *     id_user int not null auto_increment,
+ *     name_user varchar(50),
+ *     login varchar(30) not null,
+ *     password char(60) not null,
+ *     permission int not null default 1,
+ *     constraint user_pk primary key(id_user),
+ *     constraint user_login_uk unique key(login)
+ *  );
+ */
