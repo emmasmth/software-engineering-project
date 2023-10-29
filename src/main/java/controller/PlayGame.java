@@ -1,7 +1,4 @@
 package controller;
-import jakarta.servlet.http.HttpServletRequest;
-import model.dao.UserDAO;
-import model.entity.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,7 +9,7 @@ import java.util.Scanner;
  */
 public class PlayGame {
 
-    private HttpServletRequest request;
+    //private Blackjack game;
     private Scanner scanner;
     int gameOutcome = 0; //flag for game outcome
     Blackjack game = new Blackjack();
@@ -20,8 +17,7 @@ public class PlayGame {
     /**
      * default constructor
      */
-    public PlayGame(HttpServletRequest request) {
-        this.request = request;
+    public PlayGame() {
         game = new Blackjack();
         scanner = new Scanner(System.in);
     }
@@ -36,33 +32,9 @@ public class PlayGame {
         this.scanner = scanner;
     }
 
-    /**
-     * getGameOutcome method
-     * @return gameOutcome - int 1=tie 2=playerwin 3=dealerwin
-     */
     public int getGameOutcome(){
         return gameOutcome;
     }
-
-    /**
-     * updateGameHistory method
-     * adds a tie, win, or loss to the current users game history based off the outcome of play()
-     */
-    public void updateGameHistory(){
-        User currentUser = (User) request.getSession().getAttribute("currentUser");
-        if (gameOutcome == 1) {
-            currentUser.incrementTies();
-        } else if (gameOutcome == 2) {
-            currentUser.incrementWins();
-        } else if (gameOutcome == 3) {
-            currentUser.incrementLosses();
-        }
-
-        //persists updated user data
-        UserDAO userDAO = new UserDAO();
-        userDAO.update(currentUser);
-    }
-
 
     /**
      * play method
@@ -210,11 +182,6 @@ public class PlayGame {
             System.out.println("Dealer wins!");
             //add loss to user history
         }
-
-        //adds gameOutcome to Game History
-        if(request != null) {
-            updateGameHistory();
-        }
     }
 
     /**
@@ -241,13 +208,8 @@ public class PlayGame {
     }
 
 
-    /**
-     * main method
-     * for testing in non-web app context
-     * @param args
-     */
     public static void main(String[] args) {
-        PlayGame playGame = new PlayGame(null);
+        PlayGame playGame = new PlayGame();
         playGame.play();
     }
 }
