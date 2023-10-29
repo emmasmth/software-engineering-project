@@ -145,12 +145,12 @@ public class User extends BaseEntity
 /**
  *
  * create table user(
- *     id_user int not null auto_increment,
- *     name_user varchar(50),
- *     login varchar(30) not null,
- *     password char(60) not null,
- *     permission int not null default 1,
- *     constraint user_pk primary key(id_user),
- *     constraint user_login_uk unique key(login)
+ *     ID int not null auto_increment,
+ *     Name varchar(50),
+ *     Login varchar(30) not null,
+ *     Password char(60) not null,
+ *     Permission int not null default 1,
+ *     constraint user_pk primary key(ID),
+ *     constraint user_login_uk unique key(Login)
  *  );
  */
