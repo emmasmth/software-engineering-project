@@ -118,14 +118,12 @@
                 <p>Objective:</p>
             </div>
             <div class="p_font_medium">
-                <p>
                     <strong>Beat the dealer!</strong>
                     <ul>
                         <li>Draw a hand higher than the dealer's hand.</li>
                         <li>The dealer draws a hand over 21.</li>
                         <li>Draw a hand of 21 with your first two cards, as long as the dealer doesn't do the same.</li>
                     </ul>
-                </p>
             </div>
             <div class="p_font_large">
                 <p>Gameplay:</p>
