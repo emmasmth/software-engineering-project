@@ -13,6 +13,12 @@ public class User extends BaseEntity
     private String Name;
     private String Password;
     private int Permission;
+    @Column(name = "wins")
+    private int wins;
+    @Column(name = "losses")
+    private int losses;
+    @Column(name = "ties")
+    private int ties;
 
     // keyword transient, meaning that the data member will not be serialized.
     public transient static final int USER_PERMISSION = 1;
@@ -119,6 +125,36 @@ public class User extends BaseEntity
     {
         Permission = permission;
     }
+
+    //getters, setters, and incrementers for the users ties, wins, and losses
+    //wins
+    public int getWins(){return wins;}
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+    public void incrementWins() {
+        this.wins++;
+    }
+
+    //loses
+    public int getLosses(){return losses;}
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+    public void incrementLosses() {
+        this.losses++;
+    }
+
+    //ties
+    public int getTies(){return ties;}
+    public void setTies(int ties) {
+        this.ties = ties;
+    }
+    public void incrementTies() {
+        this.ties++;
+    }
+
+
 
     @Override
     public String toString() {
