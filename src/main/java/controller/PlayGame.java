@@ -1,4 +1,6 @@
 package controller;
+import model.entity.TryUserDatabase;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -209,5 +211,7 @@ public class PlayGame {
     public static void main(String[] args) {
         PlayGame playGame = new PlayGame();
         playGame.play();
+
+        // TryUserDatabase tud = new TryUserDatabase(); // ** Was using this to test if database is working
     }
 }
