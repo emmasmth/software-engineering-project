@@ -16,7 +16,6 @@
 <jsp:include page="components/title.jsp"/>
 <jsp:include page="components/menu.jsp"/>
 
-<a href="ServletTemplate">asd</a>
 <div class="container">
   <h2 class="text-center offset-1 text-info">Registration</h2>
   <form method="post" action="RegistrationServlet">

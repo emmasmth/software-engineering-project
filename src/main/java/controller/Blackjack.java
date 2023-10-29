@@ -74,7 +74,7 @@ public class Blackjack {
      * @param hand players or dealers
      * @return an int, total
      */
-    public static int calculateHandTotal(ArrayList<Card> hand) {
+    public int calculateHandTotal(ArrayList<Card> hand) {
         int total = 0;
         int aceCount = 0;
 

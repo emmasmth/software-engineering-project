@@ -4,24 +4,41 @@ import java.io.*;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import jakarta.validation.constraints.Null;
 import model.entity.User;
 import controller.Registration;
 
 @WebServlet(name = "RegistrationServlet", value = "/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
+    public Registration registration = new Registration();
+
+    public RegistrationServlet(Registration registration) {
+        this.registration = registration;
+    }
+    public RegistrationServlet() {
+
+    }
+
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+        User user = new User();
+        user.setName(name);
+        user.setLogin(username);
+        user.setPassword(password);
 
-        User newUser = new User();
-        newUser.setLogin(username);
-        newUser.setPassword(password);
-        Registration.register(newUser);
-        response.sendRedirect("index.jsp");
 
+        User userRegistered = registration.registerUser(user);
+
+        if(userRegistered != null){
+            response.sendRedirect("index.jsp");
+        }
+        else{
+            response.sendRedirect("registration.jsp?error=1");
+        }
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

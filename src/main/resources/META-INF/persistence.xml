@@ -20,9 +20,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test_database" />
-            <property name="javax.persistence.jdbc.user" value="username" />
-            <property name="javax.persistence.jdbc.password" value="password" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Test" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="Frosty123#" />
             <property name="hibernate.show_sql" value="true" />
             <!-- <property name="hibernate.format_sql" value="true"/> -->
             <property name="hibernate.hbm2ddl.auto" value="update"/>

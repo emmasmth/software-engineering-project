@@ -154,4 +154,37 @@ public class BlackjackTest {
         assertEquals("[5h, 4s]",game.getDealerHand().toString());
     }
 
+    @Test
+    public void testDrawCard() {
+        Blackjack blackjack = new Blackjack();
+
+        for (int i = 0; i < 100; i++) {  // Repeat 100 times to increase chances of catching an anomaly
+            Card card = blackjack.drawCard();
+
+            assertNotNull(card, "Card should not be null");
+
+            char[] validSuits = {'H', 'D', 'C', 'S'};
+            assertTrue(isValidSuit(card.getSuit(), validSuits), "Card has invalid suit");
+
+            String[] validNumbers = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+            assertTrue(isValidNumber(card.getNumber(), validNumbers), "Card has invalid number");
+        }
+    }
+    private boolean isValidSuit(char suit, char[] validSuits) {
+        for (char validSuit : validSuits) {
+            if (suit == validSuit) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean isValidNumber(String number, String[] validNumbers) {
+        for (String validNumber : validNumbers) {
+            if (number.equals(validNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
