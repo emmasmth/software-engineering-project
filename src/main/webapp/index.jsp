@@ -118,7 +118,14 @@
                 <p>Objective:</p>
             </div>
             <div class="p_font_medium">
-                <p>FIX ME add objectives</p>
+                <p>
+                    <strong>Beat the dealer!</strong>
+                    <ul>
+                        <li>Draw a hand higher than the dealer's hand.</li>
+                        <li>The dealer draws a hand over 21.</li>
+                        <li>Draw a hand of 21 with your first two cards, as long as the dealer doesn't do the same.</li>
+                    </ul>
+                </p>
             </div>
             <div class="p_font_large">
                 <p>Gameplay:</p>
@@ -129,15 +136,12 @@
                 <p>Going left to right, each player will play their hand by choosing to do one of the following:</p>
             </div>
             <div class="p_font_small">
-                <p>Stand: FIX ME</p>
-                <p>Hit: FIX ME</p>
-                <p>Double Down: FIX ME</p>
-                <p>Split: FIX ME</p>
-                <p>Surrender: FIX ME</p>
-                <p>
-                    Each player will be dealt a card that is face up. The dealer will get a card face down.
-                    FIX ME
-                </p>
+                <p>Stand: The dealer will move to the next player.</p>
+                <p>Hit: The dealer will give you more cards, one at a time, until you bust or stand.</p>
+            </div>
+            <div class = "p_font_medium">
+                <p>If you beat the dealer, you win!</p>
+                <p>glhf!</p>
             </div>
         </div>
         <!-- https://www.w3schools.com/css/css3_buttons.asp -->
