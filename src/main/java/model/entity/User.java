@@ -4,8 +4,6 @@ package model.entity;
 // imports
 import javax.persistence.*;
 @Entity
-@Table(name = "user", schema = "blackjack")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class User extends BaseEntity
 {
     @Id @Column (name = "ID") @GeneratedValue(strategy = GenerationType.IDENTITY)
