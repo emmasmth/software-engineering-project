@@ -10,6 +10,7 @@ public class User extends BaseEntity
     private Integer ID = null;
     @Column (unique = true) // Login must be unique for each record in DB
     private String Login;
+    private String Name;
     private String Password;
     private int Permission;
 
@@ -23,9 +24,10 @@ public class User extends BaseEntity
         this.Permission = USER_PERMISSION;
     }
 
-    public User(Integer ID, String login, String password, int permission)
+    public User(Integer ID, String name, String login, String password, int permission)
     {
         this.ID = ID;
+        Name = name;
         Login = login;
         Password = password;
         Permission = permission;
@@ -48,6 +50,23 @@ public class User extends BaseEntity
     public void setID(Integer ID)
     {
         this.ID = ID;
+    }
+
+    /**
+     * This function sets a User's Name to the argument passed in.
+     * @param name, a String that should be the new value of the User's Name.
+     */
+    public void setName(String name){
+        Name = name;
+    }
+
+    /**
+     * This function gets a User's name.
+     * @return a String, the User's name.
+     */
+    public String getName()
+    {
+        return Name;
     }
 
     /**
