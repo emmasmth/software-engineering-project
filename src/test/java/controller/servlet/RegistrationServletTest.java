@@ -21,7 +21,8 @@ public class RegistrationServletTest {
         Registration register = mock(Registration.class);
         when(register.registerUser(any(User.class))).thenReturn(new User());
 
-        RegistrationServlet servlet = new RegistrationServlet(register);
+        RegistrationServlet servlet = new RegistrationServlet();
+        servlet.setRegistration(register);
 
         when(request.getParameter("name")).thenReturn("Test");
         when(request.getParameter("username")).thenReturn("test@gmail.com");

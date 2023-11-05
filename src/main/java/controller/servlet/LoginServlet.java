@@ -9,14 +9,19 @@ import model.entity.User;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
+    public Registration registration = new Registration();
+
+    public void setRegistration(Registration register){
+        this.registration = register;
+    }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Registration register = new Registration();
 
-        User logged = register.loginUser(username, password);
+        User logged = registration.loginUser(username, password);
+
         if(logged!=null){
             HttpSession session = request.getSession();
             logged.setPassword("");

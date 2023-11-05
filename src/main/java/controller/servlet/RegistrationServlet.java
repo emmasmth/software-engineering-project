@@ -12,11 +12,8 @@ import controller.Registration;
 public class RegistrationServlet extends HttpServlet {
     public Registration registration = new Registration();
 
-    public RegistrationServlet(Registration registration) {
-        this.registration = registration;
-    }
-    public RegistrationServlet() {
-
+    public void setRegistration(Registration register){
+        this.registration = register;
     }
 
 
@@ -29,7 +26,6 @@ public class RegistrationServlet extends HttpServlet {
         user.setName(name);
         user.setLogin(username);
         user.setPassword(password);
-
 
         User userRegistered = registration.registerUser(user);
 
