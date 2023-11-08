@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class User extends BaseEntity
 {
     @Id @Column (name = "idUser") @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID = null;
+    private Integer idUser = null;
     @Column (unique = true) // Login must be unique for each record in DB
     private String Login;
     private String Name;
@@ -24,9 +24,9 @@ public class User extends BaseEntity
         this.Permission = USER_PERMISSION;
     }
 
-    public User(Integer ID, String name, String login, String password, int permission)
+    public User(Integer idUser, String name, String login, String password, int permission)
     {
-        this.ID = ID;
+        this.idUser = idUser;
         Name = name;
         Login = login;
         Password = password;
@@ -40,16 +40,16 @@ public class User extends BaseEntity
     @Override
     public Integer getID()
     {
-        return ID;
+        return idUser;
     }
 
     /**
      * This function sets a User's ID to the argument passed in.
-     * @param ID, an Integer that should be the new value of the User's ID.
+     * @param idUser, an Integer that should be the new value of the User's ID.
      */
-    public void setID(Integer ID)
+    public void setID(Integer idUser)
     {
-        this.ID = ID;
+        this.idUser = idUser;
     }
 
     /**
@@ -143,12 +143,12 @@ public class User extends BaseEntity
 /**
  *
  * create table user(
- *     ID int not null auto_increment,
+ *     idUser int not null auto_increment,
  *     Name varchar(50),
  *     Login varchar(30) not null,
  *     Password char(60) not null,
  *     Permission int not null default 1,
- *     constraint user_pk primary key(ID),
+ *     constraint user_pk primary key(idUser),
  *     constraint user_login_uk unique key(Login)
  *  );
  */

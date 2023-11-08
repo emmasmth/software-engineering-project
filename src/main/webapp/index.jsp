@@ -67,10 +67,15 @@
             }
         }
 
-        .button-click
+        .button-container
         {
             display: inline-block;
+        }
+
+        .button-click
+        {
             margin-top: 20px;
+            margin-right: 10px;
             padding: 10px 15px;
             font-size: 16px;
             font-family: "American Typewriter", sans-serif;
@@ -142,8 +147,11 @@
                 <p>glhf!</p>
             </div>
         </div>
-        <!-- https://www.w3schools.com/css/css3_buttons.asp -->
-        <button class="button-click" onclick="window.location.href = 'continue.jsp';">Continue</button>
+        <div class="button-container">
+            <!-- https://www.w3schools.com/css/css3_buttons.asp -->
+            <button class="button-click" onclick="window.location.href = 'registration.jsp';">Register</button>
+            <button class="button-click" onclick="window.location.href = 'login.jsp';">Login</button>
+        </div>
     </div>
     <!-- need to work on spacing -->
     <!-- if we want a footer, put it here -->
