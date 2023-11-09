@@ -151,6 +151,8 @@
             <!-- https://www.w3schools.com/css/css3_buttons.asp -->
             <button class="button-click" onclick="window.location.href = 'registration.jsp';">Register</button>
             <button class="button-click" onclick="window.location.href = 'login.jsp';">Login</button>
+            <button class="button-click" onclick="window.location.href = 'continue.jsp';">Continue</button>
+
         </div>
     </div>
     <!-- need to work on spacing -->
