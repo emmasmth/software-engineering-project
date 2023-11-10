@@ -2,9 +2,7 @@ package controller.servlet;
 
 import java.io.*;
 
-import controller.Blackjack;
-import controller.Card;
-import controller.Game;
+import controller.PlayGame;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
@@ -14,10 +12,10 @@ public class StartServlet extends HttpServlet {
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
 
-        Game game = (Game) session.getAttribute("game");
+        PlayGame game = (PlayGame) session.getAttribute("game");
 
         if (game == null) {
-            game = new Game();
+            game = new PlayGame();
             session.setAttribute("game", game);
         } else {
             game.clearHands();

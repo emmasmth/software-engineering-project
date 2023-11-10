@@ -9,28 +9,22 @@ import java.util.Scanner;
  */
 public class PlayGame {
 
-    //private Blackjack game;
-    private Scanner scanner;
-    int gameOutcome = 0; //flag for game outcome
-    Blackjack game = new Blackjack();
+    int gameOutcome = 0;
+    Deck deck;
+    Blackjack game;
+    ShuffleDeck shuffleDeck;
+    private boolean deckShuffled = false;
 
     /**
      * default constructor
      */
     public PlayGame() {
+        deck = new Deck();
         game = new Blackjack();
-        scanner = new Scanner(System.in);
+        shuffleDeck = new ShuffleDeck();
     }
 
-    /**
-     * constructor for testing with mockito
-     * @param game
-     * @param scanner
-     */
-    public PlayGame(Blackjack game, Scanner scanner) {
-        this.game = game;
-        this.scanner = scanner;
-    }
+
 
     public int getGameOutcome(){
         return gameOutcome;
@@ -41,29 +35,17 @@ public class PlayGame {
      * main play progression function
      */
     public void play() {
-        System.out.println("Welcome to Blackjack!");
-
+        if (!deckShuffled) {
+            shuffleDeck.shuffleDeck(deck.getCards());
+            deckShuffled = true;
+        }
         // Deal initial cards
         dealInitialCards();
 
         // Check for naturals
         checkNaturals();
 
-        //if neither won yet
-        if (gameOutcome == 0) {
-            // Player's turn
-            if (playerTurn() == 0) {
-                //if player didn't bust
-                //Dealer's turn
-                dealerTurn();
-            }
-            // Determine the winner
-            determineWinner();
-        }
-        //announce winner
-        endGame(gameOutcome);
 
-        scanner.close();
     }
 
     /**
@@ -73,8 +55,8 @@ public class PlayGame {
     public void dealInitialCards() {
         //deal two cards to player and dealer
         for (int i = 0; i < 2; i++) {
-            game.addCardToPlayer(game.drawCard());
-            game.addCardToDealer(game.drawCard());
+            game.addCardToPlayer(deck.drawCard());
+            game.addCardToDealer(deck.drawCard());
         }
         //shows each hand
         printHand("player");
@@ -98,35 +80,26 @@ public class PlayGame {
         else
             gameOutcome = 0; //neither - continue game
     }
+    public ArrayList<Card> getDealerHand() {
+        return game.getDealerHand();
+    }
 
-    /**
-     * playerTurn
-     * give player options to hit or stand for their turn
-     * return int - 0=continue play, 1=player busted
-     */
+    public ArrayList<Card> getPlayerHand() {
+        return game.getPlayerHand();
+    }
+
+
+
+    public int playerTotal(){
+        return game.getPlayerTotal();
+    }
+    public int dealerTotal(){
+        return game.getDealerTotal();
+    }
+
+
     public int playerTurn() {
-        //Blackjack game = new Blackjack();
-        //repeat player's turn until stand or bust
-        while (true) {
-            System.out.println("Do you want to (h)it or (s)tand?");
-            char choice = scanner.nextLine().charAt(0);
-
-            if (choice == 'h') {
-                game.addCardToPlayer(game.drawCard());
-                printHand("player");
-                //player got 21 - automatic move on
-                if(game.calculateHandTotal(game.getPlayerHand()) == 21){
-                    break;
-                }
-                //player busted
-                if (game.calculateHandTotal(game.getPlayerHand()) > 21) {
-                    System.out.println("Busted!");
-                    return(1);
-                }
-            } else if (choice == 's') {
-                break;
-            }
-        }
+        game.addCardToPlayer(deck.drawCard());
         return(0);
     }
 
@@ -135,10 +108,8 @@ public class PlayGame {
      * will keep hitting until total is 17+
      */
     public void dealerTurn() {
-        //Blackjack game = new Blackjack();
-        System.out.println("Dealer's turn...");
         while (game.calculateHandTotal(game.getDealerHand()) < 17) {
-            game.addCardToDealer(game.drawCard());
+            game.addCardToDealer(deck.drawCard());
             printHand("dealer");
         }
     }
@@ -184,6 +155,13 @@ public class PlayGame {
         }
     }
 
+    public void clearHands() {
+        if (!game.getPlayerHand().isEmpty() || !game.getDealerHand().isEmpty()) {
+            game.getDealerHand().clear();
+            game.getPlayerHand().clear();
+        }
+    }
+
     /**
      * printHand
      * prints the cards in the hand and its total
@@ -205,11 +183,5 @@ public class PlayGame {
                 System.out.println("Dealer hand is empty");
             }
         }
-    }
-
-
-    public static void main(String[] args) {
-        PlayGame playGame = new PlayGame();
-        playGame.play();
     }
 }

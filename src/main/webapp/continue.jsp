@@ -1,7 +1,7 @@
 <%@ page import="controller.Blackjack" %>
 <%@ page import="controller.Card" %>
-<%@ page import="controller.Game" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="controller.PlayGame" %><%--
 
   Created by IntelliJ IDEA.
   User: emmasmith
@@ -22,7 +22,7 @@
 
     <div class="row text-center mt-3">
         <%
-            Game game = (Game) session.getAttribute("game");
+            PlayGame game = (PlayGame) session.getAttribute("game");
             if (game != null) {
                 ArrayList<Card> dealerHand = game.getDealerHand();
                 ArrayList<Card> playerHand = game.getPlayerHand();

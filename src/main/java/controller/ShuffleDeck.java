@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ShuffleDeck {
+    Deck deck = new Deck();
+
+    public void setDeck(Deck deck){
+        this.deck = deck;
+    }
 
 
     public void shuffleDeck(ArrayList<Card> originalDeck){
