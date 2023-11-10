@@ -29,7 +29,7 @@
         %>
 
         <div>
-            <h3>Dealer's Hand:</h3>
+            <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
             <% for (Card card : dealerHand) { %>
             <%
                 String imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
@@ -40,7 +40,7 @@
         </div>
 
         <div>
-            <h3>Player's Hand:</h3>
+            <h3>Player's Hand: <%= game.playerTotal() %></h3>
             <% for (Card card : playerHand) { %>
             <%
                 String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
@@ -68,8 +68,9 @@
             </div>
         </form>
         <div class="col-1 d-grid">
-            <button class="btn btn-outline-primary" type="button">Hit</button>
+            <a href="HitServlet" class="btn btn-outline-primary">Hit</a>
         </div>
+
         <div class="col-1 d-grid">
             <button class="btn btn-outline-primary" type="button">Stand</button>
         </div>

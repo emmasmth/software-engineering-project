@@ -3,19 +3,19 @@ package controller;
 import java.util.ArrayList;
 
 public class Game {
-    int gameOutcome = 0; // flag for game outcome
+    int gameOutcome = 0;
     Deck deck;
     Blackjack game;
+
 
     public Game() {
         deck = new Deck();
         game = new Blackjack();
     }
 
-
-
     public void play() {
        dealInitialCards();
+       checkNaturals();
     }
 
     public void dealInitialCards() {
@@ -28,9 +28,37 @@ public class Game {
     public ArrayList<Card> getDealerHand() {
         return game.getDealerHand();
     }
+
     public ArrayList<Card> getPlayerHand() {
         return game.getPlayerHand();
     }
+
+    public void hit() {
+            game.addCardToPlayer(deck.drawCard());
+    }
+
+    public int playerTotal(){
+        return game.getPlayerTotal();
+    }
+    public int dealerTotal(){
+        return game.getDealerTotal();
+    }
+
+    public void checkNaturals() {
+        if(game.getPlayerTotal() == 21 && game.getDealerTotal()==21){
+            gameOutcome = 1;
+        }
+        else if (game.getPlayerTotal() == 21) {
+            gameOutcome = 2;
+        }
+        else if (game.getDealerTotal() == 21) {
+            gameOutcome = 3;
+        }
+        else
+            gameOutcome = 0;
+    }
+
+
 
 
 }
