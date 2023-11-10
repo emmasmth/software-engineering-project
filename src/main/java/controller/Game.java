@@ -7,6 +7,7 @@ public class Game {
     Deck deck;
     Blackjack game;
     ShuffleDeck shuffleDeck;
+    private boolean deckShuffled = false;
 
 
     public Game() {
@@ -16,10 +17,15 @@ public class Game {
     }
 
     public void play() {
-        shuffleDeck.shuffleDeck(deck.getCards());
+        if (!deckShuffled) {
+            shuffleDeck.shuffleDeck(deck.getCards());
+            deckShuffled = true;
+        }
+
         dealInitialCards();
         checkNaturals();
     }
+
 
     public void dealInitialCards() {
         for (int i = 0; i < 2; i++) {
@@ -61,6 +67,12 @@ public class Game {
             gameOutcome = 0;
     }
 
+    public void clearHands() {
+        if (!game.getPlayerHand().isEmpty() || !game.getDealerHand().isEmpty()) {
+            game.getDealerHand().clear();
+            game.getPlayerHand().clear();
+        }
+    }
 
 
 

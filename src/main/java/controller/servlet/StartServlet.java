@@ -13,15 +13,22 @@ public class StartServlet extends HttpServlet {
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        Game game = new Game();
+
+        Game game = (Game) session.getAttribute("game");
+
+        if (game == null) {
+            game = new Game();
+            session.setAttribute("game", game);
+        } else {
+            game.clearHands();
+        }
+
         game.play();
-        session.setAttribute("game", game);
+
         response.sendRedirect("continue.jsp");
     }
-
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         processRequest(request, response);
     }
 }
-

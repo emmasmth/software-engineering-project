@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Deck {
     private ArrayList<Card> cards;
-    private ShuffleDeck deck = new ShuffleDeck();
     public Deck() {
         cards = new ArrayList<>();
 
@@ -18,10 +17,6 @@ public class Deck {
             }
         }
 
-    }
-
-    private void shuffleDeck() {
-        deck.shuffleDeck(cards);
     }
 
     public ArrayList<Card> getCards(){

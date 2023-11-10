@@ -53,7 +53,7 @@
         <%
         } else {
         %>
-        <p>No card drawn yet. Click "Start" to draw a card.</p>
+        <p>No game started. Click "Play" to start your game session.</p>
         <%
             }
         %>
