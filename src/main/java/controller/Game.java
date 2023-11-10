@@ -6,16 +6,19 @@ public class Game {
     int gameOutcome = 0;
     Deck deck;
     Blackjack game;
+    ShuffleDeck shuffleDeck;
 
 
     public Game() {
         deck = new Deck();
         game = new Blackjack();
+        shuffleDeck = new ShuffleDeck();
     }
 
     public void play() {
-       dealInitialCards();
-       checkNaturals();
+        shuffleDeck.shuffleDeck(deck.getCards());
+        dealInitialCards();
+        checkNaturals();
     }
 
     public void dealInitialCards() {
