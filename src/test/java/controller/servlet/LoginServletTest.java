@@ -53,7 +53,6 @@ public class LoginServletTest {
     }
 
 
-    // For some reason this test is failing and I'm not sure why even though it works in production
     @Test
     public void loginPostTestSuccess() throws IOException, ServletException {
         // Create a User object
@@ -82,6 +81,6 @@ public class LoginServletTest {
         servlet.doPost(request, response);
 
 
-        verify(response).sendRedirect("index.jsp");
+        verify(response).sendRedirect("advertisement.jsp");
     }
 }

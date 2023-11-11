@@ -26,7 +26,10 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             logged.setPassword("");
             session.setAttribute("User", logged);
-            response.sendRedirect("advertisement.jsp");
+            if(logged.getPermission() == 1)
+                response.sendRedirect("advertisement.jsp");
+            else if(logged.getPermission() == 2)
+                response.sendRedirect("admin.jsp");
         }
         else{
             response.sendRedirect("login.jsp?loginFail=1");
