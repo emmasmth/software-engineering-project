@@ -28,8 +28,11 @@
     <jsp:include page="components/title.jsp"/>
     <jsp:include page="components/background.jsp"/>
     <jsp:include page="components/menu.jsp"/>
+    <jsp:include page="components/adminNav.jsp"/>
     <div class="box-container">
-
+        <p>
+            Hello, this is where some user data and game stats stuff will go :)
+        </p>
 
     </div>
 

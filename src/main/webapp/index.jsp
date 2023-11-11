@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.entity.User" %>
+
 <html>
 <head>
     <jsp:include page="components/header.jsp"/>
@@ -81,7 +83,6 @@
     <jsp:include page="components/background.jsp"/>
     <jsp:include page="components/menu.jsp"/>
 
-
     <div class = "box-container">
         <div class = "white-box">
             <div class = "p_header_font">
@@ -120,7 +121,7 @@
         <div class="button-container">
             <!-- https://www.w3schools.com/css/css3_buttons.asp -->
             <button class="button-click" onclick="window.location.href = 'registration.jsp';">Register</button>
-            <button class="button-click" onclick="window.location.href = 'login.jsp';">Login</button>
+            <button class="button-click" onclick="window.location.href = 'login.jsp';">Log In</button>
 
         </div>
     </div>
