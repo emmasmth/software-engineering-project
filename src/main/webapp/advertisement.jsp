@@ -11,18 +11,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <jsp:include page="components/header.jsp"/>
+    <title>Advertisements</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .carousel-inner img
+        {
+            max-width: 50vw;
+            max-height: 75vh;
+            margin: auto;
+            display: block;
+        }
+
+        .carousel-inner .item
+        {
+            transition-duration: 0.3s;
+        }
+
+        .button-container
+        {
+            text-align: center;
+            visibility: hidden;
+            animation: fadeIn 2s forwards 10s;
+        }
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="button.css">
 </head>
 <body>
 
-<div class="container">
-    <h2>Carousel Example</h2>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <jsp:include page="components/title.jsp"/>
+    <jsp:include page="components/background.jsp"/>
+    <jsp:include page="components/menu.jsp"/>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -33,15 +61,15 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <img src="adimages/fakead1.PNG" alt="Los Angeles" style="width:100%;">
+                <img src="adimages/fakead1.PNG" alt="fake image 1">
             </div>
 
             <div class="item">
-                <img src="adimages/fakead2.JPG" alt="Chicago" style="width:100%;">
+                <img src="adimages/fakead2.png" alt="fake image 2">
             </div>
 
             <div class="item">
-                <img src="adimages/fakead3.PNG" alt="New york" style="width:100%;">
+                <img src="adimages/fakead3.PNG" alt="fake image 3">
             </div>
         </div>
 
@@ -55,7 +83,16 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-</div>
+
+    <div class="button-container">
+        <!-- https://www.w3schools.com/css/css3_buttons.asp -->
+        <!-- https://www.w3schools.com/css/css3_animations.asp -->
+        <!-- https://stackoverflow.com/questions/21993661/css-auto-hide-elements-after-5-seconds -->
+
+        <button class="button-click" onclick="window.location.href = 'continue.jsp';">Continue</button>
+    </div>
+
+    <jsp:include page="components/footer.jsp"/>
 
 </body>
 </html>

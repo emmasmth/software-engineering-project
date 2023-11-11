@@ -69,40 +69,12 @@
 
         .button-container
         {
-            display: inline-block;
-        }
-
-        .button-click
-        {
-            margin-top: 20px;
-            margin-right: 10px;
-            padding: 10px 15px;
-            font-size: 16px;
-            font-family: "American Typewriter", sans-serif;
-            cursor: pointer;
             text-align: center;
-            text-decoration: none;
-            color: black;
-            background-color: darkgray;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 9px #999;
-        }
-
-        .button-click:hover
-        {
-            background-color: #3e8e41;
-        }
-
-        .button-click:active
-        {
-            background-color: #3e8e41;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
         }
 
     </style>
 
+    <link rel="stylesheet" type="text/css" href="button.css">
 </head>
 <body class="body">
     <jsp:include page="components/title.jsp"/>
@@ -149,7 +121,6 @@
             <!-- https://www.w3schools.com/css/css3_buttons.asp -->
             <button class="button-click" onclick="window.location.href = 'registration.jsp';">Register</button>
             <button class="button-click" onclick="window.location.href = 'login.jsp';">Login</button>
-            <button class="button-click" onclick="window.location.href = 'continue.jsp';">Continue</button>
 
         </div>
     </div>
