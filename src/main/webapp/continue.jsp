@@ -13,6 +13,23 @@
 <html>
 <head>
     <jsp:include page="components/header.jsp"/>
+    <style>
+        @keyframes drawCard {
+            0% {
+                transform: translateY(-50px) rotate(-5deg) scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0) rotate(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .blackjack-card.drawing {
+            animation: drawCard 0.5s ease-in-out;
+        }
+    </style>
+
 </head>
 <body>
 <jsp:include page="components/title.jsp"/>
@@ -35,7 +52,7 @@
                 String imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
             %>
 
-            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " width="75" height="75">
+            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
             <% } %>
         </div>
 
@@ -46,7 +63,7 @@
                 String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
             %>
 
-            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " width="75" height="75">
+            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
             <% } %>
         </div>
 
@@ -58,8 +75,10 @@
             }
         %>
 
+
     </div>
 </div>
+
 <form method="post" action="StartServlet">
     <div class="row justify-content-center mt-3">
             <div class="col-1 d-grid">

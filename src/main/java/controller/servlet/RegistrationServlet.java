@@ -30,7 +30,7 @@ public class RegistrationServlet extends HttpServlet {
         User userRegistered = registration.registerUser(user);
 
         if(userRegistered != null){
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("login.jsp");
         }
         else{
             response.sendRedirect("registration.jsp?error=1");

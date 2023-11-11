@@ -16,6 +16,7 @@ public class HitServlet extends HttpServlet {
             if (game.playerTotal() < 21) {
                 game.playerTurn();
             }
+
             session.setAttribute("game", game);
         }
         response.sendRedirect("continue.jsp");

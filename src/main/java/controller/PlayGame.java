@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * PlayGame class
@@ -58,9 +57,6 @@ public class PlayGame {
             game.addCardToPlayer(deck.drawCard());
             game.addCardToDealer(deck.drawCard());
         }
-        //shows each hand
-        printHand("player");
-        System.out.println("Dealer's visible card: " + game.getDealerHand().get(0));
     }
 
     /**
