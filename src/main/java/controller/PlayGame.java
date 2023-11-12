@@ -8,14 +8,18 @@ import java.util.ArrayList;
  */
 public class PlayGame {
 
-
     Deck deck;
     Blackjack game;
-    ShuffleDeck shuffleDeck;
-    private boolean deckShuffled = false;
     int gameOutcome = 0;
     double bet = 0.00;
     double payout = 0.00;
+
+    public void setGame(Blackjack game){
+        this.game = game;
+    }
+    public void setDeck(Deck deck){
+        this.deck = deck;
+    }
 
     /**
      * default constructor
@@ -23,24 +27,19 @@ public class PlayGame {
     public PlayGame() {
         deck = new Deck();
         game = new Blackjack();
-        shuffleDeck = new ShuffleDeck();
     }
 
 
-
+/*
     public int getGameOutcome(){
         return gameOutcome;
-    }
+    }*/
 
     /**
      * play method
      * main play progression function
      */
     public void play() {
-        if (!deckShuffled) {
-            shuffleDeck.shuffleDeck(deck.getCards());
-            deckShuffled = true;
-        }
         // Deal initial cards
         dealInitialCards();
 
@@ -79,6 +78,7 @@ public class PlayGame {
         else
             gameOutcome = 0; //neither - continue game
     }
+
     public ArrayList<Card> getDealerHand() {
         return game.getDealerHand();
     }
@@ -97,21 +97,20 @@ public class PlayGame {
     }
 
 
-    public int playerTurn() {
+    public void playerTurn() {
         game.addCardToPlayer(deck.drawCard());
-        return(0);
     }
 
     /**
      * dealerTurn
      * will keep hitting until total is 17+
      */
-    public void dealerTurn() {
+    /*public void dealerTurn() {
         while (game.calculateHandTotal(game.getDealerHand()) < 17) {
             game.addCardToDealer(deck.drawCard());
             printHand("dealer");
         }
-    }
+    }*/
 
 
     /**
@@ -150,7 +149,7 @@ public class PlayGame {
      * determineWinner
      * checks both player and dealer hand totals and determines the winner
      */
-    public void determineWinner() {
+   /* public void determineWinner() {
         int playerTotal = game.calculateHandTotal(game.getPlayerHand());
         int dealerTotal = game.calculateHandTotal(game.getDealerHand());
         System.out.println("player: " + playerTotal);
@@ -165,11 +164,11 @@ public class PlayGame {
         System.out.println("end: " + gameOutcome);
     }
 
-    /**
+    *//**
      * endGame
      * prints who won and will add game to history
      * @param winner int for who won (1=tie, 2=player, 3=dealer)
-     */
+     *//*
     public void endGame(int winner){
         System.out.println("Game Over!");
         System.out.println("You: " + game.getPlayerTotal() + " Dealer: " + game.getDealerTotal());
@@ -185,7 +184,7 @@ public class PlayGame {
             System.out.println("Dealer wins!");
             //add loss to user history
         }
-    }
+    }*/
 
     public void clearHands() {
         if (!game.getPlayerHand().isEmpty() || !game.getDealerHand().isEmpty()) {
@@ -198,7 +197,7 @@ public class PlayGame {
      * printHand
      * prints the cards in the hand and its total
      */
-    public void printHand(String hand) {
+   /* public void printHand(String hand) {
         if(hand.equals("player")) {
             if (!game.getPlayerHand().isEmpty()) {
                 System.out.println("Your hand: " + game.getPlayerHand() + " (" + game.getPlayerTotal() + ")");
@@ -215,5 +214,5 @@ public class PlayGame {
                 System.out.println("Dealer hand is empty");
             }
         }
-    }
+    }*/
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.io.ByteArrayOutputStream;
@@ -16,6 +17,178 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PlayGameTest {
+// New tests setup without the use of Scanner
+
+
+
+
+    @Test public void dealInitialCardsTest(){
+        Deck deck = mock(Deck.class);
+        Blackjack bj = mock(Blackjack.class);
+        Card card1 = new Card('C', "8");
+        PlayGame game = new PlayGame();
+        game.setGame(bj);
+        game.setDeck(deck);
+        when(deck.drawCard()).thenReturn(card1);
+
+        game.dealInitialCards();
+
+        assertAll(
+                () -> verify(bj, times(2)).addCardToPlayer(card1),
+                () -> verify(bj, times(2)).addCardToDealer(card1)
+
+        );
+
+    }
+
+    @Test public void checkNaturalsTieTest(){
+        Blackjack bj = mock(Blackjack.class);
+        PlayGame game = new PlayGame();
+        game.setGame(bj);
+
+
+        when(bj.getPlayerTotal()).thenReturn(21);
+        when(bj.getDealerTotal()).thenReturn(21);
+
+        game.checkNaturals();
+
+        assertEquals(1, game.gameOutcome);
+
+
+    }
+
+    @Test public void checkNaturalsPlayerWin(){
+        Blackjack bj = mock(Blackjack.class);
+        PlayGame game = new PlayGame();
+        game.setGame(bj);
+
+
+        when(bj.getPlayerTotal()).thenReturn(21);
+        when(bj.getDealerTotal()).thenReturn(2);
+
+        game.checkNaturals();
+
+        assertEquals(2, game.gameOutcome);
+
+
+
+    }
+
+    @Test public void checkDealerWin(){
+        Blackjack bj = mock(Blackjack.class);
+        PlayGame game = new PlayGame();
+        game.setGame(bj);
+
+
+        when(bj.getPlayerTotal()).thenReturn(5);
+        when(bj.getDealerTotal()).thenReturn(21);
+
+        game.checkNaturals();
+
+        assertEquals(3, game.gameOutcome);
+
+    }
+
+
+    @Test public void checkNoNatural(){
+        Blackjack bj = mock(Blackjack.class);
+        PlayGame game = new PlayGame();
+        game.setGame(bj);
+
+
+        when(bj.getPlayerTotal()).thenReturn(5);
+        when(bj.getDealerTotal()).thenReturn(5);
+
+        game.checkNaturals();
+
+        assertEquals(0, game.gameOutcome);
+
+
+
+    }
+
+    @Test public void getDealerHand(){
+        PlayGame game = new PlayGame();
+        Blackjack bj = mock(Blackjack.class);
+        game.setGame(bj);
+        when(bj.getDealerHand()).thenReturn(new ArrayList<>());
+
+        game.getDealerHand();
+        verify(bj, times(1)).getDealerHand();
+    }
+
+    @Test public void getPlayerHand(){
+        PlayGame game = new PlayGame();
+        Blackjack bj = mock(Blackjack.class);
+        game.setGame(bj);
+        when(bj.getPlayerHand()).thenReturn(new ArrayList<>());
+
+        game.getPlayerHand();
+        verify(bj, times(1)).getPlayerHand();
+
+    }
+
+    @Test public void playerTotalTest(){
+        PlayGame game = new PlayGame();
+        Blackjack bj = mock(Blackjack.class);
+        game.setGame(bj);
+        when(bj.getPlayerTotal()).thenReturn(21);
+
+        game.playerTotal();
+        verify(bj, times(1)).getPlayerTotal();
+    }
+
+    @Test public void dealerTotalTest(){
+        PlayGame game = new PlayGame();
+        Blackjack bj = mock(Blackjack.class);
+        game.setGame(bj);
+        when(bj.getDealerTotal()).thenReturn(21);
+
+        game.dealerTotal();
+
+        verify(bj, times(1)).getDealerTotal();
+    }
+
+    @Test public void playerTurnTest(){
+        PlayGame game = new PlayGame();
+        Blackjack bj = mock(Blackjack.class);
+        Deck deck = mock(Deck.class);
+        Card card1 = new Card('C', "8");
+        game.setGame(bj);
+        game.setDeck(deck);
+        when(deck.drawCard()).thenReturn(card1);
+
+
+        game.playerTurn();
+
+        verify(bj, times(1)).addCardToPlayer(card1);
+    }
+
+
+    @Test public void clearHandsTest(){
+        PlayGame game = new PlayGame();
+        Blackjack bj = mock(Blackjack.class);
+        game.setGame(bj);
+
+        ArrayList<Card> mockDealerHand = mock(ArrayList.class);
+        ArrayList<Card> mockPlayerHand = mock(ArrayList.class);
+
+        when(bj.getPlayerHand()).thenReturn(mockPlayerHand);
+        when(bj.getDealerHand()).thenReturn(mockDealerHand);
+
+        game.clearHands();
+
+        verify(mockDealerHand, times(1)).clear();
+        verify(mockPlayerHand, times(1)).clear();
+
+
+
+
+    }
+
+
+
+
 
 //setup for testing terminal output
    /* private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

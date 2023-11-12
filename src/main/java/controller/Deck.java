@@ -1,12 +1,14 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Deck {
-    private ArrayList<Card> cards;
-    public Deck() {
-        cards = new ArrayList<>();
+    public ArrayList<Card> cards;
 
+
+    public void initializeDeck() {
+        cards = new ArrayList<>();
         char[] suits = {'H', 'D', 'C', 'S'};
         String[] values = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
@@ -17,18 +19,29 @@ public class Deck {
             }
         }
 
+        shuffleDeck(cards);
     }
 
-    public ArrayList<Card> getCards(){
-        return cards;
+    public void shuffleDeck(ArrayList<Card> originalDeck){
+        ArrayList<Card> shuffledDeck = new ArrayList<>();
+        Random random = new Random();
+        while (!originalDeck.isEmpty()) {
+            int randomIndex = random.nextInt(originalDeck.size());
+            Card randomCard = originalDeck.remove(randomIndex);
+            shuffledDeck.add(randomCard);
+        }
+        originalDeck.addAll(shuffledDeck);
     }
+
+
 
 
 
     public Card drawCard() {
-        if (!cards.isEmpty()) {
-            return cards.remove(0);
+        if (cards == null || cards.isEmpty()) {
+            initializeDeck();
         }
-        return null;
+        return cards.remove(0);
     }
+
 }

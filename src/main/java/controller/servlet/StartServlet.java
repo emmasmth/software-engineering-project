@@ -8,11 +8,16 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "StartServlet", value = "/StartServlet")
 public class StartServlet extends HttpServlet {
+    public PlayGame game;
+
+    public void setGame(PlayGame game){
+        this.game = game;
+    }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
 
-        PlayGame game = (PlayGame) session.getAttribute("game");
+        game = (PlayGame) session.getAttribute("game");
 
         if (game == null) {
             game = new PlayGame();
@@ -26,7 +31,8 @@ public class StartServlet extends HttpServlet {
         response.sendRedirect("continue.jsp");
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         processRequest(request, response);
     }
+
 }
