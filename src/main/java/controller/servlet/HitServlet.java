@@ -23,6 +23,13 @@ public class HitServlet extends HttpServlet {
                 game.playerTurn();
             }
 
+            if(game.playerTotal() > 21){
+                int winner = game.determineWinner();
+                session.setAttribute("winner", winner);
+            }
+
+
+
             session.setAttribute("game", game);
         }
         response.sendRedirect("continue.jsp");

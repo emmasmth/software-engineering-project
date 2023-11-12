@@ -51,37 +51,37 @@
                 } else {
                     out.println("<p>No bet placed.</p>");
                 }
-                %>
+        %>
 
-                <div>
-                    <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
-                    <% for (Card card : dealerHand) { %>
-                    <%
-                        String imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
-                    %>
-
-                    <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
-                    <% } %>
-                </div>
-
-                <div>
-                    <h3>Player's Hand: <%= game.playerTotal() %></h3>
-                    <% for (Card card : playerHand) { %>
-                    <%
-                        String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
-                    %>
-
-                    <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
-                    <% } %>
-                </div>
-
+        <div>
+            <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
+            <% for (Card card : dealerHand) { %>
             <%
-            } else {
+                String imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
             %>
-            <p>No game started. Click "Play" to start your game session.</p>
+
+            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
+            <% } %>
+        </div>
+
+        <div>
+            <h3>Player's Hand: <%= game.playerTotal() %></h3>
+            <% for (Card card : playerHand) { %>
             <%
-                }
+                String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
             %>
+
+            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
+            <% } %>
+        </div>
+
+        <%
+        } else {
+        %>
+        <p>No game started. Click "Play" to start your game session.</p>
+        <%
+            }
+        %>
 
 
     </div>
@@ -99,28 +99,28 @@
         }
         out.println("<h3>" + message + "</h3>");
     }else if (game != null && game.getPlayerHand().size() > 0) {
-            if (game.getPlayerHand().size()==2 && (game.playerTotal() == 9 || game.playerTotal() == 10 || game.playerTotal() ==11)){%>
-                <!-- Double Down -->
-                <div class="col-1 d-grid">
-                    <a href="DoubleDownServlet" class="btn btn-warning">Double</a>
-                </div>
-            <% } %>
-            <!-- Hit Button -->
-            <div class="col-1 d-grid">
-                <a href="HitServlet" class="btn btn-success">Hit</a>
-            </div>
-            <!-- Stand Button -->
-            <div class="col-1 d-grid">
-                <form method="post" action="StandServlet">
-                    <button type="submit" class="btn btn-danger">Stand</button>
-                </form>
-            </div>
-        <%}else{%>
-            <!-- Play Button (deal cards) -->
-            <div class="col-1 d-grid">
-                <a href="StartServlet" class="btn btn-primary">Play</a>
-            </div>
-        <%}%>
+        if (game.getPlayerHand().size()==2 && (game.playerTotal() == 9 || game.playerTotal() == 10 || game.playerTotal() ==11)){%>
+    <!-- Double Down -->
+    <div class="col-1 d-grid">
+        <a href="DoubleDownServlet" class="btn btn-warning">Double</a>
+    </div>
+    <% } %>
+    <!-- Hit Button -->
+    <div class="col-1 d-grid">
+        <a href="HitServlet" class="btn btn-success">Hit</a>
+    </div>
+    <!-- Stand Button -->
+    <div class="col-1 d-grid">
+        <form method="post" action="StandServlet">
+            <button type="submit" class="btn btn-danger">Stand</button>
+        </form>
+    </div>
+    <%}else{%>
+    <!-- Play Button (deal cards) -->
+    <div class="col-1 d-grid">
+        <a href="StartServlet" class="btn btn-primary">Play</a>
+    </div>
+    <%}%>
 </div>
 
 
