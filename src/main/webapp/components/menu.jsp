@@ -21,13 +21,19 @@
                 <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown">
                     <%= "Account: " + logged.getName() %>
                 </a>
+                <ul class="dropdown-menu">
+                    <% if (logged.getPermission() == 1) { // this is user%>
+                        <li><a class="dropdown-item" href="advertisement.jsp">Game</a></li>
+                    <% } else if(logged.getPermission() == 2) { // this is an admin %>
+                        <li><a class="dropdown-item" href="admin.jsp">Admin</a> </li>
+                    <% } %>
+                    <li><a class="dropdown-item" href="LogoutServlet">Logout</a></li>
+                </ul>
                 <% } else { %>
                 <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown">Account</a>
                 <% } %><ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="login.jsp">Login</a></li>
                     <li><a class="dropdown-item" href="registration.jsp">Register</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="LogoutServlet">Logout</a></li>
                 </ul>
             </li>
         </ul>
