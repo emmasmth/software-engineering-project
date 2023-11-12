@@ -15,22 +15,22 @@
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="index.jsp">Create</a>
+                <a class="nav-link active" href="adCreate.jsp">Create</a>
             </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="index.jsp">Read</a>
+                <a class="nav-link active" href="adRead.jsp">Read</a>
             </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="index.jsp">Update</a>
+                <a class="nav-link active" href="adUpdate.jsp">Update</a>
             </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="index.jsp">Delete</a>
+                <a class="nav-link active" href="adDelete.jsp">Delete</a>
             </li>
         </ul>
 
