@@ -13,6 +13,10 @@ public class PlayGame {
     int gameOutcome = 0;
     double bet = 0.00;
     double payout = 0.00;
+    Boolean isPlayersTurn;
+
+    public void setIsPlayersTurn(Boolean isPlayersTurn){this.isPlayersTurn=isPlayersTurn;}
+    public Boolean getIsPlayersTurn(){return isPlayersTurn;}
 
     public void setGame(Blackjack game){
         this.game = game;
@@ -111,19 +115,15 @@ public class PlayGame {
             printHand("dealer");
         }
     }*/
+    public void dealerTurn(){game.addCardToDealer(deck.drawCard());}
 
 
     /**
      * setBet
      * updates bet, used for initial bet
      */
-    public void setBet(int amount){bet = amount;}
+    public void setBet(double amount){bet = amount;}
 
-    /**
-     * doubleBet
-     * doubles bet, used for double down
-     */
-    public void doubleBet(){bet = bet*2;}
     public double getBet(){return bet;} //returns how much is currently at stake
 
     /**
@@ -149,7 +149,7 @@ public class PlayGame {
      * determineWinner
      * checks both player and dealer hand totals and determines the winner
      */
-   /* public void determineWinner() {
+    public int determineWinner() {
         int playerTotal = game.calculateHandTotal(game.getPlayerHand());
         int dealerTotal = game.calculateHandTotal(game.getDealerHand());
         System.out.println("player: " + playerTotal);
@@ -161,30 +161,32 @@ public class PlayGame {
         } else {
             gameOutcome = 1; // tie
         }
-        System.out.println("end: " + gameOutcome);
+        return gameOutcome;
+//        System.out.println("end: " + gameOutcome);
     }
 
-    *//**
-     * endGame
-     * prints who won and will add game to history
-     * @param winner int for who won (1=tie, 2=player, 3=dealer)
-     *//*
-    public void endGame(int winner){
-        System.out.println("Game Over!");
-        System.out.println("You: " + game.getPlayerTotal() + " Dealer: " + game.getDealerTotal());
-        if (winner == 1){
-            System.out.println("It's a tie!");
-            //add tie to user history
-        }
-        if (winner == 2){
-            System.out.println("Player wins!");
-            //add win to user history
-        }
-        if (winner == 3){
-            System.out.println("Dealer wins!");
-            //add loss to user history
-        }
-    }*/
+
+//    /**
+//     * endGame
+//     * prints who won and will add game to history
+//     * @param winner int for who won (1=tie, 2=player, 3=dealer)
+//     */
+//    public void endGame(int winner){
+//        System.out.println("Game Over!");
+//        System.out.println("You: " + game.getPlayerTotal() + " Dealer: " + game.getDealerTotal());
+//        if (winner == 1){
+//            System.out.println("It's a tie!");
+//            //add tie to user history
+//        }
+//        if (winner == 2){
+//            System.out.println("Player wins!");
+//            //add win to user history
+//        }
+//        if (winner == 3){
+//            System.out.println("Dealer wins!");
+//            //add loss to user history
+//        }
+//    }*/
 
     public void clearHands() {
         if (!game.getPlayerHand().isEmpty() || !game.getDealerHand().isEmpty()) {

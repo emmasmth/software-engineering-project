@@ -16,7 +16,6 @@ public class StartServlet extends HttpServlet {
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-
         game = (PlayGame) session.getAttribute("game");
 
         if (game == null) {
@@ -26,6 +25,7 @@ public class StartServlet extends HttpServlet {
             game.clearHands();
         }
 
+        game.setIsPlayersTurn(true);
         game.play();
 
         response.sendRedirect("continue.jsp");

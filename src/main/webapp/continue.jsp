@@ -40,66 +40,87 @@
     <div class="row text-center mt-3">
         <%
             PlayGame game = (PlayGame) session.getAttribute("game");
+            Integer winner = (Integer) session.getAttribute("winner");
             if (game != null) {
                 ArrayList<Card> dealerHand = game.getDealerHand();
                 ArrayList<Card> playerHand = game.getPlayerHand();
-        %>
 
-        <%
-            Integer betAmount = (Integer) session.getAttribute("betAmount");
-            if (betAmount != null) {
-                out.println("<p>Your bet amount: " + betAmount + "</p>");
+                Double betAmount = (Double) session.getAttribute("betAmount");
+                if (betAmount != null) {
+                    out.println("<p>Your bet amount: " + betAmount + "</p>");
+                } else {
+                    out.println("<p>No bet placed.</p>");
+                }
+                %>
+
+                <div>
+                    <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
+                    <% for (Card card : dealerHand) { %>
+                    <%
+                        String imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
+                    %>
+
+                    <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
+                    <% } %>
+                </div>
+
+                <div>
+                    <h3>Player's Hand: <%= game.playerTotal() %></h3>
+                    <% for (Card card : playerHand) { %>
+                    <%
+                        String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
+                    %>
+
+                    <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
+                    <% } %>
+                </div>
+
+            <%
             } else {
-                out.println("<p>No bet placed.</p>");
-            }
-        %>
-
-        <div>
-            <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
-            <% for (Card card : dealerHand) { %>
-            <%
-                String imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
             %>
-
-            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
-            <% } %>
-        </div>
-
-        <div>
-            <h3>Player's Hand: <%= game.playerTotal() %></h3>
-            <% for (Card card : playerHand) { %>
+            <p>No game started. Click "Play" to start your game session.</p>
             <%
-                String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
+                }
             %>
-
-            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
-            <% } %>
-        </div>
-
-        <%
-        } else {
-        %>
-        <p>No game started. Click "Play" to start your game session.</p>
-        <%
-            }
-        %>
 
 
     </div>
 </div>
 
+<!-- Game Controls -->
 <div class="row justify-content-center mt-3">
-    <div class="col-1 d-grid">
-        <a href="StartServlet" class="btn btn-primary">Play</a>
-    </div>
-
-    <div class="col-1 d-grid">
-        <a href="HitServlet" class="btn btn-success">Hit</a>
-    </div>
-
-    <div class="col-1 d-grid">
-        <button class="btn btn-danger" type="button">Stand</button>
-    </div>
+    <% if(winner!=null && winner!=0){
+        String message;
+        switch(winner) {
+            case 1: message = "It's a tie!"; break;
+            case 2: message = "Player wins!"; break;
+            case 3: message = "Dealer wins!"; break;
+            default: message = "Unexpected game outcome."; break;
+        }
+        out.println("<h3>" + message + "</h3>");
+    }else if (game != null && game.getPlayerHand().size() > 0) {
+            if (game.getPlayerHand().size()==2 && (game.playerTotal() == 9 || game.playerTotal() == 10 || game.playerTotal() ==11)){%>
+                <!-- Double Down -->
+                <div class="col-1 d-grid">
+                    <a href="DoubleDownServlet" class="btn btn-warning">Double</a>
+                </div>
+            <% } %>
+            <!-- Hit Button -->
+            <div class="col-1 d-grid">
+                <a href="HitServlet" class="btn btn-success">Hit</a>
+            </div>
+            <!-- Stand Button -->
+            <div class="col-1 d-grid">
+                <form method="post" action="StandServlet">
+                    <button type="submit" class="btn btn-danger">Stand</button>
+                </form>
+            </div>
+        <%}else{%>
+            <!-- Play Button (deal cards) -->
+            <div class="col-1 d-grid">
+                <a href="StartServlet" class="btn btn-primary">Play</a>
+            </div>
+        <%}%>
 </div>
 
 

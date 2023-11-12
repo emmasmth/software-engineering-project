@@ -13,9 +13,9 @@ public class BetServlet extends HttpServlet {
         PlayGame game = new PlayGame();
 //        PlayGame game = (PlayGame) session.getAttribute("game");
 
-        if (game != null) {
+//        if (game != null) {
             try {
-                int betAmount = Integer.parseInt(request.getParameter("betAmount"));
+                double betAmount = Double.parseDouble(request.getParameter("betAmount"));
                 // Validation logic can be added here (e.g., checking if the user has enough balance)
 
                 game.setBet(betAmount);
@@ -27,10 +27,10 @@ public class BetServlet extends HttpServlet {
                 // Optionally redirect to an error page or back to the betting page with an error message
                 response.sendRedirect("betting.jsp?error=InvalidBetAmount");
             }
-        } else {
-            // Redirect if no game is in session, or handle this scenario as per your application's flow
-            response.sendRedirect("index.jsp");
-        }
+//        } else {
+//            // Redirect if no game is in session, or handle this scenario as per your application's flow
+//            response.sendRedirect("index.jsp");
+//        }
     }
 
     @Override
