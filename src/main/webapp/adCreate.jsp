@@ -32,17 +32,12 @@
     <div class="box-container">
         <h1>Create!</h1>
         <h1></h1>
-
         <!-- https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Java-File-Upload-Servlet-Ajax-Example -->
-
-        <form action="AdCreateServlet" method="post" enctype="multipart/form-data">
-            <input type="file" name="file"/>
-            <button type="submit">Upload</button>
+        <form method="post" action="fileuploadservlet" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
         </form>
-
     </div>
-
-
 
     <jsp:include page="components/footer.jsp"/>
 </body>

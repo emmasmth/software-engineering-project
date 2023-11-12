@@ -42,8 +42,8 @@
                 <%
                 } %>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="login.jsp">Login</a></li>
                     <li><a class="dropdown-item" href="registration.jsp">Register</a></li>
+                    <li><a class="dropdown-item" href="login.jsp">Login</a></li>
                 </ul>
             </li>
         </ul>
