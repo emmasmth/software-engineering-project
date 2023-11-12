@@ -5,12 +5,9 @@
   Time: 6:41 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="model.entity.User" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-
-
-
-
 
 <html>
 <head>
@@ -22,6 +19,18 @@
 
 <div class="container">
     <h2 class="text-center offset-1 text-info">Login</h2>
+
+    <% User logged = (User) session.getAttribute("User"); %>
+    <% if (logged != null)
+    { %>
+    <h3 class="text-center offset-1" style="color: red">You are already registered and logged in!</h3>
+    <%
+    }
+    else
+    {
+    %>
+
+
     <form method="post" action="LoginServlet">
 
         <div class="row justify-content-center mb-1">
@@ -53,9 +62,8 @@
             </div>
         </div>
 
-
-
     </form>
+    <% } %>
 </div>
 <% String code = request.getParameter("loginFail");
     if (code != null) {%>

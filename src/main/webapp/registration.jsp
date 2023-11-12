@@ -5,6 +5,9 @@
   Time: 2:02 PM
   To change this template use File | Settings | File Templates.
 --%>
+
+<%@ page import="model.entity.User" %>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -18,6 +21,17 @@
 
 <div class="container">
   <h2 class="text-center offset-1 text-info">Registration</h2>
+
+  <% User logged = (User) session.getAttribute("User"); %>
+  <% if (logged != null)
+  { %>
+      <h3 class="text-center offset-1" style="color: red">You are already registered and logged in!</h3>
+  <%
+  }
+  else
+  {
+  %>
+
   <form method="post" action="RegistrationServlet">
 
     <div class="row justify-content-center mb-1">
@@ -59,7 +73,7 @@
 
 
   </form>
-
+  <% } %>
 
 
 
