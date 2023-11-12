@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StartServletTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">StartServletTest.java</span></div><h1>StartServletTest.java</h1><pre class="source lang-java linenums">package controller.servlet;
+
+import controller.PlayGame;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+
+
+
+<span class="fc" id="L17">public class StartServletTest {</span>
+
+
+    @Test public void testGet() throws IOException, ServletException {
+<span class="fc" id="L21">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L22">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L23">        HttpSession sessionMock = mock(HttpSession.class);</span>
+<span class="fc" id="L24">        when(request.getSession()).thenReturn(sessionMock);</span>
+<span class="fc" id="L25">        when(sessionMock.getAttribute(&quot;game&quot;)).thenReturn(null);</span>
+<span class="fc" id="L26">        PlayGame game = mock(PlayGame.class);</span>
+<span class="fc" id="L27">        doNothing().when(game).play();</span>
+
+<span class="fc" id="L29">        StartServlet servlet = new StartServlet();</span>
+<span class="fc" id="L30">        servlet.setGame(game);</span>
+
+<span class="fc" id="L32">        servlet.doGet(request, response);</span>
+
+<span class="fc" id="L34">        assertAll(</span>
+<span class="fc" id="L35">                () -&gt; verify(sessionMock).setAttribute(eq(&quot;game&quot;), any(PlayGame.class)),</span>
+<span class="fc" id="L36">                () -&gt; assertNotNull(game),</span>
+<span class="fc" id="L37">                () -&gt; verify(response).sendRedirect(&quot;continue.jsp&quot;)</span>
+
+        );
+
+
+<span class="fc" id="L42">    }</span>
+
+
+
+    @Test public void testClearHands() throws IOException, ServletException {
+<span class="fc" id="L47">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L48">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L49">        HttpSession sessionMock = mock(HttpSession.class);</span>
+<span class="fc" id="L50">        when(request.getSession()).thenReturn(sessionMock);</span>
+<span class="fc" id="L51">        PlayGame game = mock(PlayGame.class);</span>
+<span class="fc" id="L52">        when(sessionMock.getAttribute(&quot;game&quot;)).thenReturn(game);</span>
+
+<span class="fc" id="L54">        doNothing().when(game).clearHands();</span>
+
+<span class="fc" id="L56">        StartServlet servlet = new StartServlet();</span>
+<span class="fc" id="L57">        servlet.setGame(game);</span>
+
+<span class="fc" id="L59">        servlet.doGet(request, response);</span>
+
+<span class="fc" id="L61">        assertAll(</span>
+<span class="fc" id="L62">                () -&gt; assertNotNull(game),</span>
+<span class="fc" id="L63">                () -&gt; verify(response).sendRedirect(&quot;continue.jsp&quot;)</span>
+
+        );
+
+
+<span class="fc" id="L68">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

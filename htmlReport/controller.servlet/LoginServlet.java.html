@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DeckTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">LoginServlet.java</span></div><h1>LoginServlet.java</h1><pre class="source lang-java linenums">package controller.servlet;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">LoginServlet.java</span></div><h1>LoginServlet.java</h1><pre class="source lang-java linenums">package controller.servlet;
 
 import java.io.*;
 
@@ -8,40 +8,40 @@ import jakarta.servlet.annotation.*;
 import model.entity.User;
 
 @WebServlet(name = &quot;LoginServlet&quot;, value = &quot;/LoginServlet&quot;)
-<span class="nc" id="L11">public class LoginServlet extends HttpServlet {</span>
-<span class="nc" id="L12">    public Registration registration = new Registration();</span>
+<span class="fc" id="L11">public class LoginServlet extends HttpServlet {</span>
+<span class="fc" id="L12">    public Registration registration = new Registration();</span>
 
     public void setRegistration(Registration register){
-<span class="nc" id="L15">        this.registration = register;</span>
-<span class="nc" id="L16">    }</span>
+<span class="fc" id="L15">        this.registration = register;</span>
+<span class="fc" id="L16">    }</span>
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-<span class="nc" id="L19">        String username = request.getParameter(&quot;username&quot;);</span>
-<span class="nc" id="L20">        String password = request.getParameter(&quot;password&quot;);</span>
+<span class="fc" id="L19">        String username = request.getParameter(&quot;username&quot;);</span>
+<span class="fc" id="L20">        String password = request.getParameter(&quot;password&quot;);</span>
 
 
-<span class="nc" id="L23">        User logged = registration.loginUser(username, password);</span>
+<span class="fc" id="L23">        User logged = registration.loginUser(username, password);</span>
 
-<span class="nc bnc" id="L25" title="All 2 branches missed.">        if(logged!=null){</span>
-<span class="nc" id="L26">            HttpSession session = request.getSession();</span>
-<span class="nc" id="L27">            logged.setPassword(&quot;&quot;);</span>
-<span class="nc" id="L28">            session.setAttribute(&quot;User&quot;, logged);</span>
-<span class="nc bnc" id="L29" title="All 2 branches missed.">            if(logged.getPermission() == 1)</span>
-<span class="nc" id="L30">                response.sendRedirect(&quot;advertisement.jsp&quot;);</span>
-<span class="nc bnc" id="L31" title="All 2 branches missed.">            else if(logged.getPermission() == 2)</span>
-<span class="nc" id="L32">                response.sendRedirect(&quot;admin.jsp&quot;);</span>
-<span class="nc" id="L33">        }</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if(logged!=null){</span>
+<span class="fc" id="L26">            HttpSession session = request.getSession();</span>
+<span class="fc" id="L27">            logged.setPassword(&quot;&quot;);</span>
+<span class="fc" id="L28">            session.setAttribute(&quot;User&quot;, logged);</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">            if(logged.getPermission() == 1)</span>
+<span class="fc" id="L30">                response.sendRedirect(&quot;advertisement.jsp&quot;);</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">            else if(logged.getPermission() == 2)</span>
+<span class="fc" id="L32">                response.sendRedirect(&quot;admin.jsp&quot;);</span>
+<span class="fc" id="L33">        }</span>
         else{
-<span class="nc" id="L35">            response.sendRedirect(&quot;login.jsp?loginFail=1&quot;);</span>
+<span class="fc" id="L35">            response.sendRedirect(&quot;login.jsp?loginFail=1&quot;);</span>
         }
 
 
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L39">    }</span>
 
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-<span class="nc" id="L43">        processRequest(request, response);</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L43">        processRequest(request, response);</span>
+<span class="fc" id="L44">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

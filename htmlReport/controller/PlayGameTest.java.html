@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayGameTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DeckTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">PlayGameTest.java</span></div><h1>PlayGameTest.java</h1><pre class="source lang-java linenums">package controller;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayGameTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">PlayGameTest.java</span></div><h1>PlayGameTest.java</h1><pre class="source lang-java linenums">package controller;
 
 import static org.mockito.Mockito.*;
 
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.io.ByteArrayOutputStream;
@@ -15,7 +16,179 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-<span class="nc" id="L18">public class PlayGameTest {</span>
+<span class="fc" id="L19">public class PlayGameTest {</span>
+// New tests setup without the use of Scanner
+
+
+
+
+    @Test public void dealInitialCardsTest(){
+<span class="fc" id="L26">        Deck deck = mock(Deck.class);</span>
+<span class="fc" id="L27">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L28">        Card card1 = new Card('C', &quot;8&quot;);</span>
+<span class="fc" id="L29">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L30">        game.setGame(bj);</span>
+<span class="fc" id="L31">        game.setDeck(deck);</span>
+<span class="fc" id="L32">        when(deck.drawCard()).thenReturn(card1);</span>
+
+<span class="fc" id="L34">        game.dealInitialCards();</span>
+
+<span class="fc" id="L36">        assertAll(</span>
+<span class="fc" id="L37">                () -&gt; verify(bj, times(2)).addCardToPlayer(card1),</span>
+<span class="fc" id="L38">                () -&gt; verify(bj, times(2)).addCardToDealer(card1)</span>
+
+        );
+
+<span class="fc" id="L42">    }</span>
+
+    @Test public void checkNaturalsTieTest(){
+<span class="fc" id="L45">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L46">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L47">        game.setGame(bj);</span>
+
+
+<span class="fc" id="L50">        when(bj.getPlayerTotal()).thenReturn(21);</span>
+<span class="fc" id="L51">        when(bj.getDealerTotal()).thenReturn(21);</span>
+
+<span class="fc" id="L53">        game.checkNaturals();</span>
+
+<span class="fc" id="L55">        assertEquals(1, game.gameOutcome);</span>
+
+
+<span class="fc" id="L58">    }</span>
+
+    @Test public void checkNaturalsPlayerWin(){
+<span class="fc" id="L61">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L62">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L63">        game.setGame(bj);</span>
+
+
+<span class="fc" id="L66">        when(bj.getPlayerTotal()).thenReturn(21);</span>
+<span class="fc" id="L67">        when(bj.getDealerTotal()).thenReturn(2);</span>
+
+<span class="fc" id="L69">        game.checkNaturals();</span>
+
+<span class="fc" id="L71">        assertEquals(2, game.gameOutcome);</span>
+
+
+
+<span class="fc" id="L75">    }</span>
+
+    @Test public void checkDealerWin(){
+<span class="fc" id="L78">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L79">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L80">        game.setGame(bj);</span>
+
+
+<span class="fc" id="L83">        when(bj.getPlayerTotal()).thenReturn(5);</span>
+<span class="fc" id="L84">        when(bj.getDealerTotal()).thenReturn(21);</span>
+
+<span class="fc" id="L86">        game.checkNaturals();</span>
+
+<span class="fc" id="L88">        assertEquals(3, game.gameOutcome);</span>
+
+<span class="fc" id="L90">    }</span>
+
+
+    @Test public void checkNoNatural(){
+<span class="fc" id="L94">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L95">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L96">        game.setGame(bj);</span>
+
+
+<span class="fc" id="L99">        when(bj.getPlayerTotal()).thenReturn(5);</span>
+<span class="fc" id="L100">        when(bj.getDealerTotal()).thenReturn(5);</span>
+
+<span class="fc" id="L102">        game.checkNaturals();</span>
+
+<span class="fc" id="L104">        assertEquals(0, game.gameOutcome);</span>
+
+
+
+<span class="fc" id="L108">    }</span>
+
+    @Test public void getDealerHand(){
+<span class="fc" id="L111">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L112">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L113">        game.setGame(bj);</span>
+<span class="fc" id="L114">        when(bj.getDealerHand()).thenReturn(new ArrayList&lt;&gt;());</span>
+
+<span class="fc" id="L116">        game.getDealerHand();</span>
+<span class="fc" id="L117">        verify(bj, times(1)).getDealerHand();</span>
+<span class="fc" id="L118">    }</span>
+
+    @Test public void getPlayerHand(){
+<span class="fc" id="L121">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L122">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L123">        game.setGame(bj);</span>
+<span class="fc" id="L124">        when(bj.getPlayerHand()).thenReturn(new ArrayList&lt;&gt;());</span>
+
+<span class="fc" id="L126">        game.getPlayerHand();</span>
+<span class="fc" id="L127">        verify(bj, times(1)).getPlayerHand();</span>
+
+<span class="fc" id="L129">    }</span>
+
+    @Test public void playerTotalTest(){
+<span class="fc" id="L132">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L133">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L134">        game.setGame(bj);</span>
+<span class="fc" id="L135">        when(bj.getPlayerTotal()).thenReturn(21);</span>
+
+<span class="fc" id="L137">        game.playerTotal();</span>
+<span class="fc" id="L138">        verify(bj, times(1)).getPlayerTotal();</span>
+<span class="fc" id="L139">    }</span>
+
+    @Test public void dealerTotalTest(){
+<span class="fc" id="L142">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L143">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L144">        game.setGame(bj);</span>
+<span class="fc" id="L145">        when(bj.getDealerTotal()).thenReturn(21);</span>
+
+<span class="fc" id="L147">        game.dealerTotal();</span>
+
+<span class="fc" id="L149">        verify(bj, times(1)).getDealerTotal();</span>
+<span class="fc" id="L150">    }</span>
+
+    @Test public void playerTurnTest(){
+<span class="fc" id="L153">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L154">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L155">        Deck deck = mock(Deck.class);</span>
+<span class="fc" id="L156">        Card card1 = new Card('C', &quot;8&quot;);</span>
+<span class="fc" id="L157">        game.setGame(bj);</span>
+<span class="fc" id="L158">        game.setDeck(deck);</span>
+<span class="fc" id="L159">        when(deck.drawCard()).thenReturn(card1);</span>
+
+
+<span class="fc" id="L162">        game.playerTurn();</span>
+
+<span class="fc" id="L164">        verify(bj, times(1)).addCardToPlayer(card1);</span>
+<span class="fc" id="L165">    }</span>
+
+
+    @Test public void clearHandsTest(){
+<span class="fc" id="L169">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L170">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L171">        game.setGame(bj);</span>
+
+<span class="fc" id="L173">        ArrayList&lt;Card&gt; mockDealerHand = mock(ArrayList.class);</span>
+<span class="fc" id="L174">        ArrayList&lt;Card&gt; mockPlayerHand = mock(ArrayList.class);</span>
+
+<span class="fc" id="L176">        when(bj.getPlayerHand()).thenReturn(mockPlayerHand);</span>
+<span class="fc" id="L177">        when(bj.getDealerHand()).thenReturn(mockDealerHand);</span>
+
+<span class="fc" id="L179">        game.clearHands();</span>
+
+<span class="fc" id="L181">        verify(mockDealerHand, times(1)).clear();</span>
+<span class="fc" id="L182">        verify(mockPlayerHand, times(1)).clear();</span>
+
+
+
+
+<span class="fc" id="L187">    }</span>
+
+
+
+
 
 //setup for testing terminal output
    /* private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

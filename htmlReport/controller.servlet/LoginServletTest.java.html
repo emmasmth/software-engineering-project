@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginServletTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DeckTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">LoginServletTest.java</span></div><h1>LoginServletTest.java</h1><pre class="source lang-java linenums">package controller.servlet;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginServletTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">LoginServletTest.java</span></div><h1>LoginServletTest.java</h1><pre class="source lang-java linenums">package controller.servlet;
 import controller.Registration;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,73 +15,108 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-<span class="nc" id="L18">public class LoginServletTest {</span>
+<span class="fc" id="L18">public class LoginServletTest {</span>
     @Test
     public void loginPostTestFail() throws IOException, ServletException {
         // Create a User object
-<span class="nc" id="L22">        User user = new User();</span>
-<span class="nc" id="L23">        user.setID(200);</span>
-<span class="nc" id="L24">        user.setLogin(&quot;test@gmail.com&quot;);</span>
-<span class="nc" id="L25">        user.setPassword(&quot;Test123&quot;);</span>
+<span class="fc" id="L22">        User user = new User();</span>
+<span class="fc" id="L23">        user.setID(200);</span>
+<span class="fc" id="L24">        user.setLogin(&quot;test@gmail.com&quot;);</span>
+<span class="fc" id="L25">        user.setPassword(&quot;Test123&quot;);</span>
 
-<span class="nc" id="L27">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
-<span class="nc" id="L28">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
-<span class="nc" id="L29">        HttpSession sessionMock = mock(HttpSession.class);</span>
+<span class="fc" id="L27">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L28">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L29">        HttpSession sessionMock = mock(HttpSession.class);</span>
 
-<span class="nc" id="L31">        when(request.getSession()).thenReturn(sessionMock);</span>
+<span class="fc" id="L31">        when(request.getSession()).thenReturn(sessionMock);</span>
 
-<span class="nc" id="L33">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;test@gmail.com&quot;);</span>
-<span class="nc" id="L34">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;Test123&quot;);</span>
+<span class="fc" id="L33">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;test@gmail.com&quot;);</span>
+<span class="fc" id="L34">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;Test123&quot;);</span>
 
-<span class="nc" id="L36">        doNothing().when(response).sendRedirect(anyString());</span>
-
-
-<span class="nc" id="L39">        doNothing().when(sessionMock).setAttribute(anyString(), any(User.class));</span>
-
-<span class="nc" id="L41">        Registration test = mock(Registration.class);</span>
-<span class="nc" id="L42">        UserDAO mockDAO = mock(UserDAO.class);</span>
-<span class="nc" id="L43">        test.setDAO(mockDAO);</span>
-
-<span class="nc" id="L45">        when(test.loginUser(eq(&quot;test@gmail.com&quot;), eq(&quot;Test123&quot;))).thenReturn(null);</span>
-
-<span class="nc" id="L47">        LoginServlet servlet = new LoginServlet();</span>
-
-<span class="nc" id="L49">        servlet.doPost(request, response);</span>
+<span class="fc" id="L36">        doNothing().when(response).sendRedirect(anyString());</span>
 
 
-<span class="nc" id="L52">        verify(response).sendRedirect(&quot;login.jsp?loginFail=1&quot;);</span>
-<span class="nc" id="L53">    }</span>
+<span class="fc" id="L39">        doNothing().when(sessionMock).setAttribute(anyString(), any(User.class));</span>
+
+<span class="fc" id="L41">        Registration test = mock(Registration.class);</span>
+<span class="fc" id="L42">        UserDAO mockDAO = mock(UserDAO.class);</span>
+<span class="fc" id="L43">        test.setDAO(mockDAO);</span>
+
+<span class="fc" id="L45">        when(test.loginUser(eq(&quot;test@gmail.com&quot;), eq(&quot;Test123&quot;))).thenReturn(null);</span>
+
+<span class="fc" id="L47">        LoginServlet servlet = new LoginServlet();</span>
+
+<span class="fc" id="L49">        servlet.doPost(request, response);</span>
+
+
+<span class="fc" id="L52">        verify(response).sendRedirect(&quot;login.jsp?loginFail=1&quot;);</span>
+<span class="fc" id="L53">    }</span>
 
 
     @Test
     public void loginPostTestSuccess() throws IOException, ServletException {
         // Create a User object
-<span class="nc" id="L59">        User user = new User();</span>
-<span class="nc" id="L60">        user.setID(200);</span>
-<span class="nc" id="L61">        user.setLogin(&quot;test@gmail.com&quot;);</span>
-<span class="nc" id="L62">        user.setPassword(&quot;Test123&quot;);</span>
+<span class="fc" id="L59">        User user = new User();</span>
+<span class="fc" id="L60">        user.setID(200);</span>
+<span class="fc" id="L61">        user.setLogin(&quot;test@gmail.com&quot;);</span>
+<span class="fc" id="L62">        user.setPassword(&quot;Test123&quot;);</span>
 
-<span class="nc" id="L64">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
-<span class="nc" id="L65">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
-<span class="nc" id="L66">        HttpSession sessionMock = mock(HttpSession.class);</span>
-
-
-<span class="nc" id="L69">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;test@gmail.com&quot;);</span>
-<span class="nc" id="L70">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;Test123&quot;);</span>
-<span class="nc" id="L71">        when(request.getSession()).thenReturn(sessionMock);</span>
+<span class="fc" id="L64">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L65">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L66">        HttpSession sessionMock = mock(HttpSession.class);</span>
 
 
-<span class="nc" id="L74">        Registration test = mock(Registration.class);</span>
-
-<span class="nc" id="L76">        when(test.loginUser(anyString(), anyString())).thenReturn(user);</span>
-
-<span class="nc" id="L78">        LoginServlet servlet = new LoginServlet();</span>
-<span class="nc" id="L79">        servlet.setRegistration(test);</span>
-
-<span class="nc" id="L81">        servlet.doPost(request, response);</span>
+<span class="fc" id="L69">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;test@gmail.com&quot;);</span>
+<span class="fc" id="L70">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;Test123&quot;);</span>
+<span class="fc" id="L71">        when(request.getSession()).thenReturn(sessionMock);</span>
 
 
-<span class="nc" id="L84">        verify(response).sendRedirect(&quot;advertisement.jsp&quot;);</span>
-<span class="nc" id="L85">    }</span>
+<span class="fc" id="L74">        Registration test = mock(Registration.class);</span>
+
+<span class="fc" id="L76">        when(test.loginUser(anyString(), anyString())).thenReturn(user);</span>
+
+<span class="fc" id="L78">        LoginServlet servlet = new LoginServlet();</span>
+<span class="fc" id="L79">        servlet.setRegistration(test);</span>
+
+<span class="fc" id="L81">        servlet.doPost(request, response);</span>
+
+
+<span class="fc" id="L84">        verify(response).sendRedirect(&quot;advertisement.jsp&quot;);</span>
+<span class="fc" id="L85">    }</span>
+
+
+
+    @Test public void loginPostAdmin() throws IOException, ServletException {
+        // Create a User object
+<span class="fc" id="L91">        User user = new User();</span>
+<span class="fc" id="L92">        user.setID(200);</span>
+<span class="fc" id="L93">        user.setLogin(&quot;test@gmail.com&quot;);</span>
+<span class="fc" id="L94">        user.setPassword(&quot;Test123&quot;);</span>
+<span class="fc" id="L95">        user.setPermission(2);</span>
+
+<span class="fc" id="L97">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L98">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L99">        HttpSession sessionMock = mock(HttpSession.class);</span>
+
+
+<span class="fc" id="L102">        when(request.getParameter(&quot;username&quot;)).thenReturn(&quot;test@gmail.com&quot;);</span>
+<span class="fc" id="L103">        when(request.getParameter(&quot;password&quot;)).thenReturn(&quot;Test123&quot;);</span>
+<span class="fc" id="L104">        when(request.getSession()).thenReturn(sessionMock);</span>
+
+
+<span class="fc" id="L107">        Registration test = mock(Registration.class);</span>
+
+<span class="fc" id="L109">        when(test.loginUser(anyString(), anyString())).thenReturn(user);</span>
+
+<span class="fc" id="L111">        LoginServlet servlet = new LoginServlet();</span>
+<span class="fc" id="L112">        servlet.setRegistration(test);</span>
+
+<span class="fc" id="L114">        servlet.doPost(request, response);</span>
+
+
+<span class="fc" id="L117">        verify(response).sendRedirect(&quot;admin.jsp&quot;);</span>
+<span class="fc" id="L118">    }</span>
+
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserDAOTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UserDAOTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.dao</a> &gt; <span class="el_source">UserDAOTest.java</span></div><h1>UserDAOTest.java</h1><pre class="source lang-java linenums">package model.dao;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserDAOTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.dao</a> &gt; <span class="el_source">UserDAOTest.java</span></div><h1>UserDAOTest.java</h1><pre class="source lang-java linenums">package model.dao;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -50,69 +50,78 @@ import model.entity.User;
 <span class="fc" id="L50">                () -&gt; assertEquals(userInserted.getPassword(), newUser.getPassword(), &quot;Password of the user we extracted from database should match the Password of the entity&quot;)</span>
                 );
 <span class="fc" id="L52">    }</span>
-
-
-
+    @Test public void deleteEmptyDAOTest(){
+<span class="fc" id="L54">        User newuser = createUserEntity();</span>
+<span class="fc" id="L55">        assertDoesNotThrow(() -&gt; dao.delete(newuser));</span>
+<span class="fc" id="L56">    }</span>
 
 
     @Test public void deleteUserTest(){
-<span class="fc" id="L59">        User newUser = createUserEntity();</span>
-<span class="fc" id="L60">        dao.create(newUser);</span>
-<span class="fc" id="L61">        dao.delete(newUser.getID());</span>
-<span class="fc" id="L62">        assertNull(dao.read(newUser.getID()), &quot;User should not exist after deletion&quot;);</span>
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L60">        User newUser = createUserEntity();</span>
+<span class="fc" id="L61">        dao.create(newUser);</span>
+<span class="fc" id="L62">        dao.delete(newUser.getID());</span>
+<span class="fc" id="L63">        assertNull(dao.read(newUser.getID()), &quot;User should not exist after deletion&quot;);</span>
+<span class="fc" id="L64">    }</span>
 
     @Test public void deleteAllTest(){
-<span class="fc" id="L66">        User newUser = createUserEntity();</span>
-<span class="fc" id="L67">        User differentUser = createUserEntityDifferent();</span>
-<span class="fc" id="L68">        dao.create(newUser);</span>
-<span class="fc" id="L69">        dao.create(differentUser);</span>
-<span class="fc" id="L70">        dao.deleteAll();</span>
-<span class="fc" id="L71">        assertNull(dao.read(newUser.getID()), &quot;User should not exist after deletion&quot;);</span>
-<span class="fc" id="L72">        assertNull(dao.read(differentUser.getID()), &quot;User should not exist after deletion&quot;);</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L67">        User newUser = createUserEntity();</span>
+<span class="fc" id="L68">        User differentUser = createUserEntityDifferent();</span>
+<span class="fc" id="L69">        dao.create(newUser);</span>
+<span class="fc" id="L70">        dao.create(differentUser);</span>
+<span class="fc" id="L71">        dao.deleteAll();</span>
+<span class="fc" id="L72">        assertNull(dao.read(newUser.getID()), &quot;User should not exist after deletion&quot;);</span>
+<span class="fc" id="L73">        assertNull(dao.read(differentUser.getID()), &quot;User should not exist after deletion&quot;);</span>
+<span class="fc" id="L74">    }</span>
 
     @Test public void updateEntityTest(){
-<span class="fc" id="L76">        User newUser = createUserEntity();</span>
-<span class="fc" id="L77">        dao.create(newUser);</span>
-<span class="fc" id="L78">        newUser.setName(&quot;Update&quot;);</span>
-<span class="fc" id="L79">        dao.update(newUser);</span>
-<span class="fc" id="L80">        User record = dao.read(newUser.getID());</span>
-<span class="fc" id="L81">        assertEquals(record.getName(), &quot;Update&quot;);</span>
-<span class="fc" id="L82">    }</span>
+<span class="fc" id="L77">        User newUser = createUserEntity();</span>
+<span class="fc" id="L78">        dao.create(newUser);</span>
+<span class="fc" id="L79">        newUser.setName(&quot;Update&quot;);</span>
+<span class="fc" id="L80">        dao.update(newUser);</span>
+<span class="fc" id="L81">        User record = dao.read(newUser.getID());</span>
+<span class="fc" id="L82">        assertEquals(record.getName(), &quot;Update&quot;);</span>
+<span class="fc" id="L83">    }</span>
 
     @Test public void ListTest(){
-<span class="fc" id="L85">        User newUser = createUserEntity();</span>
-<span class="fc" id="L86">        User differentUser = createUserEntityDifferent();</span>
-<span class="fc" id="L87">        dao.create(newUser);</span>
-<span class="fc" id="L88">        dao.create(differentUser);</span>
-<span class="fc" id="L89">        java.util.List&lt;User&gt; userList = dao.list(&quot;idUser&quot;);</span>
+<span class="fc" id="L86">        User newUser = createUserEntity();</span>
+<span class="fc" id="L87">        User differentUser = createUserEntityDifferent();</span>
+<span class="fc" id="L88">        dao.create(newUser);</span>
+<span class="fc" id="L89">        dao.create(differentUser);</span>
+<span class="fc" id="L90">        java.util.List&lt;User&gt; userList = dao.list(&quot;idUser&quot;);</span>
 
-<span class="fc" id="L91">        assertAll(</span>
-<span class="fc" id="L92">                () -&gt; assertEquals(userList.size(), 2),</span>
-<span class="fc" id="L93">                () -&gt; assertEquals(userList.get(0).getName(), &quot;Oliver&quot;),</span>
-<span class="fc" id="L94">                () -&gt; assertEquals(userList.get(1).getName(), &quot;John&quot;)</span>
+<span class="fc" id="L92">        assertAll(</span>
+<span class="fc" id="L93">                () -&gt; assertEquals(userList.size(), 2),</span>
+<span class="fc" id="L94">                () -&gt; assertEquals(userList.get(0).getName(), &quot;Oliver&quot;),</span>
+<span class="fc" id="L95">                () -&gt; assertEquals(userList.get(1).getName(), &quot;John&quot;)</span>
                 );
-<span class="fc" id="L96">    }</span>
+<span class="fc" id="L97">    }</span>
 
     @Test public void ListTestNonExistingOrder(){
-<span class="fc" id="L99">        User newUser = createUserEntity();</span>
-<span class="fc" id="L100">        User differentUser = createUserEntityDifferent();</span>
-<span class="fc" id="L101">        dao.create(newUser);</span>
-<span class="fc" id="L102">        dao.create(differentUser);</span>
+<span class="fc" id="L100">        User newUser = createUserEntity();</span>
+<span class="fc" id="L101">        User differentUser = createUserEntityDifferent();</span>
+<span class="fc" id="L102">        dao.create(newUser);</span>
+<span class="fc" id="L103">        dao.create(differentUser);</span>
 
-<span class="pc" id="L104">        assertThrows(javax.persistence.PersistenceException.class, () -&gt; dao.list(&quot;random&quot;));</span>
+<span class="pc" id="L105">        assertThrows(javax.persistence.PersistenceException.class, () -&gt; dao.list(&quot;random&quot;));</span>
 
-<span class="fc" id="L106">    }</span>
+<span class="fc" id="L107">    }</span>
 
     @Test public void userRegistered(){
-<span class="fc" id="L109">        User newUser = createUserEntity();</span>
-<span class="fc" id="L110">        dao.create(newUser);</span>
-<span class="fc" id="L111">        User registered = dao.read(newUser.getID());</span>
-<span class="fc" id="L112">        assertAll(</span>
-<span class="fc" id="L113">                () -&gt; assertNotNull(registered.getLogin()),</span>
-<span class="fc" id="L114">                () -&gt; assertNotNull(registered.getPassword())</span>
+<span class="fc" id="L110">        User newUser = createUserEntity();</span>
+<span class="fc" id="L111">        dao.create(newUser);</span>
+<span class="fc" id="L112">        User registered = dao.read(newUser.getID());</span>
+<span class="fc" id="L113">        assertAll(</span>
+<span class="fc" id="L114">                () -&gt; assertNotNull(registered.getLogin()),</span>
+<span class="fc" id="L115">                () -&gt; assertNotNull(registered.getPassword())</span>
                 );
-<span class="fc" id="L116">    }</span>
+<span class="fc" id="L117">    }</span>
+
+    @Test public void testLogin(){
+<span class="fc" id="L120">        User newUser = createUserEntity();</span>
+
+<span class="fc" id="L122">        dao.create(newUser);</span>
+<span class="fc" id="L123">        User checkLogged = dao.findUserFromUsername(newUser.getLogin());</span>
+<span class="fc" id="L124">        assertNotNull(checkLogged.getID());</span>
+<span class="fc" id="L125">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

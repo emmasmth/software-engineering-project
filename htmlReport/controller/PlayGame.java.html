@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DeckTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">PlayGame.java</span></div><h1>PlayGame.java</h1><pre class="source lang-java linenums">package controller;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">PlayGame.java</span></div><h1>PlayGame.java</h1><pre class="source lang-java linenums">package controller;
 
 import java.util.ArrayList;
 
@@ -8,21 +8,30 @@ import java.util.ArrayList;
  */
 public class PlayGame {
 
-<span class="nc" id="L11">    int gameOutcome = 0;</span>
     Deck deck;
     Blackjack game;
+<span class="fc" id="L13">    int gameOutcome = 0;</span>
+<span class="fc" id="L14">    double bet = 0.00;</span>
+<span class="fc" id="L15">    double payout = 0.00;</span>
+
+    public void setGame(Blackjack game){
+<span class="fc" id="L18">        this.game = game;</span>
+<span class="fc" id="L19">    }</span>
+    public void setDeck(Deck deck){
+<span class="fc" id="L21">        this.deck = deck;</span>
+<span class="fc" id="L22">    }</span>
 
     /**
      * default constructor
      */
-<span class="nc" id="L18">    public PlayGame() {</span>
-<span class="nc" id="L19">        deck = new Deck();</span>
-<span class="nc" id="L20">        game = new Blackjack();</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L27">    public PlayGame() {</span>
+<span class="fc" id="L28">        deck = new Deck();</span>
+<span class="fc" id="L29">        game = new Blackjack();</span>
+<span class="fc" id="L30">    }</span>
 
 
-
-    /*public int getGameOutcome(){
+/*
+    public int getGameOutcome(){
         return gameOutcome;
     }*/
 
@@ -32,13 +41,13 @@ public class PlayGame {
      */
     public void play() {
         // Deal initial cards
-<span class="nc" id="L35">        dealInitialCards();</span>
+<span class="fc" id="L44">        dealInitialCards();</span>
 
         // Check for naturals
-<span class="nc" id="L38">        checkNaturals();</span>
+<span class="fc" id="L47">        checkNaturals();</span>
 
 
-<span class="nc" id="L41">    }</span>
+<span class="fc" id="L50">    }</span>
 
     /**
      * dealInitialCards
@@ -46,50 +55,51 @@ public class PlayGame {
      */
     public void dealInitialCards() {
         //deal two cards to player and dealer
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        for (int i = 0; i &lt; 2; i++) {</span>
-<span class="nc" id="L50">            game.addCardToPlayer(deck.drawCard());</span>
-<span class="nc" id="L51">            game.addCardToDealer(deck.drawCard());</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (int i = 0; i &lt; 2; i++) {</span>
+<span class="fc" id="L59">            game.addCardToPlayer(deck.drawCard());</span>
+<span class="fc" id="L60">            game.addCardToDealer(deck.drawCard());</span>
         }
-<span class="nc" id="L53">    }</span>
+<span class="fc" id="L62">    }</span>
 
     /**
      * checkNaturals
      * checks if player or dealer won with initial cards
      */
     public void checkNaturals() {
-<span class="nc bnc" id="L60" title="All 4 branches missed.">        if(game.getPlayerTotal() == 21 &amp;&amp; game.getDealerTotal()==21){</span>
-<span class="nc" id="L61">            gameOutcome = 1; //tie</span>
+<span class="fc bfc" id="L69" title="All 4 branches covered.">        if(game.getPlayerTotal() == 21 &amp;&amp; game.getDealerTotal()==21){</span>
+<span class="fc" id="L70">            gameOutcome = 1; //tie</span>
         }
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        else if (game.getPlayerTotal() == 21) {</span>
-<span class="nc" id="L64">            gameOutcome = 2; //player win</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        else if (game.getPlayerTotal() == 21) {</span>
+<span class="fc" id="L73">            gameOutcome = 2; //player win</span>
         }
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        else if (game.getDealerTotal() == 21) {</span>
-<span class="nc" id="L67">            gameOutcome = 3; //dealer win</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        else if (game.getDealerTotal() == 21) {</span>
+<span class="fc" id="L76">            gameOutcome = 3; //dealer win</span>
         }
         else
-<span class="nc" id="L70">            gameOutcome = 0; //neither - continue game</span>
-<span class="nc" id="L71">    }</span>
+<span class="fc" id="L79">            gameOutcome = 0; //neither - continue game</span>
+<span class="fc" id="L80">    }</span>
+
     public ArrayList&lt;Card&gt; getDealerHand() {
-<span class="nc" id="L73">        return game.getDealerHand();</span>
+<span class="fc" id="L83">        return game.getDealerHand();</span>
     }
 
     public ArrayList&lt;Card&gt; getPlayerHand() {
-<span class="nc" id="L77">        return game.getPlayerHand();</span>
+<span class="fc" id="L87">        return game.getPlayerHand();</span>
     }
 
 
 
     public int playerTotal(){
-<span class="nc" id="L83">        return game.getPlayerTotal();</span>
+<span class="fc" id="L93">        return game.getPlayerTotal();</span>
     }
     public int dealerTotal(){
-<span class="nc" id="L86">        return game.getDealerTotal();</span>
+<span class="fc" id="L96">        return game.getDealerTotal();</span>
     }
 
 
     public void playerTurn() {
-<span class="nc" id="L91">        game.addCardToPlayer(deck.drawCard());</span>
-<span class="nc" id="L92">    }</span>
+<span class="fc" id="L101">        game.addCardToPlayer(deck.drawCard());</span>
+<span class="fc" id="L102">    }</span>
 
     /**
      * dealerTurn
@@ -101,6 +111,39 @@ public class PlayGame {
             printHand(&quot;dealer&quot;);
         }
     }*/
+
+
+    /**
+     * setBet
+     * updates bet, used for initial bet
+     */
+<span class="nc" id="L120">    public void setBet(int amount){bet = amount;}</span>
+
+    /**
+     * doubleBet
+     * doubles bet, used for double down
+     */
+<span class="nc" id="L126">    public void doubleBet(){bet = bet*2;}</span>
+<span class="nc" id="L127">    public double getBet(){return bet;} //returns how much is currently at stake</span>
+
+    /**
+     * calcPayOut
+     * calculates how much player should be paid after game depending on outcome
+     */
+    public void calcPayOut(){
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if(gameOutcome==1){ //tie</span>
+<span class="nc" id="L135">            payout=bet; //get money back</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        }else if(gameOutcome==2){//player win</span>
+<span class="nc" id="L137">            payout=bet*2; //1:1 win</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        }else if(gameOutcome==3){//dealer win</span>
+<span class="nc" id="L139">            payout=0; //lose buy in</span>
+        }else{
+<span class="nc" id="L141">            payout=bet; //something went wrong, just return buy in</span>
+        }
+<span class="nc" id="L143">    }</span>
+
+<span class="nc" id="L145">    public double getPayout(){return payout;} //returns how much the player gets back after game</span>
+
 
     /**
      * determineWinner
@@ -119,14 +162,14 @@ public class PlayGame {
             gameOutcome = 1; // tie
         }
         System.out.println(&quot;end: &quot; + gameOutcome);
-    }*/
+    }
 
-    /**
+    *//**
      * endGame
      * prints who won and will add game to history
      * @param winner int for who won (1=tie, 2=player, 3=dealer)
-     */
-   /* public void endGame(int winner){
+     *//*
+    public void endGame(int winner){
         System.out.println(&quot;Game Over!&quot;);
         System.out.println(&quot;You: &quot; + game.getPlayerTotal() + &quot; Dealer: &quot; + game.getDealerTotal());
         if (winner == 1){
@@ -144,17 +187,17 @@ public class PlayGame {
     }*/
 
     public void clearHands() {
-<span class="nc bnc" id="L147" title="All 4 branches missed.">        if (!game.getPlayerHand().isEmpty() || !game.getDealerHand().isEmpty()) {</span>
-<span class="nc" id="L148">            game.getDealerHand().clear();</span>
-<span class="nc" id="L149">            game.getPlayerHand().clear();</span>
+<span class="pc bpc" id="L190" title="3 of 4 branches missed.">        if (!game.getPlayerHand().isEmpty() || !game.getDealerHand().isEmpty()) {</span>
+<span class="fc" id="L191">            game.getDealerHand().clear();</span>
+<span class="fc" id="L192">            game.getPlayerHand().clear();</span>
         }
-<span class="nc" id="L151">    }</span>
+<span class="fc" id="L194">    }</span>
 
     /**
      * printHand
      * prints the cards in the hand and its total
      */
-    /*public void printHand(String hand) {
+   /* public void printHand(String hand) {
         if(hand.equals(&quot;player&quot;)) {
             if (!game.getPlayerHand().isEmpty()) {
                 System.out.println(&quot;Your hand: &quot; + game.getPlayerHand() + &quot; (&quot; + game.getPlayerTotal() + &quot;)&quot;);

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UserTest Coverage Results, UserDAOTest.createUser Coverage Results, UserDAOTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.entity</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">// SPDX-License-Identifier: MIT
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.entity</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">// SPDX-License-Identifier: MIT
 package model.entity;
 
 // imports
@@ -7,12 +7,14 @@ import javax.persistence.*;
 public class User extends BaseEntity
 {
 <span class="fc" id="L9">    @Id @Column (name = &quot;idUser&quot;) @GeneratedValue(strategy = GenerationType.IDENTITY)</span>
-    private Integer ID = null;
+    private Integer idUser = null;
     @Column (unique = true) // Login must be unique for each record in DB
     private String Login;
     private String Name;
     private String Password;
     private int Permission;
+    private int Wins;
+    private int Loses;
 
     // keyword transient, meaning that the data member will not be serialized.
     public transient static final int USER_PERMISSION = 1;
@@ -20,18 +22,18 @@ public class User extends BaseEntity
 
 
     public User()
-<span class="fc" id="L23">    {</span>
-<span class="fc" id="L24">        this.Permission = USER_PERMISSION;</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L25">    {</span>
+<span class="fc" id="L26">        this.Permission = USER_PERMISSION;</span>
+<span class="fc" id="L27">    }</span>
 
-    public User(Integer ID, String name, String login, String password, int permission)
-<span class="fc" id="L28">    {</span>
-<span class="fc" id="L29">        this.ID = ID;</span>
-<span class="fc" id="L30">        Name = name;</span>
-<span class="fc" id="L31">        Login = login;</span>
-<span class="fc" id="L32">        Password = password;</span>
-<span class="fc" id="L33">        Permission = permission;</span>
-<span class="fc" id="L34">    }</span>
+    public User(Integer idUser, String name, String login, String password, int permission)
+<span class="fc" id="L30">    {</span>
+<span class="fc" id="L31">        this.idUser = idUser;</span>
+<span class="fc" id="L32">        Name = name;</span>
+<span class="fc" id="L33">        Login = login;</span>
+<span class="fc" id="L34">        Password = password;</span>
+<span class="fc" id="L35">        Permission = permission;</span>
+<span class="fc" id="L36">    }</span>
 
     /**
      * This function gets a User's ID.
@@ -40,25 +42,25 @@ public class User extends BaseEntity
     @Override
     public Integer getID()
     {
-<span class="fc" id="L43">        return ID;</span>
+<span class="fc" id="L45">        return idUser;</span>
     }
 
     /**
      * This function sets a User's ID to the argument passed in.
-     * @param ID, an Integer that should be the new value of the User's ID.
+     * @param idUser, an Integer that should be the new value of the User's ID.
      */
-    public void setID(Integer ID)
+    public void setID(Integer idUser)
     {
-<span class="fc" id="L52">        this.ID = ID;</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L54">        this.idUser = idUser;</span>
+<span class="fc" id="L55">    }</span>
 
     /**
      * This function sets a User's Name to the argument passed in.
      * @param name, a String that should be the new value of the User's Name.
      */
     public void setName(String name){
-<span class="fc" id="L60">        Name = name;</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L62">        Name = name;</span>
+<span class="fc" id="L63">    }</span>
 
     /**
      * This function gets a User's name.
@@ -66,7 +68,7 @@ public class User extends BaseEntity
      */
     public String getName()
     {
-<span class="fc" id="L69">        return Name;</span>
+<span class="fc" id="L71">        return Name;</span>
     }
 
     /**
@@ -75,7 +77,7 @@ public class User extends BaseEntity
      */
     public String getLogin()
     {
-<span class="fc" id="L78">        return Login;</span>
+<span class="fc" id="L80">        return Login;</span>
     }
 
     /**
@@ -84,8 +86,8 @@ public class User extends BaseEntity
      */
     public void setLogin(String login)
     {
-<span class="fc" id="L87">        Login = login;</span>
-<span class="fc" id="L88">    }</span>
+<span class="fc" id="L89">        Login = login;</span>
+<span class="fc" id="L90">    }</span>
 
     /**
      * This function gets a User's password.
@@ -94,7 +96,7 @@ public class User extends BaseEntity
     public String getPassword()
     {
         // FIXME : is it okay for this to be public?
-<span class="fc" id="L97">        return Password;</span>
+<span class="fc" id="L99">        return Password;</span>
     }
 
     /**
@@ -103,8 +105,8 @@ public class User extends BaseEntity
      */
     public void setPassword(String password)
     {
-<span class="fc" id="L106">        Password = password;</span>
-<span class="fc" id="L107">    }</span>
+<span class="fc" id="L108">        Password = password;</span>
+<span class="fc" id="L109">    }</span>
 
     /**
      * This function gets a User's permission.
@@ -112,31 +114,54 @@ public class User extends BaseEntity
      */
     public int getPermission()
     {
-<span class="fc" id="L115">        return Permission;</span>
+<span class="fc" id="L117">        return Permission;</span>
     }
 
     public void setPermission(int permission)
     {
-<span class="fc" id="L120">        Permission = permission;</span>
-<span class="fc" id="L121">    }</span>
+<span class="fc" id="L122">        Permission = permission;</span>
+<span class="fc" id="L123">    }</span>
 
-    @Override
-    public String toString() {
+    public String getPermissionAsString() {
 
-<span class="fc bfc" id="L126" title="All 2 branches covered.">        if (Permission == USER_PERMISSION)</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        if (Permission == USER_PERMISSION)</span>
         {
-<span class="fc" id="L128">            return &quot;Player&quot;;</span>
+<span class="fc" id="L129">            return &quot;User&quot;;</span>
         }
-<span class="fc bfc" id="L130" title="All 2 branches covered.">        else if (Permission == ADMIN_PERMISSION)</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        else if (Permission == ADMIN_PERMISSION)</span>
         {
-<span class="fc" id="L132">            return &quot;Admin&quot;;</span>
+<span class="fc" id="L133">            return &quot;Admin&quot;;</span>
         }
         else
         {
-<span class="fc" id="L136">            return &quot;Unknown&quot;;</span>
+<span class="fc" id="L137">            return &quot;Unknown&quot;;</span>
         }
 
     }
 
+
+    //Game History
+<span class="nc" id="L144">    public void setWins(int wins){Wins = wins;}</span>
+<span class="nc" id="L145">    public void incWins(){Wins++;}</span>
+<span class="nc" id="L146">    public int getWins(){return Wins;}</span>
+
+<span class="nc" id="L148">    public void setLoses(int loses){Loses=loses;}</span>
+<span class="nc" id="L149">    public void incLoses(){Loses++;}</span>
+<span class="nc" id="L150">    public int getLoses(){return Loses;}</span>
+
 }
+
+
+/**
+ *
+ * create table user(
+ *     idUser int not null auto_increment,
+ *     Name varchar(50),
+ *     Login varchar(30) not null,
+ *     Password char(60) not null,
+ *     Permission int not null default 1,
+ *     constraint user_pk primary key(idUser),
+ *     constraint user_login_uk unique key(Login)
+ *  );
+ */
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

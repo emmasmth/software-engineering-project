@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenericDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UserDAOTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.dao</a> &gt; <span class="el_source">GenericDAO.java</span></div><h1>GenericDAO.java</h1><pre class="source lang-java linenums">// SPDX-License-Identifier: MIT
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenericDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.dao</a> &gt; <span class="el_source">GenericDAO.java</span></div><h1>GenericDAO.java</h1><pre class="source lang-java linenums">// SPDX-License-Identifier: MIT
 package model.dao;
 
 import model.entity.BaseEntity;
+import model.entity.User;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -18,11 +19,11 @@ import java.util.List;
  * @param &lt;E&gt; The Entity (subclass of BaseEntity) and annotated with @javax.persistence.Entity
  */
 public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
-<span class="fc" id="L21">    public enum DbType {STANDARD, TEST};</span>
-<span class="fc" id="L22">    protected static EntityManagerFactory standardEMF = null; //Factory for Normal DB</span>
-<span class="fc" id="L23">    protected static EntityManagerFactory testEMF = null; //Factory for Test DB</span>
+<span class="fc" id="L22">    public enum DbType {STANDARD, TEST};</span>
+<span class="fc" id="L23">    protected static EntityManagerFactory standardEMF = null; //Factory for Normal DB</span>
+<span class="fc" id="L24">    protected static EntityManagerFactory testEMF = null; //Factory for Test DB</span>
 
-<span class="fc" id="L25">    protected DbType DbTypeOutput = DbType.STANDARD; //Sets standard DAO output to Normal DB</span>
+<span class="fc" id="L26">    protected DbType DbTypeOutput = DbType.STANDARD; //Sets standard DAO output to Normal DB</span>
     protected Class&lt;E&gt; EntityClass; //Necessary to use some functions
 
     /***
@@ -31,9 +32,9 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * the goal is to enforce developers to create a subclas of GenericDAO
      * @param entityclass
      */
-<span class="fc" id="L34">    public GenericDAO(Class&lt;E&gt; entityclass){</span>
-<span class="fc" id="L35">        this.EntityClass = entityclass;</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L35">    public GenericDAO(Class&lt;E&gt; entityclass){</span>
+<span class="fc" id="L36">        this.EntityClass = entityclass;</span>
+<span class="fc" id="L37">    }</span>
 
     /***
      * Sets up the DAO outputs to a different DB
@@ -41,8 +42,8 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @param output
      */
     public void setDbTypeOutput(DbType output){
-<span class="fc" id="L44">        this.DbTypeOutput = output;</span>
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L45">        this.DbTypeOutput = output;</span>
+<span class="fc" id="L46">    }</span>
 
     /***
      * Creates the EntityManagerFactory if it does not exist,
@@ -52,18 +53,18 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @return the appropriate EntityManager (for Production or Test DB)
      */
     protected EntityManager getEntityManager(){
-<span class="fc" id="L55">        EntityManagerFactory fac = null;</span>
-<span class="pc bpc" id="L56" title="2 of 3 branches missed.">        switch (DbTypeOutput){</span>
+<span class="fc" id="L56">        EntityManagerFactory fac = null;</span>
+<span class="pc bpc" id="L57" title="1 of 3 branches missed.">        switch (DbTypeOutput){</span>
             case STANDARD:
-<span class="nc bnc" id="L58" title="All 2 branches missed.">                if(standardEMF == null) standardEMF = Persistence.createEntityManagerFactory(&quot;standardPersistenceUnit&quot;);</span>
-<span class="nc" id="L59">                fac = standardEMF;</span>
-<span class="nc" id="L60">                break;</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">                if(standardEMF == null) standardEMF = Persistence.createEntityManagerFactory(&quot;standardPersistenceUnit&quot;);</span>
+<span class="fc" id="L60">                fac = standardEMF;</span>
+<span class="fc" id="L61">                break;</span>
             case TEST:
-<span class="fc bfc" id="L62" title="All 2 branches covered.">                if(testEMF == null) testEMF = Persistence.createEntityManagerFactory(&quot;testPersistenceUnit&quot;);</span>
-<span class="fc" id="L63">                fac = testEMF;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">                if(testEMF == null) testEMF = Persistence.createEntityManagerFactory(&quot;testPersistenceUnit&quot;);</span>
+<span class="fc" id="L64">                fac = testEMF;</span>
                 break;
         }
-<span class="fc" id="L66">        return fac.createEntityManager();</span>
+<span class="fc" id="L67">        return fac.createEntityManager();</span>
     }
 
     /***
@@ -71,19 +72,19 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @param entity A BaseEntity subclass object to be saved in the DB.
      */
     public E create(E entity){
-<span class="fc" id="L74">        EntityManager em = this.getEntityManager();</span>
+<span class="fc" id="L75">        EntityManager em = this.getEntityManager();</span>
         try {
-<span class="fc" id="L76">            em.getTransaction().begin();</span>
-<span class="fc" id="L77">            em.persist(entity);</span>
-<span class="fc" id="L78">            em.getTransaction().commit();</span>
-<span class="fc" id="L79">            em.close();</span>
-<span class="nc" id="L80">        }catch(Exception ex){</span>
+<span class="fc" id="L77">            em.getTransaction().begin();</span>
+<span class="fc" id="L78">            em.persist(entity);</span>
+<span class="fc" id="L79">            em.getTransaction().commit();</span>
+<span class="fc" id="L80">            em.close();</span>
+<span class="nc" id="L81">        }catch(Exception ex){</span>
             //Something went wrong (like duplicate unique filed)
-<span class="nc" id="L82">            em.getTransaction().rollback(); //abort transaction</span>
-<span class="nc" id="L83">            em.close();</span>
-<span class="nc" id="L84">            throw ex; //rethrow for the upper layer to know what happened</span>
-<span class="fc" id="L85">        }</span>
-<span class="fc" id="L86">        return entity;</span>
+<span class="nc" id="L83">            em.getTransaction().rollback(); //abort transaction</span>
+<span class="nc" id="L84">            em.close();</span>
+<span class="nc" id="L85">            throw ex; //rethrow for the upper layer to know what happened</span>
+<span class="fc" id="L86">        }</span>
+<span class="fc" id="L87">        return entity;</span>
     }
 
     /***
@@ -93,7 +94,7 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @return the entity full info that was in the DB or null if it does not exist
      */
     public E read(E entity){
-<span class="nc" id="L96">        return read(entity.getID());</span>
+<span class="nc" id="L97">        return read(entity.getID());</span>
     }
 
     /***
@@ -102,10 +103,10 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @return A BaseEntity subclass with the appropriate record in the DB, or null if it does not exist
      */
     public E read(int id){
-<span class="fc" id="L105">        EntityManager em = this.getEntityManager();</span>
-<span class="fc" id="L106">        E entity = em.find(EntityClass, id);</span>
-<span class="fc" id="L107">        em.close();</span>
-<span class="fc" id="L108">        return entity;</span>
+<span class="fc" id="L106">        EntityManager em = this.getEntityManager();</span>
+<span class="fc" id="L107">        E entity = em.find(EntityClass, id);</span>
+<span class="fc" id="L108">        em.close();</span>
+<span class="fc" id="L109">        return entity;</span>
     }
 
     /***
@@ -114,19 +115,19 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @return The updated version of the entity
      */
     public E update(E entity){
-<span class="fc" id="L117">        EntityManager em = this.getEntityManager();</span>
-<span class="fc" id="L118">        E updated = null;</span>
+<span class="fc" id="L118">        EntityManager em = this.getEntityManager();</span>
+<span class="fc" id="L119">        E updated = null;</span>
         try {
-<span class="fc" id="L120">            em.getTransaction().begin();</span>
-<span class="fc" id="L121">            updated = em.merge(entity);</span>
-<span class="fc" id="L122">            em.getTransaction().commit();</span>
-<span class="fc" id="L123">            em.close();</span>
-<span class="nc" id="L124">        }catch(Exception ex){</span>
-<span class="nc" id="L125">            em.getTransaction().rollback();</span>
-<span class="nc" id="L126">            em.close();</span>
-<span class="nc" id="L127">            throw ex;</span>
-<span class="fc" id="L128">        }</span>
-<span class="fc" id="L129">        return updated;</span>
+<span class="fc" id="L121">            em.getTransaction().begin();</span>
+<span class="fc" id="L122">            updated = em.merge(entity);</span>
+<span class="fc" id="L123">            em.getTransaction().commit();</span>
+<span class="fc" id="L124">            em.close();</span>
+<span class="nc" id="L125">        }catch(Exception ex){</span>
+<span class="nc" id="L126">            em.getTransaction().rollback();</span>
+<span class="nc" id="L127">            em.close();</span>
+<span class="nc" id="L128">            throw ex;</span>
+<span class="fc" id="L129">        }</span>
+<span class="fc" id="L130">        return updated;</span>
     }
 
     /***
@@ -134,57 +135,57 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @param id The ID in the DB
      */
     public void delete(int id){
-<span class="fc" id="L137">        E entity = read(id);</span>
-<span class="fc" id="L138">        delete(entity);</span>
-<span class="fc" id="L139">    }</span>
+<span class="fc" id="L138">        E entity = read(id);</span>
+<span class="fc" id="L139">        delete(entity);</span>
+<span class="fc" id="L140">    }</span>
 
     /***
      * Deletes the entity in the DB
      * @param entity
      */
     public void delete(E entity){
-<span class="pc bpc" id="L146" title="2 of 4 branches missed.">        if(entity==null || entity.getID()==null){</span>
-<span class="nc" id="L147">            return;</span>
+<span class="pc bpc" id="L147" title="1 of 4 branches missed.">        if(entity==null || entity.getID()==null){</span>
+<span class="fc" id="L148">            return;</span>
         }
 
-<span class="fc" id="L150">        EntityManager em = this.getEntityManager();</span>
+<span class="fc" id="L151">        EntityManager em = this.getEntityManager();</span>
         try {
-<span class="fc" id="L152">            em.getTransaction().begin();</span>
-<span class="fc" id="L153">            E mergedContext = em.merge(entity);</span>
-<span class="fc" id="L154">            em.remove(mergedContext);</span>
-<span class="fc" id="L155">            em.getTransaction().commit();</span>
-<span class="fc" id="L156">            em.close();</span>
-<span class="nc" id="L157">        }catch(Exception ex){</span>
-<span class="nc" id="L158">            em.getTransaction().rollback();</span>
-<span class="nc" id="L159">            em.close();</span>
-<span class="nc" id="L160">            throw ex;</span>
-<span class="fc" id="L161">        }</span>
-<span class="fc" id="L162">    }</span>
+<span class="fc" id="L153">            em.getTransaction().begin();</span>
+<span class="fc" id="L154">            E mergedContext = em.merge(entity);</span>
+<span class="fc" id="L155">            em.remove(mergedContext);</span>
+<span class="fc" id="L156">            em.getTransaction().commit();</span>
+<span class="fc" id="L157">            em.close();</span>
+<span class="nc" id="L158">        }catch(Exception ex){</span>
+<span class="nc" id="L159">            em.getTransaction().rollback();</span>
+<span class="nc" id="L160">            em.close();</span>
+<span class="nc" id="L161">            throw ex;</span>
+<span class="fc" id="L162">        }</span>
+<span class="fc" id="L163">    }</span>
 
     /***
      * Deletes all records in the table.
      * This should *not* be used in Production DB only for TestDB
      */
     public void deleteAll(){
-<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        if(DbTypeOutput!=DbType.TEST){</span>
-<span class="nc" id="L170">            System.out.println(&quot;Access Denied, cannot use deleteAll outside testing.&quot;);</span>
-<span class="nc" id="L171">            return;</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">        if(DbTypeOutput!=DbType.TEST){</span>
+<span class="nc" id="L171">            System.out.println(&quot;Access Denied, cannot use deleteAll outside testing.&quot;);</span>
+<span class="nc" id="L172">            return;</span>
         }
 
-<span class="fc" id="L174">        String query = &quot;DELETE FROM &quot;+getTableName();</span>
+<span class="fc" id="L175">        String query = &quot;DELETE FROM &quot;+getTableName();</span>
 
-<span class="fc" id="L176">        EntityManager em = this.getEntityManager();</span>
+<span class="fc" id="L177">        EntityManager em = this.getEntityManager();</span>
         try {
-<span class="fc" id="L178">            em.getTransaction().begin();</span>
-<span class="fc" id="L179">            em.createQuery(query).executeUpdate();</span>
-<span class="fc" id="L180">            em.getTransaction().commit();</span>
-<span class="fc" id="L181">            em.close();</span>
-<span class="nc" id="L182">        }catch(Exception ex){</span>
-<span class="nc" id="L183">            em.getTransaction().rollback();</span>
-<span class="nc" id="L184">            em.close();</span>
-<span class="nc" id="L185">            throw ex;</span>
-<span class="fc" id="L186">        }</span>
-<span class="fc" id="L187">    }</span>
+<span class="fc" id="L179">            em.getTransaction().begin();</span>
+<span class="fc" id="L180">            em.createQuery(query).executeUpdate();</span>
+<span class="fc" id="L181">            em.getTransaction().commit();</span>
+<span class="fc" id="L182">            em.close();</span>
+<span class="nc" id="L183">        }catch(Exception ex){</span>
+<span class="nc" id="L184">            em.getTransaction().rollback();</span>
+<span class="nc" id="L185">            em.close();</span>
+<span class="nc" id="L186">            throw ex;</span>
+<span class="fc" id="L187">        }</span>
+<span class="fc" id="L188">    }</span>
 
     /***
      * List operation returns a list of all records in the table mapped by the DAO.
@@ -193,12 +194,12 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @return A java.util.List of entities
      */
     public List&lt;E&gt; list(String Order){
-<span class="fc" id="L196">        String query = &quot;SELECT entity FROM &quot;+getTableName()+&quot; entity&quot;;</span>
-<span class="pc bpc" id="L197" title="1 of 2 branches missed.">        if(Order!=null) query+=&quot; ORDER BY &quot;+Order;</span>
+<span class="fc" id="L197">        String query = &quot;SELECT entity FROM &quot;+getTableName()+&quot; entity&quot;;</span>
+<span class="pc bpc" id="L198" title="1 of 2 branches missed.">        if(Order!=null) query+=&quot; ORDER BY &quot;+Order;</span>
 
-<span class="fc" id="L199">        EntityManager em = this.getEntityManager();</span>
-<span class="fc" id="L200">        List&lt;E&gt; results = em.createQuery(query,EntityClass).getResultList();</span>
-<span class="fc" id="L201">        return results;</span>
+<span class="fc" id="L200">        EntityManager em = this.getEntityManager();</span>
+<span class="fc" id="L201">        List&lt;E&gt; results = em.createQuery(query,EntityClass).getResultList();</span>
+<span class="fc" id="L202">        return results;</span>
     }
 
     /***
@@ -206,9 +207,9 @@ public abstract class GenericDAO&lt;E extends BaseEntity&gt; {
      * @return A String with the appropriate table name mapped by this DAO.
      */
     public String getTableName(){
-<span class="fc" id="L209">        javax.persistence.Table tableAnnotation = EntityClass.getAnnotation(javax.persistence.Table.class);</span>
-<span class="pc bpc" id="L210" title="1 of 2 branches missed.">        if(tableAnnotation != null) return tableAnnotation.name();</span>
-<span class="fc" id="L211">        else return EntityClass.getName();</span>
+<span class="fc" id="L210">        javax.persistence.Table tableAnnotation = EntityClass.getAnnotation(javax.persistence.Table.class);</span>
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        if(tableAnnotation != null) return tableAnnotation.name();</span>
+<span class="fc" id="L212">        else return EntityClass.getName();</span>
     }
 
 }
