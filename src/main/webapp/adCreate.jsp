@@ -5,6 +5,8 @@
   Time: 11:34 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="model.entity.Ad" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -33,12 +35,21 @@
         <h1>Create!</h1>
         <h1></h1>
         <!-- https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Java-File-Upload-Servlet-Ajax-Example -->
-        <form method="post" action="fileuploadservlet" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <input type="submit" value="Upload">
+        <form action="fileuploadservlet" method="post" enctype="multipart/form-data">
+            <label for="filename">Select a File</label>
+            <input class="form-control" type="file" id="filename" name="filename"/>
+            <input type="submit" value="Upload"/>
         </form>
     </div>
 
+    <% Ad ad = (Ad) session.getAttribute("Ad"); %>
+    <% if(ad != null) { %>
+    <p>
+
+    <%= "FILE: " + ad.getFilename() %>
+
+    </p>
+    <% } %>
     <jsp:include page="components/footer.jsp"/>
 </body>
 </html>

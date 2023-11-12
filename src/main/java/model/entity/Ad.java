@@ -1,7 +1,11 @@
 package model.entity;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Entity
 public class Ad extends BaseEntity
@@ -12,13 +16,18 @@ public class Ad extends BaseEntity
     @Column
     private String filename;
 
-    @Column
-    private InputStream filedata;
+    @Column @Lob
+    private byte[] filedata;
 
-    public Ad(String filename, InputStream filedata)
+
+    public Ad()
+    {
+
+    }
+
+    public Ad(String filename)
     {
         this.filename = filename;
-        this.filedata = filedata;
     }
 
     @Override
@@ -42,14 +51,31 @@ public class Ad extends BaseEntity
         this.filename = filename;
     }
 
-    public InputStream getFiledata()
+
+    public byte[] getFileData()
     {
-        return filedata;
+        byte[] fileBytes = null;
+
+        try
+        {
+            fileBytes = readFileToByteArray(filename);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return fileBytes;
     }
 
-    public void setFiledata(InputStream filedata)
+    public void setFiledata(byte[] filedata)
     {
         this.filedata = filedata;
+    }
+
+    private static byte[] readFileToByteArray(String filePath) throws IOException
+    {
+        Path path = Paths.get(filePath);
+        return Files.readAllBytes(path);
     }
 
 }
