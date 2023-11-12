@@ -6,7 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 
+<%@ page import="controller.Passwords" %>
+
+<!-- https://www.tutorialspoint.com/how-to-executes-an-sql-select-statement-in-a-jsp -->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import = "java.io.*, java.util.*, java.sql.*"%>
+<%@ page import = "jakarta.servlet.http.*, jakarta.servlet.*"%>
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <html>
 <head>
@@ -31,10 +40,35 @@
     <jsp:include page="components/background.jsp"/>
     <jsp:include page="components/menu.jsp"/>
     <jsp:include page="components/adminNav.jsp"/>
+
+
     <div class="box-container">
-        <p>
-            Hello, this is where some user data and game stats stuff will go :)
-        </p>
+
+        <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://localhost:3306/Ad"
+            user = "root" password = "Dinosaurs06340" />
+        <sql:query dataSource = "${snapshot}" var = "result" >
+            SELECT * FROM User;
+        </sql:query>
+
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Login</th>
+                <th>Wins</th>
+                <th>Losses</th>
+            </tr>
+            <c:forEach var = "row" items = "${result.rows}">
+                <tr>
+                    <td><c:out value = "${row.idUser}"/></td>
+                    <td><c:out value = "${row.Name}"/></td>
+                    <td><c:out value = "${row.Login}"/></td>
+                    <td><c:out value = "${row.Wins}"/></td>
+                    <td><c:out value = "${row.Loses}"/></td>
+                </tr>
+            </c:forEach>
+        </table>
 
     </div>
 
