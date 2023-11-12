@@ -8,10 +8,16 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "HitServlet", value = "/HitServlet")
 public class HitServlet extends HttpServlet {
+    public PlayGame game;
+
+    public void setGame(PlayGame game){
+        this.game = game;
+    }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        PlayGame game = (PlayGame) session.getAttribute("game");
+
+        game = (PlayGame) session.getAttribute("game");
         if (game != null) {
             if (game.playerTotal() < 21) {
                 game.playerTurn();

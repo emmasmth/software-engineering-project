@@ -33,7 +33,29 @@ public class RegistrationServletTest {
         servlet.doPost(request, response);
 
         assertDoesNotThrow(
-                () -> verify(response).sendRedirect("index.jsp")
+                () -> verify(response).sendRedirect("login.jsp")
+        );
+    }
+
+    @Test public void testPostNull() throws IOException, ServletException {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        Registration register = mock(Registration.class);
+        when(register.registerUser(any(User.class))).thenReturn(null);
+
+        RegistrationServlet servlet = new RegistrationServlet();
+        servlet.setRegistration(register);
+
+        when(request.getParameter("name")).thenReturn("Test");
+        when(request.getParameter("username")).thenReturn("test@gmail.com");
+        when(request.getParameter("password")).thenReturn("Test123");
+
+        doNothing().when(response).sendRedirect(anyString());
+
+        servlet.doPost(request, response);
+
+        assertDoesNotThrow(
+                () -> verify(response).sendRedirect("registration.jsp?error=1")
         );
     }
 

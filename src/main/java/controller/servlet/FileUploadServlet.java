@@ -47,7 +47,6 @@ public class FileUploadServlet extends HttpServlet
         this.ad.setFilename(filename);
         System.out.println(this.ad.getFilename());
         response.sendRedirect("adDelete.jsp");
-/*
         Ad ad = new Ad(filename);
         byte[] filedata = ad.getFileData();
         ad.setFiledata(filedata);
@@ -67,7 +66,8 @@ public class FileUploadServlet extends HttpServlet
             e.printStackTrace();
         }
 
- */
+
+
     }
 
 }

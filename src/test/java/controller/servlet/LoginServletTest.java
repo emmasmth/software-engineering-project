@@ -83,4 +83,39 @@ public class LoginServletTest {
 
         verify(response).sendRedirect("advertisement.jsp");
     }
+
+
+
+    @Test public void loginPostAdmin() throws IOException, ServletException {
+        // Create a User object
+        User user = new User();
+        user.setID(200);
+        user.setLogin("test@gmail.com");
+        user.setPassword("Test123");
+        user.setPermission(2);
+
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpSession sessionMock = mock(HttpSession.class);
+
+
+        when(request.getParameter("username")).thenReturn("test@gmail.com");
+        when(request.getParameter("password")).thenReturn("Test123");
+        when(request.getSession()).thenReturn(sessionMock);
+
+
+        Registration test = mock(Registration.class);
+
+        when(test.loginUser(anyString(), anyString())).thenReturn(user);
+
+        LoginServlet servlet = new LoginServlet();
+        servlet.setRegistration(test);
+
+        servlet.doPost(request, response);
+
+
+        verify(response).sendRedirect("admin.jsp");
+    }
+
+
 }
