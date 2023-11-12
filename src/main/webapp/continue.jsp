@@ -45,6 +45,15 @@
                 ArrayList<Card> playerHand = game.getPlayerHand();
         %>
 
+        <%
+            Integer betAmount = (Integer) session.getAttribute("betAmount");
+            if (betAmount != null) {
+                out.println("<p>Your bet amount: " + betAmount + "</p>");
+            } else {
+                out.println("<p>No bet placed.</p>");
+            }
+        %>
+
         <div>
             <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
             <% for (Card card : dealerHand) { %>

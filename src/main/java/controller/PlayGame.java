@@ -8,11 +8,14 @@ import java.util.ArrayList;
  */
 public class PlayGame {
 
-    int gameOutcome = 0;
+
     Deck deck;
     Blackjack game;
     ShuffleDeck shuffleDeck;
     private boolean deckShuffled = false;
+    int gameOutcome = 0;
+    double bet = 0.00;
+    double payout = 0.00;
 
     /**
      * default constructor
@@ -109,6 +112,39 @@ public class PlayGame {
             printHand("dealer");
         }
     }
+
+
+    /**
+     * setBet
+     * updates bet, used for initial bet
+     */
+    public void setBet(int amount){bet = amount;}
+
+    /**
+     * doubleBet
+     * doubles bet, used for double down
+     */
+    public void doubleBet(){bet = bet*2;}
+    public double getBet(){return bet;} //returns how much is currently at stake
+
+    /**
+     * calcPayOut
+     * calculates how much player should be paid after game depending on outcome
+     */
+    public void calcPayOut(){
+        if(gameOutcome==1){ //tie
+            payout=bet; //get money back
+        }else if(gameOutcome==2){//player win
+            payout=bet*2; //1:1 win
+        }else if(gameOutcome==3){//dealer win
+            payout=0; //lose buy in
+        }else{
+            payout=bet; //something went wrong, just return buy in
+        }
+    }
+
+    public double getPayout(){return payout;} //returns how much the player gets back after game
+
 
     /**
      * determineWinner

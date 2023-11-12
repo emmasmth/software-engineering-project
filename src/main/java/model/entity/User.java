@@ -13,6 +13,8 @@ public class User extends BaseEntity
     private String Name;
     private String Password;
     private int Permission;
+    private int Wins;
+    private int Loses;
 
     // keyword transient, meaning that the data member will not be serialized.
     public transient static final int USER_PERMISSION = 1;
@@ -136,6 +138,16 @@ public class User extends BaseEntity
         }
 
     }
+
+
+    //Game History
+    public void setWins(int wins){Wins = wins;}
+    public void incWins(){Wins++;}
+    public int getWins(){return Wins;}
+
+    public void setLoses(int loses){Loses=loses;}
+    public void incLoses(){Loses++;}
+    public int getLoses(){return Loses;}
 
 }
 
