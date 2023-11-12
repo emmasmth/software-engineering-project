@@ -16,17 +16,24 @@ public class HitServlet extends HttpServlet {
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-
         game = (PlayGame) session.getAttribute("game");
         if (game != null) {
             if (game.playerTotal() < 21) {
                 game.playerTurn();
             }
-
-            if(game.playerTotal() > 21){
+            //Check Bust
+            if (game.playerTotal() > 21) {
                 int winner = game.determineWinner();
                 session.setAttribute("winner", winner);
             }
+            //Check naturals
+            if (game.playerTotal() == 21 || game.dealerTotal() == 21) {
+                int winner = game.determineWinner();
+                session.setAttribute("winner", winner);
+            }
+
+
+
 
 
 
