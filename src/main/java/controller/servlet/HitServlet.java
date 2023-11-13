@@ -18,7 +18,7 @@ public class HitServlet extends HttpServlet {
         HttpSession session = request.getSession();
         game = (PlayGame) session.getAttribute("game");
         if (game != null) {
-            if (game.playerTotal() < 21) {
+            if (game.playerTotal() < 21 && game.getIsPlayersTurn()) {
                 game.playerTurn();
             }
             //Check Bust
