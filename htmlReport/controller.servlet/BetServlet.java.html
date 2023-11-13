@@ -6,37 +6,37 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 @WebServlet(name = &quot;BetServlet&quot;, value = &quot;/BetServlet&quot;)
-<span class="nc" id="L9">public class BetServlet extends HttpServlet {</span>
+<span class="fc" id="L9">public class BetServlet extends HttpServlet {</span>
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-<span class="nc" id="L12">        HttpSession session = request.getSession();</span>
-<span class="nc" id="L13">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L12">        HttpSession session = request.getSession();</span>
+<span class="fc" id="L13">        PlayGame game = new PlayGame();</span>
 //        PlayGame game = (PlayGame) session.getAttribute(&quot;game&quot;);
 
-<span class="nc bnc" id="L16" title="All 2 branches missed.">        if (game != null) {</span>
+//        if (game != null) {
             try {
-<span class="nc" id="L18">                int betAmount = Integer.parseInt(request.getParameter(&quot;betAmount&quot;));</span>
+<span class="fc" id="L18">                double betAmount = Double.parseDouble(request.getParameter(&quot;betAmount&quot;));</span>
                 // Validation logic can be added here (e.g., checking if the user has enough balance)
 
-<span class="nc" id="L21">                game.setBet(betAmount);</span>
-<span class="nc" id="L22">                session.setAttribute(&quot;game&quot;, game);</span>
-<span class="nc" id="L23">                session.setAttribute(&quot;betAmount&quot;, betAmount); // Storing the bet amount in session</span>
-<span class="nc" id="L24">                response.sendRedirect(&quot;continue.jsp&quot;); // Redirect to continue.jsp</span>
-<span class="nc" id="L25">            } catch (NumberFormatException e) {</span>
+<span class="fc" id="L21">                game.setBet(betAmount);</span>
+<span class="fc" id="L22">                session.setAttribute(&quot;game&quot;, game);</span>
+<span class="fc" id="L23">                session.setAttribute(&quot;betAmount&quot;, betAmount); // Storing the bet amount in session</span>
+<span class="fc" id="L24">                response.sendRedirect(&quot;continue.jsp&quot;); // Redirect to continue.jsp</span>
+<span class="fc" id="L25">            } catch (NumberFormatException e) {</span>
                 // Handle invalid bet amount (e.g., not a number)
                 // Optionally redirect to an error page or back to the betting page with an error message
-<span class="nc" id="L28">                response.sendRedirect(&quot;betting.jsp?error=InvalidBetAmount&quot;);</span>
-<span class="nc" id="L29">            }</span>
-        } else {
-            // Redirect if no game is in session, or handle this scenario as per your application's flow
-<span class="nc" id="L32">            response.sendRedirect(&quot;index.jsp&quot;);</span>
-        }
-<span class="nc" id="L34">    }</span>
+<span class="fc" id="L28">                response.sendRedirect(&quot;betting.jsp?error=InvalidBetAmount&quot;);</span>
+<span class="fc" id="L29">            }</span>
+//        } else {
+//            // Redirect if no game is in session, or handle this scenario as per your application's flow
+//            response.sendRedirect(&quot;index.jsp&quot;);
+//        }
+<span class="fc" id="L34">    }</span>
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-<span class="nc" id="L38">        processRequest(request, response);</span>
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L38">        processRequest(request, response);</span>
+<span class="fc" id="L39">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

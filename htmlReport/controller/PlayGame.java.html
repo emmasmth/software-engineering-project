@@ -13,21 +13,29 @@ public class PlayGame {
 <span class="fc" id="L13">    int gameOutcome = 0;</span>
 <span class="fc" id="L14">    double bet = 0.00;</span>
 <span class="fc" id="L15">    double payout = 0.00;</span>
+<span class="fc" id="L16">    Boolean isPlayersTurn = false;</span>
+<span class="fc" id="L17">    Boolean isDealerTurn = false;</span>
+
+<span class="fc" id="L19">    public void setIsPlayersTurn(Boolean isPlayersTurn){this.isPlayersTurn=isPlayersTurn;}</span>
+<span class="nc" id="L20">    public Boolean getIsPlayersTurn(){return isPlayersTurn;}</span>
+
+<span class="fc" id="L22">    public void setIsDealerTurn(Boolean isDealerTurn){this.isDealerTurn=isDealerTurn;}</span>
+<span class="nc" id="L23">    public Boolean getIsDealerTurn(){return isDealerTurn;}</span>
 
     public void setGame(Blackjack game){
-<span class="fc" id="L18">        this.game = game;</span>
-<span class="fc" id="L19">    }</span>
+<span class="fc" id="L26">        this.game = game;</span>
+<span class="fc" id="L27">    }</span>
     public void setDeck(Deck deck){
-<span class="fc" id="L21">        this.deck = deck;</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L29">        this.deck = deck;</span>
+<span class="fc" id="L30">    }</span>
 
     /**
      * default constructor
      */
-<span class="fc" id="L27">    public PlayGame() {</span>
-<span class="fc" id="L28">        deck = new Deck();</span>
-<span class="fc" id="L29">        game = new Blackjack();</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L35">    public PlayGame() {</span>
+<span class="fc" id="L36">        deck = new Deck();</span>
+<span class="fc" id="L37">        game = new Blackjack();</span>
+<span class="fc" id="L38">    }</span>
 
 
 /*
@@ -41,13 +49,13 @@ public class PlayGame {
      */
     public void play() {
         // Deal initial cards
-<span class="fc" id="L44">        dealInitialCards();</span>
+<span class="fc" id="L52">        dealInitialCards();</span>
 
         // Check for naturals
-<span class="fc" id="L47">        checkNaturals();</span>
+<span class="fc" id="L55">        checkNaturals();</span>
 
 
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L58">    }</span>
 
     /**
      * dealInitialCards
@@ -55,51 +63,51 @@ public class PlayGame {
      */
     public void dealInitialCards() {
         //deal two cards to player and dealer
-<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (int i = 0; i &lt; 2; i++) {</span>
-<span class="fc" id="L59">            game.addCardToPlayer(deck.drawCard());</span>
-<span class="fc" id="L60">            game.addCardToDealer(deck.drawCard());</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        for (int i = 0; i &lt; 2; i++) {</span>
+<span class="fc" id="L67">            game.addCardToPlayer(deck.drawCard());</span>
+<span class="fc" id="L68">            game.addCardToDealer(deck.drawCard());</span>
         }
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L70">    }</span>
 
     /**
      * checkNaturals
      * checks if player or dealer won with initial cards
      */
     public void checkNaturals() {
-<span class="fc bfc" id="L69" title="All 4 branches covered.">        if(game.getPlayerTotal() == 21 &amp;&amp; game.getDealerTotal()==21){</span>
-<span class="fc" id="L70">            gameOutcome = 1; //tie</span>
+<span class="fc bfc" id="L77" title="All 4 branches covered.">        if(game.getPlayerTotal() == 21 &amp;&amp; game.getDealerTotal()==21){</span>
+<span class="fc" id="L78">            gameOutcome = 1; //tie</span>
         }
-<span class="fc bfc" id="L72" title="All 2 branches covered.">        else if (game.getPlayerTotal() == 21) {</span>
-<span class="fc" id="L73">            gameOutcome = 2; //player win</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        else if (game.getPlayerTotal() == 21) {</span>
+<span class="fc" id="L81">            gameOutcome = 2; //player win</span>
         }
-<span class="fc bfc" id="L75" title="All 2 branches covered.">        else if (game.getDealerTotal() == 21) {</span>
-<span class="fc" id="L76">            gameOutcome = 3; //dealer win</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        else if (game.getDealerTotal() == 21) {</span>
+<span class="fc" id="L84">            gameOutcome = 3; //dealer win</span>
         }
         else
-<span class="fc" id="L79">            gameOutcome = 0; //neither - continue game</span>
-<span class="fc" id="L80">    }</span>
+<span class="fc" id="L87">            gameOutcome = 0; //neither - continue game</span>
+<span class="fc" id="L88">    }</span>
 
     public ArrayList&lt;Card&gt; getDealerHand() {
-<span class="fc" id="L83">        return game.getDealerHand();</span>
+<span class="fc" id="L91">        return game.getDealerHand();</span>
     }
 
     public ArrayList&lt;Card&gt; getPlayerHand() {
-<span class="fc" id="L87">        return game.getPlayerHand();</span>
+<span class="fc" id="L95">        return game.getPlayerHand();</span>
     }
 
 
 
     public int playerTotal(){
-<span class="fc" id="L93">        return game.getPlayerTotal();</span>
+<span class="fc" id="L101">        return game.getPlayerTotal();</span>
     }
     public int dealerTotal(){
-<span class="fc" id="L96">        return game.getDealerTotal();</span>
+<span class="fc" id="L104">        return game.getDealerTotal();</span>
     }
 
 
     public void playerTurn() {
-<span class="fc" id="L101">        game.addCardToPlayer(deck.drawCard());</span>
-<span class="fc" id="L102">    }</span>
+<span class="fc" id="L109">        game.addCardToPlayer(deck.drawCard());</span>
+<span class="fc" id="L110">    }</span>
 
     /**
      * dealerTurn
@@ -111,87 +119,85 @@ public class PlayGame {
             printHand(&quot;dealer&quot;);
         }
     }*/
+<span class="nc" id="L122">    public void dealerTurn(){game.addCardToDealer(deck.drawCard());}</span>
 
 
     /**
      * setBet
      * updates bet, used for initial bet
      */
-<span class="nc" id="L120">    public void setBet(int amount){bet = amount;}</span>
+<span class="fc" id="L129">    public void setBet(double amount){bet = amount;}</span>
 
-    /**
-     * doubleBet
-     * doubles bet, used for double down
-     */
-<span class="nc" id="L126">    public void doubleBet(){bet = bet*2;}</span>
-<span class="nc" id="L127">    public double getBet(){return bet;} //returns how much is currently at stake</span>
+<span class="nc" id="L131">    public double getBet(){return bet;} //returns how much is currently at stake</span>
 
     /**
      * calcPayOut
      * calculates how much player should be paid after game depending on outcome
      */
     public void calcPayOut(){
-<span class="nc bnc" id="L134" title="All 2 branches missed.">        if(gameOutcome==1){ //tie</span>
-<span class="nc" id="L135">            payout=bet; //get money back</span>
-<span class="nc bnc" id="L136" title="All 2 branches missed.">        }else if(gameOutcome==2){//player win</span>
-<span class="nc" id="L137">            payout=bet*2; //1:1 win</span>
-<span class="nc bnc" id="L138" title="All 2 branches missed.">        }else if(gameOutcome==3){//dealer win</span>
-<span class="nc" id="L139">            payout=0; //lose buy in</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        if(gameOutcome==1){ //tie</span>
+<span class="nc" id="L139">            payout=bet; //get money back</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        }else if(gameOutcome==2){//player win</span>
+<span class="nc" id="L141">            payout=bet*2; //1:1 win</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        }else if(gameOutcome==3){//dealer win</span>
+<span class="nc" id="L143">            payout=0; //lose buy in</span>
         }else{
-<span class="nc" id="L141">            payout=bet; //something went wrong, just return buy in</span>
+<span class="nc" id="L145">            payout=bet; //something went wrong, just return buy in</span>
         }
-<span class="nc" id="L143">    }</span>
+<span class="nc" id="L147">    }</span>
 
-<span class="nc" id="L145">    public double getPayout(){return payout;} //returns how much the player gets back after game</span>
+<span class="nc" id="L149">    public double getPayout(){return payout;} //returns how much the player gets back after game</span>
 
 
     /**
      * determineWinner
      * checks both player and dealer hand totals and determines the winner
      */
-   /* public void determineWinner() {
-        int playerTotal = game.calculateHandTotal(game.getPlayerHand());
-        int dealerTotal = game.calculateHandTotal(game.getDealerHand());
-        System.out.println(&quot;player: &quot; + playerTotal);
-        System.out.println(&quot;dealer: &quot; + dealerTotal);
-        if (playerTotal &gt; 21 || (dealerTotal &lt;= 21 &amp;&amp; dealerTotal &gt; playerTotal)) {
-            gameOutcome = 3; // dealer win
-        } else if (dealerTotal &gt; 21 || playerTotal &gt; dealerTotal) {
-            gameOutcome = 2; // player win
+    public int determineWinner() {
+<span class="fc" id="L157">        int playerTotal = game.calculateHandTotal(game.getPlayerHand());</span>
+<span class="fc" id="L158">        int dealerTotal = game.calculateHandTotal(game.getDealerHand());</span>
+<span class="fc" id="L159">        System.out.println(&quot;player: &quot; + playerTotal);</span>
+<span class="fc" id="L160">        System.out.println(&quot;dealer: &quot; + dealerTotal);</span>
+<span class="pc bpc" id="L161" title="3 of 6 branches missed.">        if (playerTotal &gt; 21 || (dealerTotal &lt;= 21 &amp;&amp; dealerTotal &gt; playerTotal)) {</span>
+<span class="fc" id="L162">            gameOutcome = 3; // dealer win</span>
+<span class="nc bnc" id="L163" title="All 4 branches missed.">        } else if (dealerTotal &gt; 21 || playerTotal &gt; dealerTotal) {</span>
+<span class="nc" id="L164">            gameOutcome = 2; // player win</span>
         } else {
-            gameOutcome = 1; // tie
+<span class="nc" id="L166">            gameOutcome = 1; // tie</span>
         }
-        System.out.println(&quot;end: &quot; + gameOutcome);
+<span class="fc" id="L168">        return gameOutcome;</span>
+//        System.out.println(&quot;end: &quot; + gameOutcome);
     }
 
-    *//**
-     * endGame
-     * prints who won and will add game to history
-     * @param winner int for who won (1=tie, 2=player, 3=dealer)
-     *//*
-    public void endGame(int winner){
-        System.out.println(&quot;Game Over!&quot;);
-        System.out.println(&quot;You: &quot; + game.getPlayerTotal() + &quot; Dealer: &quot; + game.getDealerTotal());
-        if (winner == 1){
-            System.out.println(&quot;It's a tie!&quot;);
-            //add tie to user history
-        }
-        if (winner == 2){
-            System.out.println(&quot;Player wins!&quot;);
-            //add win to user history
-        }
-        if (winner == 3){
-            System.out.println(&quot;Dealer wins!&quot;);
-            //add loss to user history
-        }
-    }*/
+
+//    /**
+//     * endGame
+//     * prints who won and will add game to history
+//     * @param winner int for who won (1=tie, 2=player, 3=dealer)
+//     */
+//    public void endGame(int winner){
+//        System.out.println(&quot;Game Over!&quot;);
+//        System.out.println(&quot;You: &quot; + game.getPlayerTotal() + &quot; Dealer: &quot; + game.getDealerTotal());
+//        if (winner == 1){
+//            System.out.println(&quot;It's a tie!&quot;);
+//            //add tie to user history
+//        }
+//        if (winner == 2){
+//            System.out.println(&quot;Player wins!&quot;);
+//            //add win to user history
+//        }
+//        if (winner == 3){
+//            System.out.println(&quot;Dealer wins!&quot;);
+//            //add loss to user history
+//        }
+//    }*/
 
     public void clearHands() {
-<span class="pc bpc" id="L190" title="3 of 4 branches missed.">        if (!game.getPlayerHand().isEmpty() || !game.getDealerHand().isEmpty()) {</span>
-<span class="fc" id="L191">            game.getDealerHand().clear();</span>
-<span class="fc" id="L192">            game.getPlayerHand().clear();</span>
+<span class="pc bpc" id="L196" title="3 of 4 branches missed.">        if (!game.getPlayerHand().isEmpty() || !game.getDealerHand().isEmpty()) {</span>
+<span class="fc" id="L197">            game.getDealerHand().clear();</span>
+<span class="fc" id="L198">            game.getPlayerHand().clear();</span>
         }
-<span class="fc" id="L194">    }</span>
+<span class="fc" id="L200">    }</span>
 
     /**
      * printHand

@@ -30,16 +30,19 @@ import controller.Registration;
 <span class="fc" id="L30">        User userRegistered = registration.registerUser(user);</span>
 
 <span class="fc bfc" id="L32" title="All 2 branches covered.">        if(userRegistered != null){</span>
-<span class="fc" id="L33">            response.sendRedirect(&quot;login.jsp&quot;);</span>
-        }
+<span class="fc" id="L33">            HttpSession session = request.getSession();</span>
+<span class="fc" id="L34">            userRegistered.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L35">            session.setAttribute(&quot;User&quot;, userRegistered);</span>
+<span class="nc" id="L36">            response.sendRedirect(&quot;advertisement.jsp&quot;);</span>
+<span class="nc" id="L37">        }</span>
         else{
-<span class="fc" id="L36">            response.sendRedirect(&quot;registration.jsp?error=1&quot;);</span>
+<span class="fc" id="L39">            response.sendRedirect(&quot;registration.jsp?error=1&quot;);</span>
         }
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L41">    }</span>
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-<span class="fc" id="L41">        processRequest(request, response);</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L44">        processRequest(request, response);</span>
+<span class="fc" id="L45">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

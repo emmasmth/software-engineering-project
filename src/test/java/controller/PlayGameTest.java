@@ -186,7 +186,14 @@ public class PlayGameTest {
 
     }
 
-
+    @Test public void determineWinnerTest(){
+        PlayGame game = new PlayGame();
+        Blackjack bj = mock(Blackjack.class);
+        game.setGame(bj);
+        when(bj.calculateHandTotal(any(ArrayList.class))).thenReturn(21);
+        game.determineWinner();
+        assertEquals(1, game.gameOutcome);
+    }
 
 
 

@@ -141,13 +141,13 @@ public class User extends BaseEntity
 
 
     //Game History
-<span class="nc" id="L144">    public void setWins(int wins){Wins = wins;}</span>
-<span class="nc" id="L145">    public void incWins(){Wins++;}</span>
-<span class="nc" id="L146">    public int getWins(){return Wins;}</span>
+<span class="fc" id="L144">    public void setWins(int wins){Wins = wins;}</span>
+<span class="fc" id="L145">    public void incWins(){Wins++;}</span>
+<span class="fc" id="L146">    public int getWins(){return Wins;}</span>
 
-<span class="nc" id="L148">    public void setLoses(int loses){Loses=loses;}</span>
-<span class="nc" id="L149">    public void incLoses(){Loses++;}</span>
-<span class="nc" id="L150">    public int getLoses(){return Loses;}</span>
+<span class="fc" id="L148">    public void setLoses(int loses){Loses=loses;}</span>
+<span class="fc" id="L149">    public void incLoses(){Loses++;}</span>
+<span class="fc" id="L150">    public int getLoses(){return Loses;}</span>
 
 }
 
@@ -160,6 +160,8 @@ public class User extends BaseEntity
  *     Login varchar(30) not null,
  *     Password char(60) not null,
  *     Permission int not null default 1,
+ *     Wins int default 0,
+ *     Loses int default 0,
  *     constraint user_pk primary key(idUser),
  *     constraint user_login_uk unique key(Login)
  *  );

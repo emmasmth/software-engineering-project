@@ -15,81 +15,110 @@ import static org.junit.jupiter.api.Assertions.*;
 <span class="fc" id="L15">                () -&gt; assertNull(u.getLogin()),</span>
 <span class="fc" id="L16">                () -&gt; assertNull(u.getPassword()),</span>
 <span class="fc" id="L17">                () -&gt; assertEquals(u.getPermission(), User.USER_PERMISSION),</span>
-<span class="fc" id="L18">                () -&gt; assertEquals(u.getPermissionAsString(), &quot;User&quot;)</span>
+<span class="fc" id="L18">                () -&gt; assertEquals(u.getPermissionAsString(), &quot;User&quot;),</span>
+<span class="fc" id="L19">                () -&gt; assertEquals(u.getWins(), 0),</span>
+<span class="fc" id="L20">                () -&gt; assertEquals(u.getLoses(), 0)</span>
         );
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L22">    }</span>
 
     @Test
     public void testEmptyConstructor()
     {
-<span class="fc" id="L25">        User u = new User();</span>
-<span class="fc" id="L26">        assertEquals(u.getPermission(), User.USER_PERMISSION);</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L27">        User u = new User();</span>
+<span class="fc" id="L28">        assertEquals(u.getPermission(), User.USER_PERMISSION);</span>
+<span class="fc" id="L29">    }</span>
 
     @Test
     public void testEmptyConstructorSetAttributes()
     {
-<span class="fc" id="L32">        User u = new User();</span>
-<span class="fc" id="L33">        Integer expectedID = 404;</span>
-<span class="fc" id="L34">        u.setID(expectedID);</span>
+<span class="fc" id="L34">        User u = new User();</span>
+<span class="fc" id="L35">        Integer expectedID = 404;</span>
+<span class="fc" id="L36">        u.setID(expectedID);</span>
 
-<span class="fc" id="L36">        String expectedName = &quot;myname000&quot;;</span>
-<span class="fc" id="L37">        u.setName(expectedName);</span>
+<span class="fc" id="L38">        String expectedName = &quot;myname000&quot;;</span>
+<span class="fc" id="L39">        u.setName(expectedName);</span>
 
-<span class="fc" id="L39">        String expectedLogin = &quot;mylogin123&quot;;</span>
-<span class="fc" id="L40">        u.setLogin(expectedLogin);</span>
+<span class="fc" id="L41">        String expectedLogin = &quot;mylogin123&quot;;</span>
+<span class="fc" id="L42">        u.setLogin(expectedLogin);</span>
 
-<span class="fc" id="L42">        String expectedPassword = &quot;mypassword456&quot;;</span>
-<span class="fc" id="L43">        u.setPassword(expectedPassword);</span>
+<span class="fc" id="L44">        String expectedPassword = &quot;mypassword456&quot;;</span>
+<span class="fc" id="L45">        u.setPassword(expectedPassword);</span>
 
-<span class="fc" id="L45">        assertAll(</span>
-<span class="fc" id="L46">                () -&gt; assertEquals(u.getID(), expectedID),</span>
-<span class="fc" id="L47">                () -&gt; assertEquals(u.getName(), expectedName),</span>
-<span class="fc" id="L48">                () -&gt; assertEquals(u.getLogin(), expectedLogin),</span>
-<span class="fc" id="L49">                () -&gt; assertEquals(u.getPassword(), expectedPassword)</span>
+<span class="fc" id="L47">        assertAll(</span>
+<span class="fc" id="L48">                () -&gt; assertEquals(u.getID(), expectedID),</span>
+<span class="fc" id="L49">                () -&gt; assertEquals(u.getName(), expectedName),</span>
+<span class="fc" id="L50">                () -&gt; assertEquals(u.getLogin(), expectedLogin),</span>
+<span class="fc" id="L51">                () -&gt; assertEquals(u.getPassword(), expectedPassword)</span>
         );
-<span class="fc" id="L51">    }</span>
+<span class="fc" id="L53">    }</span>
 
     @Test
     public void testConstructor()
     {
-<span class="fc" id="L56">        User u = new User(101, &quot;myname1&quot;, &quot;test@test.com&quot;, &quot;123456&quot;, User.ADMIN_PERMISSION);</span>
-<span class="fc" id="L57">        assertAll(</span>
-<span class="fc" id="L58">                () -&gt; assertEquals(u.getID(), 101),</span>
-<span class="fc" id="L59">                () -&gt; assertEquals(u.getLogin(), &quot;test@test.com&quot;),</span>
-<span class="fc" id="L60">                () -&gt; assertEquals(u.getPassword(), &quot;123456&quot;),</span>
-<span class="fc" id="L61">                () -&gt; assertEquals(u.getPermission(), User.ADMIN_PERMISSION),</span>
-<span class="fc" id="L62">                () -&gt; assertEquals(u.getPermissionAsString(), &quot;Admin&quot;)</span>
+<span class="fc" id="L58">        User u = new User(101, &quot;myname1&quot;, &quot;test@test.com&quot;, &quot;123456&quot;, User.ADMIN_PERMISSION);</span>
+<span class="fc" id="L59">        assertAll(</span>
+<span class="fc" id="L60">                () -&gt; assertEquals(u.getID(), 101),</span>
+<span class="fc" id="L61">                () -&gt; assertEquals(u.getLogin(), &quot;test@test.com&quot;),</span>
+<span class="fc" id="L62">                () -&gt; assertEquals(u.getPassword(), &quot;123456&quot;),</span>
+<span class="fc" id="L63">                () -&gt; assertEquals(u.getPermission(), User.ADMIN_PERMISSION),</span>
+<span class="fc" id="L64">                () -&gt; assertEquals(u.getPermissionAsString(), &quot;Admin&quot;)</span>
         );
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L66">    }</span>
 
 
     @Test
     public void testConstructor2()
     {
-<span class="fc" id="L70">        Integer expectedID = 1;</span>
-<span class="fc" id="L71">        String expectedName = &quot;testname&quot;;</span>
-<span class="fc" id="L72">        String expectedLogin = &quot;testlogin&quot;;</span>
-<span class="fc" id="L73">        String expectedPassword = &quot;testpassword&quot;;</span>
-<span class="fc" id="L74">        int expectedPermission = 1;</span>
+<span class="fc" id="L72">        Integer expectedID = 1;</span>
+<span class="fc" id="L73">        String expectedName = &quot;testname&quot;;</span>
+<span class="fc" id="L74">        String expectedLogin = &quot;testlogin&quot;;</span>
+<span class="fc" id="L75">        String expectedPassword = &quot;testpassword&quot;;</span>
+<span class="fc" id="L76">        int expectedPermission = 1;</span>
 
-<span class="fc" id="L76">        User user = new User(expectedID, expectedName, expectedLogin, expectedPassword, expectedPermission);</span>
+<span class="fc" id="L78">        User user = new User(expectedID, expectedName, expectedLogin, expectedPassword, expectedPermission);</span>
 
-<span class="fc" id="L78">        assertAll(</span>
-<span class="fc" id="L79">                () -&gt; assertEquals(expectedID, user.getID()),</span>
-<span class="fc" id="L80">                () -&gt; assertEquals(expectedLogin, user.getLogin()),</span>
-<span class="fc" id="L81">                () -&gt; assertEquals(expectedPassword, user.getPassword()),</span>
-<span class="fc" id="L82">                () -&gt; assertEquals(expectedPermission, user.getPermission())</span>
+<span class="fc" id="L80">        assertAll(</span>
+<span class="fc" id="L81">                () -&gt; assertEquals(expectedID, user.getID()),</span>
+<span class="fc" id="L82">                () -&gt; assertEquals(expectedLogin, user.getLogin()),</span>
+<span class="fc" id="L83">                () -&gt; assertEquals(expectedPassword, user.getPassword()),</span>
+<span class="fc" id="L84">                () -&gt; assertEquals(expectedPermission, user.getPermission())</span>
         );
-<span class="fc" id="L84">    }</span>
+<span class="fc" id="L86">    }</span>
 
     @Test
     public void testUnknownPermissionString()
     {
-<span class="fc" id="L89">        User u = new User();</span>
-<span class="fc" id="L90">        u.setPermission(-1);</span>
-<span class="fc" id="L91">        assertEquals(u.getPermissionAsString(), &quot;Unknown&quot;);</span>
-<span class="fc" id="L92">    }</span>
+<span class="fc" id="L91">        User u = new User();</span>
+<span class="fc" id="L92">        u.setPermission(-1);</span>
+<span class="fc" id="L93">        assertEquals(u.getPermissionAsString(), &quot;Unknown&quot;);</span>
+<span class="fc" id="L94">    }</span>
+
+    @Test
+    public void testSetWinsLosses()
+    {
+<span class="fc" id="L99">        User user = new User();</span>
+<span class="fc" id="L100">        user.setWins(3);</span>
+<span class="fc" id="L101">        user.setLoses(4);</span>
+
+<span class="fc" id="L103">        assertAll(</span>
+<span class="fc" id="L104">                () -&gt; assertEquals(user.getWins(), 3),</span>
+<span class="fc" id="L105">                () -&gt; assertEquals(user.getLoses(), 4)</span>
+        );
+<span class="fc" id="L107">    }</span>
+
+    @Test
+    public void testIncLosses()
+    {
+<span class="fc" id="L112">        User user = new User();</span>
+<span class="fc" id="L113">        user.incWins();</span>
+<span class="fc" id="L114">        user.incLoses();</span>
+
+<span class="fc" id="L116">        assertAll(</span>
+<span class="fc" id="L117">                () -&gt; assertEquals(user.getWins(), 1),</span>
+<span class="fc" id="L118">                () -&gt; assertEquals(user.getLoses(), 1)</span>
+        );
+<span class="fc" id="L120">    }</span>
+
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

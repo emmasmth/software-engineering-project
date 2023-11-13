@@ -33,95 +33,96 @@ import model.entity.User;
 <span class="fc" id="L33">        dao.setDbTypeOutput(GenericDAO.DbType.TEST);</span>
 <span class="fc" id="L34">    }</span>
 
+    /*
     @BeforeEach public void clearBefore(){
-<span class="fc" id="L37">        dao.deleteAll();</span>
-<span class="fc" id="L38">    }</span>
-
+        dao.deleteAll();
+    }
+    */
 
     @Test public void createUserTest(){
-<span class="fc" id="L42">        User newUser = createUserEntity();</span>
-<span class="fc" id="L43">        dao.create(newUser);</span>
-<span class="fc" id="L44">        User userInserted = dao.read(newUser.getID());</span>
-<span class="fc" id="L45">        assertAll(</span>
-<span class="fc" id="L46">                () -&gt; assertNotNull(userInserted, &quot;If we added a user to the database they should exist&quot;),</span>
-<span class="fc" id="L47">                () -&gt; assertEquals(userInserted.getID(), newUser.getID(), &quot;ID of the user we extracted from database should match the ID of the entity&quot;),</span>
-<span class="fc" id="L48">                () -&gt; assertEquals(userInserted.getName(), newUser.getName(), &quot;Name of the user we extracted from database should match the Name of the entity&quot;),</span>
-<span class="fc" id="L49">                () -&gt; assertEquals(userInserted.getLogin(), newUser.getLogin(), &quot;Login of the user we extracted from database should match the Login of the entity&quot;),</span>
-<span class="fc" id="L50">                () -&gt; assertEquals(userInserted.getPassword(), newUser.getPassword(), &quot;Password of the user we extracted from database should match the Password of the entity&quot;)</span>
+<span class="fc" id="L43">        User newUser = createUserEntity();</span>
+<span class="nc" id="L44">        dao.create(newUser);</span>
+<span class="nc" id="L45">        User userInserted = dao.read(newUser.getID());</span>
+<span class="nc" id="L46">        assertAll(</span>
+<span class="nc" id="L47">                () -&gt; assertNotNull(userInserted, &quot;If we added a user to the database they should exist&quot;),</span>
+<span class="nc" id="L48">                () -&gt; assertEquals(userInserted.getID(), newUser.getID(), &quot;ID of the user we extracted from database should match the ID of the entity&quot;),</span>
+<span class="nc" id="L49">                () -&gt; assertEquals(userInserted.getName(), newUser.getName(), &quot;Name of the user we extracted from database should match the Name of the entity&quot;),</span>
+<span class="nc" id="L50">                () -&gt; assertEquals(userInserted.getLogin(), newUser.getLogin(), &quot;Login of the user we extracted from database should match the Login of the entity&quot;),</span>
+<span class="nc" id="L51">                () -&gt; assertEquals(userInserted.getPassword(), newUser.getPassword(), &quot;Password of the user we extracted from database should match the Password of the entity&quot;)</span>
                 );
-<span class="fc" id="L52">    }</span>
+<span class="nc" id="L53">    }</span>
     @Test public void deleteEmptyDAOTest(){
-<span class="fc" id="L54">        User newuser = createUserEntity();</span>
-<span class="fc" id="L55">        assertDoesNotThrow(() -&gt; dao.delete(newuser));</span>
-<span class="fc" id="L56">    }</span>
+<span class="fc" id="L55">        User newuser = createUserEntity();</span>
+<span class="fc" id="L56">        assertDoesNotThrow(() -&gt; dao.delete(newuser));</span>
+<span class="fc" id="L57">    }</span>
 
 
     @Test public void deleteUserTest(){
-<span class="fc" id="L60">        User newUser = createUserEntity();</span>
-<span class="fc" id="L61">        dao.create(newUser);</span>
-<span class="fc" id="L62">        dao.delete(newUser.getID());</span>
-<span class="fc" id="L63">        assertNull(dao.read(newUser.getID()), &quot;User should not exist after deletion&quot;);</span>
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L61">        User newUser = createUserEntity();</span>
+<span class="nc" id="L62">        dao.create(newUser);</span>
+<span class="nc" id="L63">        dao.delete(newUser.getID());</span>
+<span class="nc" id="L64">        assertNull(dao.read(newUser.getID()), &quot;User should not exist after deletion&quot;);</span>
+<span class="nc" id="L65">    }</span>
 
     @Test public void deleteAllTest(){
-<span class="fc" id="L67">        User newUser = createUserEntity();</span>
-<span class="fc" id="L68">        User differentUser = createUserEntityDifferent();</span>
-<span class="fc" id="L69">        dao.create(newUser);</span>
-<span class="fc" id="L70">        dao.create(differentUser);</span>
-<span class="fc" id="L71">        dao.deleteAll();</span>
-<span class="fc" id="L72">        assertNull(dao.read(newUser.getID()), &quot;User should not exist after deletion&quot;);</span>
-<span class="fc" id="L73">        assertNull(dao.read(differentUser.getID()), &quot;User should not exist after deletion&quot;);</span>
-<span class="fc" id="L74">    }</span>
+<span class="fc" id="L68">        User newUser = createUserEntity();</span>
+<span class="fc" id="L69">        User differentUser = createUserEntityDifferent();</span>
+<span class="nc" id="L70">        dao.create(newUser);</span>
+<span class="nc" id="L71">        dao.create(differentUser);</span>
+<span class="nc" id="L72">        dao.deleteAll();</span>
+<span class="nc" id="L73">        assertNull(dao.read(newUser.getID()), &quot;User should not exist after deletion&quot;);</span>
+<span class="nc" id="L74">        assertNull(dao.read(differentUser.getID()), &quot;User should not exist after deletion&quot;);</span>
+<span class="nc" id="L75">    }</span>
 
     @Test public void updateEntityTest(){
-<span class="fc" id="L77">        User newUser = createUserEntity();</span>
-<span class="fc" id="L78">        dao.create(newUser);</span>
-<span class="fc" id="L79">        newUser.setName(&quot;Update&quot;);</span>
-<span class="fc" id="L80">        dao.update(newUser);</span>
-<span class="fc" id="L81">        User record = dao.read(newUser.getID());</span>
-<span class="fc" id="L82">        assertEquals(record.getName(), &quot;Update&quot;);</span>
-<span class="fc" id="L83">    }</span>
+<span class="fc" id="L78">        User newUser = createUserEntity();</span>
+<span class="nc" id="L79">        dao.create(newUser);</span>
+<span class="nc" id="L80">        newUser.setName(&quot;Update&quot;);</span>
+<span class="nc" id="L81">        dao.update(newUser);</span>
+<span class="nc" id="L82">        User record = dao.read(newUser.getID());</span>
+<span class="nc" id="L83">        assertEquals(record.getName(), &quot;Update&quot;);</span>
+<span class="nc" id="L84">    }</span>
 
     @Test public void ListTest(){
-<span class="fc" id="L86">        User newUser = createUserEntity();</span>
-<span class="fc" id="L87">        User differentUser = createUserEntityDifferent();</span>
-<span class="fc" id="L88">        dao.create(newUser);</span>
-<span class="fc" id="L89">        dao.create(differentUser);</span>
-<span class="fc" id="L90">        java.util.List&lt;User&gt; userList = dao.list(&quot;idUser&quot;);</span>
+<span class="fc" id="L87">        User newUser = createUserEntity();</span>
+<span class="fc" id="L88">        User differentUser = createUserEntityDifferent();</span>
+<span class="nc" id="L89">        dao.create(newUser);</span>
+<span class="nc" id="L90">        dao.create(differentUser);</span>
+<span class="nc" id="L91">        java.util.List&lt;User&gt; userList = dao.list(&quot;idUser&quot;);</span>
 
-<span class="fc" id="L92">        assertAll(</span>
-<span class="fc" id="L93">                () -&gt; assertEquals(userList.size(), 2),</span>
-<span class="fc" id="L94">                () -&gt; assertEquals(userList.get(0).getName(), &quot;Oliver&quot;),</span>
-<span class="fc" id="L95">                () -&gt; assertEquals(userList.get(1).getName(), &quot;John&quot;)</span>
+<span class="nc" id="L93">        assertAll(</span>
+<span class="nc" id="L94">                () -&gt; assertEquals(userList.size(), 2),</span>
+<span class="nc" id="L95">                () -&gt; assertEquals(userList.get(0).getName(), &quot;Oliver&quot;),</span>
+<span class="nc" id="L96">                () -&gt; assertEquals(userList.get(1).getName(), &quot;John&quot;)</span>
                 );
-<span class="fc" id="L97">    }</span>
+<span class="nc" id="L98">    }</span>
 
     @Test public void ListTestNonExistingOrder(){
-<span class="fc" id="L100">        User newUser = createUserEntity();</span>
-<span class="fc" id="L101">        User differentUser = createUserEntityDifferent();</span>
-<span class="fc" id="L102">        dao.create(newUser);</span>
-<span class="fc" id="L103">        dao.create(differentUser);</span>
+<span class="fc" id="L101">        User newUser = createUserEntity();</span>
+<span class="fc" id="L102">        User differentUser = createUserEntityDifferent();</span>
+<span class="nc" id="L103">        dao.create(newUser);</span>
+<span class="nc" id="L104">        dao.create(differentUser);</span>
 
-<span class="pc" id="L105">        assertThrows(javax.persistence.PersistenceException.class, () -&gt; dao.list(&quot;random&quot;));</span>
+<span class="nc" id="L106">        assertThrows(javax.persistence.PersistenceException.class, () -&gt; dao.list(&quot;random&quot;));</span>
 
-<span class="fc" id="L107">    }</span>
+<span class="nc" id="L108">    }</span>
 
     @Test public void userRegistered(){
-<span class="fc" id="L110">        User newUser = createUserEntity();</span>
-<span class="fc" id="L111">        dao.create(newUser);</span>
-<span class="fc" id="L112">        User registered = dao.read(newUser.getID());</span>
-<span class="fc" id="L113">        assertAll(</span>
-<span class="fc" id="L114">                () -&gt; assertNotNull(registered.getLogin()),</span>
-<span class="fc" id="L115">                () -&gt; assertNotNull(registered.getPassword())</span>
+<span class="fc" id="L111">        User newUser = createUserEntity();</span>
+<span class="nc" id="L112">        dao.create(newUser);</span>
+<span class="nc" id="L113">        User registered = dao.read(newUser.getID());</span>
+<span class="nc" id="L114">        assertAll(</span>
+<span class="nc" id="L115">                () -&gt; assertNotNull(registered.getLogin()),</span>
+<span class="nc" id="L116">                () -&gt; assertNotNull(registered.getPassword())</span>
                 );
-<span class="fc" id="L117">    }</span>
+<span class="nc" id="L118">    }</span>
 
     @Test public void testLogin(){
-<span class="fc" id="L120">        User newUser = createUserEntity();</span>
+<span class="fc" id="L121">        User newUser = createUserEntity();</span>
 
-<span class="fc" id="L122">        dao.create(newUser);</span>
-<span class="fc" id="L123">        User checkLogged = dao.findUserFromUsername(newUser.getLogin());</span>
-<span class="fc" id="L124">        assertNotNull(checkLogged.getID());</span>
-<span class="fc" id="L125">    }</span>
+<span class="fc" id="L123">        dao.create(newUser);</span>
+<span class="fc" id="L124">        User checkLogged = dao.findUserFromUsername(newUser.getLogin());</span>
+<span class="fc" id="L125">        assertNotNull(checkLogged.getID());</span>
+<span class="fc" id="L126">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

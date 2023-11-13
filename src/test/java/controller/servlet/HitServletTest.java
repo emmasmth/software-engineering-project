@@ -28,7 +28,7 @@ public class HitServletTest {
         when(request.getSession()).thenReturn(sessionMock);
         when(sessionMock.getAttribute("game")).thenReturn(game);
         when(game.playerTotal()).thenReturn(4);
-
+        when(game.getIsPlayersTurn()).thenReturn(true);
 
         HitServlet servlet = new HitServlet();
         servlet.setGame(game);

@@ -31,13 +31,13 @@ import static org.junit.jupiter.api.Assertions.*;
 <span class="fc" id="L31">        Registration registration = new Registration();</span>
 <span class="fc" id="L32">        registration.setDAO(mockDAO);</span>
 
-<span class="fc" id="L34">        User registeredNewUser = registration.registerUser(newUser);</span>
+<span class="nc" id="L34">        User registeredNewUser = registration.registerUser(newUser);</span>
 
-<span class="fc" id="L36">        assertNull(registeredNewUser);</span>
+<span class="nc" id="L36">        assertNull(registeredNewUser);</span>
 
 
 
-<span class="fc" id="L40">    }</span>
+<span class="nc" id="L40">    }</span>
 
     @Test public void loginUserTest(){
 <span class="fc" id="L43">        String username = &quot;test@gmail.com&quot;;</span>
@@ -51,8 +51,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 <span class="fc" id="L52">        User logged = registration.loginUser(username, pass);</span>
 
-<span class="fc" id="L54">        assertEquals(logged.getLogin(), newUser.getLogin());</span>
-<span class="fc" id="L55">    }</span>
+<span class="nc" id="L54">        assertEquals(logged.getLogin(), newUser.getLogin());</span>
+<span class="nc" id="L55">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
