@@ -89,10 +89,16 @@
 
 <!-- Game Controls -->
 <div class="row justify-content-center mt-3">
+    <%
+        if (game == null || (!game.getIsPlayersTurn() && !game.getIsDealerTurn())) {
+    %>
     <!-- Play Button (deal cards) -->
     <div class="col-1 d-grid">
         <a href="StartServlet" class="btn btn-primary">Play</a>
     </div>
+    <%
+        }
+    %>
     <!-- Hit Button -->
     <div class="col-1 d-grid">
         <a href="HitServlet" class="btn btn-success">Hit</a>

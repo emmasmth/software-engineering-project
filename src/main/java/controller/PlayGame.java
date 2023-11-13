@@ -13,10 +13,14 @@ public class PlayGame {
     int gameOutcome = 0;
     double bet = 0.00;
     double payout = 0.00;
-    Boolean isPlayersTurn;
+    Boolean isPlayersTurn = false;
+    Boolean isDealerTurn = false;
 
     public void setIsPlayersTurn(Boolean isPlayersTurn){this.isPlayersTurn=isPlayersTurn;}
     public Boolean getIsPlayersTurn(){return isPlayersTurn;}
+
+    public void setIsDealerTurn(Boolean isDealerTurn){this.isDealerTurn=isDealerTurn;}
+    public Boolean getIsDealerTurn(){return isDealerTurn;}
 
     public void setGame(Blackjack game){
         this.game = game;

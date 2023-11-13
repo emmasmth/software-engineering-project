@@ -17,15 +17,16 @@ public class StandServlet extends HttpServlet {
         if (game != null) {
             // Indicate player's turn is over
             game.setIsPlayersTurn(false);
-
+            game.setIsDealerTurn(true);
             // dealer's turn
-            while (game.dealerTotal()<17) {
+            while (game.dealerTotal()<17 && game.getIsDealerTurn()) {
                 game.dealerTurn();
             }
 
             //get the winner
             int winner = game.determineWinner();
             session.setAttribute("winner", winner);
+            game.setIsDealerTurn(false);
 
             session.setAttribute("game", game);
             response.sendRedirect("continue.jsp");

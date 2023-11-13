@@ -31,6 +31,9 @@ public class StartServlet extends HttpServlet {
         //Check naturals
         if (game.playerTotal() == 21 || game.dealerTotal() == 21) {
             int winner = game.determineWinner();
+            game.setIsDealerTurn(false);
+            game.setIsPlayersTurn(false);
+
             session.setAttribute("winner", winner);
         }
 

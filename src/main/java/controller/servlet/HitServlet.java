@@ -24,6 +24,8 @@ public class HitServlet extends HttpServlet {
             //Check Bust
             if (game.playerTotal() > 21) {
                 int winner = game.determineWinner();
+                game.setIsPlayersTurn(false);
+                game.setIsDealerTurn(false);
                 session.setAttribute("winner", winner);
             }
 
