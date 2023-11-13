@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">model.entity</a> &gt; <span class="el_source">AdTest.java</span></div><h1>AdTest.java</h1><pre class="source lang-java linenums">package model.entity;
+
+import org.hibernate.engine.jdbc.ReaderInputStream;
+import org.junit.jupiter.api.Test;
+
+import java.io.InputStream;
+import java.io.StringReader;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+<span class="fc" id="L11">public class AdTest</span>
+{
+    @Test
+    public void testEmptyAd()
+    {
+<span class="fc" id="L16">        Ad ad = new Ad();</span>
+<span class="fc" id="L17">        assertAll(</span>
+<span class="fc" id="L18">                () -&gt; assertNull(ad.getID()),</span>
+<span class="fc" id="L19">                () -&gt; assertNull(ad.getFilename()),</span>
+<span class="fc" id="L20">                () -&gt; assertNull(ad.getFilecontents())</span>
+        );
+<span class="fc" id="L22">    }</span>
+
+    @Test
+    public void testAdConstructor()
+    {
+<span class="fc" id="L27">        Ad ad = new Ad(&quot;test.png&quot;);</span>
+<span class="fc" id="L28">        assertAll(</span>
+<span class="fc" id="L29">                () -&gt; assertNull(ad.getID()),</span>
+<span class="fc" id="L30">                () -&gt; assertEquals(ad.getFilename(), &quot;test.png&quot;)</span>
+        );
+<span class="fc" id="L32">    }</span>
+
+    @Test
+    public void setAd()
+    {
+<span class="fc" id="L37">        int expectedID = 54;</span>
+<span class="fc" id="L38">        String expectedName = &quot;test.png&quot;;</span>
+
+<span class="fc" id="L40">        Ad ad = new Ad();</span>
+<span class="fc" id="L41">        ad.setID(expectedID);</span>
+<span class="fc" id="L42">        ad.setFilename(expectedName);</span>
+
+<span class="fc" id="L44">        assertAll(</span>
+<span class="fc" id="L45">                () -&gt; assertEquals(ad.getID(), expectedID),</span>
+<span class="fc" id="L46">                () -&gt; assertEquals(ad.getFilename(), expectedName)</span>
+        );
+<span class="fc" id="L48">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
