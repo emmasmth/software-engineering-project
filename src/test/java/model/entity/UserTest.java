@@ -15,7 +15,9 @@ public class UserTest
                 () -> assertNull(u.getLogin()),
                 () -> assertNull(u.getPassword()),
                 () -> assertEquals(u.getPermission(), User.USER_PERMISSION),
-                () -> assertEquals(u.getPermissionAsString(), "User")
+                () -> assertEquals(u.getPermissionAsString(), "User"),
+                () -> assertEquals(u.getWins(), 0),
+                () -> assertEquals(u.getLoses(), 0)
         );
     }
 
@@ -90,5 +92,32 @@ public class UserTest
         u.setPermission(-1);
         assertEquals(u.getPermissionAsString(), "Unknown");
     }
+
+    @Test
+    public void testSetWinsLosses()
+    {
+        User user = new User();
+        user.setWins(3);
+        user.setLoses(4);
+
+        assertAll(
+                () -> assertEquals(user.getWins(), 3),
+                () -> assertEquals(user.getLoses(), 4)
+        );
+    }
+
+    @Test
+    public void testIncLosses()
+    {
+        User user = new User();
+        user.incWins();
+        user.incLoses();
+
+        assertAll(
+                () -> assertEquals(user.getWins(), 1),
+                () -> assertEquals(user.getLoses(), 1)
+        );
+    }
+
 }
 

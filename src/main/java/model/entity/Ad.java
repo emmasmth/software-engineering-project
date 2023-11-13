@@ -11,13 +11,13 @@ import java.nio.file.Paths;
 public class Ad extends BaseEntity
 {
     @Id @Column (name = "idAdUploads") @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAdUploads = null;
+    private Integer idAdUploads;
 
     @Column
     private String filename;
 
-    @Column @Lob
-    private byte[] filedata;
+    @Column
+    private InputStream filedata;
 
 
     public Ad()
@@ -52,30 +52,14 @@ public class Ad extends BaseEntity
     }
 
 
-    public byte[] getFileData()
+    public InputStream getFileData()
     {
-        byte[] fileBytes = null;
-
-        try
-        {
-            fileBytes = readFileToByteArray(filename);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        return fileBytes;
+        return this.filedata;
     }
 
-    public void setFiledata(byte[] filedata)
+    public void setFiledata(InputStream filedata)
     {
         this.filedata = filedata;
-    }
-
-    private static byte[] readFileToByteArray(String filePath) throws IOException
-    {
-        Path path = Paths.get(filePath);
-        return Files.readAllBytes(path);
     }
 
 }
