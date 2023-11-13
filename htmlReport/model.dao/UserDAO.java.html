@@ -12,19 +12,19 @@ public class UserDAO extends GenericDAO&lt;User&gt; {
 <span class="fc" id="L12">    }</span>
 
     public User findUserFromUsername(String username) {
-<span class="fc" id="L15">        EntityManager entityManager = getEntityManager();</span>
+<span class="nc" id="L15">        EntityManager entityManager = getEntityManager();</span>
 
-<span class="fc" id="L17">        String query = &quot;SELECT u FROM &quot; + getTableName() + &quot; u WHERE u.Login = :email&quot;;</span>
-<span class="fc" id="L18">        User located = null;</span>
+<span class="nc" id="L17">        String query = &quot;SELECT u FROM &quot; + getTableName() + &quot; u WHERE u.Login = :email&quot;;</span>
+<span class="nc" id="L18">        User located = null;</span>
 
         try {
-<span class="fc" id="L21">            located = entityManager.createQuery(query, User.class).setParameter(&quot;email&quot;, username).getSingleResult();</span>
+<span class="nc" id="L21">            located = entityManager.createQuery(query, User.class).setParameter(&quot;email&quot;, username).getSingleResult();</span>
 <span class="nc" id="L22">        } catch (NoResultException exception) {</span>
 <span class="nc" id="L23">            located = null;</span>
         } finally {
-<span class="fc" id="L25">            entityManager.close();</span>
+<span class="nc" id="L25">            entityManager.close();</span>
         }
-<span class="fc" id="L27">        return located;</span>
+<span class="nc" id="L27">        return located;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

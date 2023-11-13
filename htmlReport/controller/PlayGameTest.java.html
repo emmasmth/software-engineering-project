@@ -186,7 +186,14 @@ import java.util.Scanner;
 
 <span class="fc" id="L187">    }</span>
 
-
+    @Test public void determineWinnerTest(){
+<span class="fc" id="L190">        PlayGame game = new PlayGame();</span>
+<span class="fc" id="L191">        Blackjack bj = mock(Blackjack.class);</span>
+<span class="fc" id="L192">        game.setGame(bj);</span>
+<span class="fc" id="L193">        when(bj.calculateHandTotal(any(ArrayList.class))).thenReturn(21);</span>
+<span class="fc" id="L194">        game.determineWinner();</span>
+<span class="fc" id="L195">        assertEquals(1, game.gameOutcome);</span>
+<span class="fc" id="L196">    }</span>
 
 
 

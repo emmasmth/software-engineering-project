@@ -54,15 +54,33 @@
         %>
 
         <div>
+
+            <% if (game.getIsPlayersTurn()) { %>
+            <h3>Dealer's Hand: <%= game.dealerFirstCardValue() %></h3>
+            <% } else {%>
             <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
+            <% } %>
+
+
+
+            <% int cardIndex = 0; %>
             <% for (Card card : dealerHand) { %>
             <%
-                String imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
+                String imageFileName;
+                if (cardIndex == 1 && game.getIsPlayersTurn()) {
+                    // Display the back of the card if it's the second card and it's still the player's turn
+                    imageFileName = "card_back.png";
+
+                } else {
+                    imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
+                }
+                cardIndex++;
             %>
 
-            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
+            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> "width="75" height="75">
             <% } %>
         </div>
+
 
         <div>
             <h3>Player's Hand: <%= game.playerTotal() %></h3>

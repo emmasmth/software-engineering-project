@@ -19,7 +19,7 @@ public class PlayGame {
 <span class="fc" id="L19">    public void setIsPlayersTurn(Boolean isPlayersTurn){this.isPlayersTurn=isPlayersTurn;}</span>
 <span class="nc" id="L20">    public Boolean getIsPlayersTurn(){return isPlayersTurn;}</span>
 
-<span class="fc" id="L22">    public void setIsDealerTurn(Boolean isDealerTurn){this.isDealerTurn=isDealerTurn;}</span>
+<span class="nc" id="L22">    public void setIsDealerTurn(Boolean isDealerTurn){this.isDealerTurn=isDealerTurn;}</span>
 <span class="nc" id="L23">    public Boolean getIsDealerTurn(){return isDealerTurn;}</span>
 
     public void setGame(Blackjack game){
@@ -159,11 +159,11 @@ public class PlayGame {
 <span class="fc" id="L159">        System.out.println(&quot;player: &quot; + playerTotal);</span>
 <span class="fc" id="L160">        System.out.println(&quot;dealer: &quot; + dealerTotal);</span>
 <span class="pc bpc" id="L161" title="3 of 6 branches missed.">        if (playerTotal &gt; 21 || (dealerTotal &lt;= 21 &amp;&amp; dealerTotal &gt; playerTotal)) {</span>
-<span class="fc" id="L162">            gameOutcome = 3; // dealer win</span>
-<span class="nc bnc" id="L163" title="All 4 branches missed.">        } else if (dealerTotal &gt; 21 || playerTotal &gt; dealerTotal) {</span>
+<span class="nc" id="L162">            gameOutcome = 3; // dealer win</span>
+<span class="pc bpc" id="L163" title="2 of 4 branches missed.">        } else if (dealerTotal &gt; 21 || playerTotal &gt; dealerTotal) {</span>
 <span class="nc" id="L164">            gameOutcome = 2; // player win</span>
         } else {
-<span class="nc" id="L166">            gameOutcome = 1; // tie</span>
+<span class="fc" id="L166">            gameOutcome = 1; // tie</span>
         }
 <span class="fc" id="L168">        return gameOutcome;</span>
 //        System.out.println(&quot;end: &quot; + gameOutcome);

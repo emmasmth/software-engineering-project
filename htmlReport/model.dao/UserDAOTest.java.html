@@ -120,9 +120,9 @@ import model.entity.User;
     @Test public void testLogin(){
 <span class="fc" id="L121">        User newUser = createUserEntity();</span>
 
-<span class="fc" id="L123">        dao.create(newUser);</span>
-<span class="fc" id="L124">        User checkLogged = dao.findUserFromUsername(newUser.getLogin());</span>
-<span class="fc" id="L125">        assertNotNull(checkLogged.getID());</span>
-<span class="fc" id="L126">    }</span>
+<span class="nc" id="L123">        dao.create(newUser);</span>
+<span class="nc" id="L124">        User checkLogged = dao.findUserFromUsername(newUser.getLogin());</span>
+<span class="nc" id="L125">        assertNotNull(checkLogged.getID());</span>
+<span class="nc" id="L126">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

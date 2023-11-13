@@ -169,7 +169,6 @@ public class PlayGame {
 //        System.out.println("end: " + gameOutcome);
     }
 
-
 //    /**
 //     * endGame
 //     * prints who won and will add game to history
@@ -197,6 +196,26 @@ public class PlayGame {
             game.getDealerHand().clear();
             game.getPlayerHand().clear();
         }
+    }
+
+
+    public int dealerFirstCardValue() {
+        Card firstCard = getDealerHand().get(0);
+        String number = firstCard.getNumber();
+
+        int cardValue;
+        if (number.equals("K") || number.equals("Q") || number.equals("J")) {
+            cardValue = 10;
+        }
+        else if(number.equals("A")){
+            cardValue = 11;
+        }
+
+        else {
+            cardValue = Integer.parseInt(number);
+        }
+
+        return cardValue;
     }
 
     /**
