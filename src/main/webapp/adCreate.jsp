@@ -40,16 +40,12 @@
             <input class="form-control" type="file" id="filename" name="filename"/>
             <input type="submit" value="Upload"/>
         </form>
+
+        <div class="button-container">
+            <button class="button-click" onclick="window.location.href = 'admin.jsp';">Back</button>
+        </div>
     </div>
 
-    <% Ad ad = (Ad) session.getAttribute("Ad"); %>
-    <% if(ad != null) { %>
-    <p>
-
-    <%= "FILE: " + ad.getFilename() %>
-
-    </p>
-    <% } %>
     <jsp:include page="components/footer.jsp"/>
 </body>
 </html>

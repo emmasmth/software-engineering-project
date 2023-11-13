@@ -8,14 +8,7 @@
 
 <%@ page import="controller.Passwords" %>
 
-<!-- https://www.tutorialspoint.com/how-to-executes-an-sql-select-statement-in-a-jsp -->
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%@ page import = "java.io.*, java.util.*, java.sql.*"%>
-<%@ page import = "jakarta.servlet.http.*, jakarta.servlet.*"%>
-<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <html>
 <head>
@@ -23,6 +16,18 @@
     <jsp:include page="components/header.jsp"/>
 
     <style>
+
+        .white-box
+        {
+            background-color: white;
+            border: 5px solid black;
+            padding: 5%;
+            text-align: center;
+            width: 50%;
+            height: 35%;
+            margin-top: 3%;
+        }
+
         .box-container
         {
             display: flex;
@@ -32,44 +37,48 @@
             height: 80vh;
         }
 
+        @media screen and (max-width: 1800px)
+        {
+            .white-box
+            {
+                -ms-overflow-style: scrollbar;
+                scrollbar-width: thin;
+                overflow-y: scroll;
+                scroll-behavior: auto;
+                margin-top: 10px;
+            }
+        }
 
     </style>
+    <link rel="stylesheet" type="text/css" href="button.css">
 </head>
 <body>
     <jsp:include page="components/title.jsp"/>
     <jsp:include page="components/background.jsp"/>
     <jsp:include page="components/menu.jsp"/>
-    <jsp:include page="components/adminNav.jsp"/>
-
 
     <div class="box-container">
+        <div class="white-box">
+            <h2>Edit Users</h2>
+            <div class="button-container">
+                <!-- https://www.w3schools.com/css/css3_buttons.asp -->
+                <button class="button-click" onclick="window.location.href = 'userCreate.jsp';">Create</button>
+                <button class="button-click" onclick="window.location.href = 'userRead.jsp';">Read</button>
+                <button class="button-click" onclick="window.location.href = 'userUpdate.jsp';">Update</button>
+                <button class="button-click" onclick="window.location.href = 'userDelete.jsp';">Delete</button>
+            </div>
+        </div>
 
-        <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql://localhost:3306/Ad"
-            user = "root" password = "Dinosaurs06340" />
-        <sql:query dataSource = "${snapshot}" var = "result" >
-            SELECT * FROM User;
-        </sql:query>
-
-        <table>
-            <tr>
-                <th>User ID</th>
-                <th>Name</th>
-                <th>Login</th>
-                <th>Wins</th>
-                <th>Losses</th>
-            </tr>
-            <c:forEach var = "row" items = "${result.rows}">
-                <tr>
-                    <td><c:out value = "${row.idUser}"/></td>
-                    <td><c:out value = "${row.Name}"/></td>
-                    <td><c:out value = "${row.Login}"/></td>
-                    <td><c:out value = "${row.Wins}"/></td>
-                    <td><c:out value = "${row.Loses}"/></td>
-                </tr>
-            </c:forEach>
-        </table>
-
+        <div class="white-box">
+            <h2>Edit Advertisements</h2>
+            <div class="button-container">
+                <!-- https://www.w3schools.com/css/css3_buttons.asp -->
+                <button class="button-click" onclick="window.location.href = 'adCreate.jsp';">Create</button>
+                <button class="button-click" onclick="window.location.href = 'adRead.jsp';">Read</button>
+                <button class="button-click" onclick="window.location.href = 'adUpdate.jsp';">Update</button>
+                <button class="button-click" onclick="window.location.href = 'adDelete.jsp';">Delete</button>
+            </div>
+        </div>
     </div>
 
     <jsp:include page="components/footer.jsp"/>

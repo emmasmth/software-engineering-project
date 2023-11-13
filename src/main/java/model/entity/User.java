@@ -160,6 +160,8 @@ public class User extends BaseEntity
  *     Login varchar(30) not null,
  *     Password char(60) not null,
  *     Permission int not null default 1,
+ *     Wins int default 0,
+ *     Loses int default 0,
  *     constraint user_pk primary key(idUser),
  *     constraint user_login_uk unique key(Login)
  *  );
