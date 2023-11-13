@@ -16,7 +16,8 @@ public class AdTest
         Ad ad = new Ad();
         assertAll(
                 () -> assertNull(ad.getID()),
-                () -> assertNull(ad.getFilename())
+                () -> assertNull(ad.getFilename()),
+                () -> assertNull(ad.getFilecontents())
         );
     }
 
