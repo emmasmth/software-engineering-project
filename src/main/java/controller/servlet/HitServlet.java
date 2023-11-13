@@ -26,11 +26,6 @@ public class HitServlet extends HttpServlet {
                 int winner = game.determineWinner();
                 session.setAttribute("winner", winner);
             }
-            //Check naturals
-            if (game.playerTotal() == 21 || game.dealerTotal() == 21) {
-                int winner = game.determineWinner();
-                session.setAttribute("winner", winner);
-            }
 
 
 

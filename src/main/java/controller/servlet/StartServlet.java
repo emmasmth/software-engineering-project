@@ -28,6 +28,12 @@ public class StartServlet extends HttpServlet {
         game.setIsPlayersTurn(true);
         game.play();
 
+        //Check naturals
+        if (game.playerTotal() == 21 || game.dealerTotal() == 21) {
+            int winner = game.determineWinner();
+            session.setAttribute("winner", winner);
+        }
+
         response.sendRedirect("continue.jsp");
     }
 
