@@ -16,9 +16,6 @@ public class Ad extends BaseEntity
     @Column
     private String filename;
 
-    @Column @Lob
-    private byte[] filedata;
-
 
     public Ad()
     {
@@ -52,30 +49,5 @@ public class Ad extends BaseEntity
     }
 
 
-    public byte[] getFileData()
-    {
-        byte[] fileBytes = null;
-
-        try
-        {
-            fileBytes = readFileToByteArray(filename);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        return fileBytes;
-    }
-
-    public void setFiledata(byte[] filedata)
-    {
-        this.filedata = filedata;
-    }
-
-    private static byte[] readFileToByteArray(String filePath) throws IOException
-    {
-        Path path = Paths.get(filePath);
-        return Files.readAllBytes(path);
-    }
 
 }

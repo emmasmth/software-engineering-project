@@ -51,16 +51,13 @@ public class FileUploadServlet extends HttpServlet
         System.out.println(this.ad.getFilename());
 
         Ad ad = new Ad(filename);
-        byte[] filedata = ad.getFileData();
-        ad.setFiledata(filedata);
 
         try(Connection connection = DriverManager.getConnection(url, myuser, mypw))
         {
-            String sql = "INSERT INTO Ad (filename, filedata) VALUES (?, ?)";
+            String sql = "INSERT INTO Ad (filename) VALUES (?, ?)";
             try(PreparedStatement statement = connection.prepareStatement(sql))
             {
                 statement.setString(1, ad.getFilename());
-                statement.setBytes(2, ad.getFileData());
                 statement.executeUpdate();
             }
         }
