@@ -89,22 +89,10 @@
 
 <!-- Game Controls -->
 <div class="row justify-content-center mt-3">
-    <% if(winner!=null && winner!=0){
-        String message;
-        switch(winner) {
-            case 1: message = "It's a tie!"; break;
-            case 2: message = "Player wins!"; break;
-            case 3: message = "Dealer wins!"; break;
-            default: message = "Unexpected game outcome."; break;
-        }
-        out.println("<h3>" + message + "</h3>");
-    }else if (game != null && game.getPlayerHand().size() > 0) {
-        if (game.getPlayerHand().size()==2 && (game.playerTotal() == 9 || game.playerTotal() == 10 || game.playerTotal() ==11)){%>
-    <!-- Double Down -->
+    <!-- Play Button (deal cards) -->
     <div class="col-1 d-grid">
-        <a href="DoubleDownServlet" class="btn btn-warning">Double</a>
+        <a href="StartServlet" class="btn btn-primary">Play</a>
     </div>
-    <% } %>
     <!-- Hit Button -->
     <div class="col-1 d-grid">
         <a href="HitServlet" class="btn btn-success">Hit</a>
@@ -115,11 +103,26 @@
             <button type="submit" class="btn btn-danger">Stand</button>
         </form>
     </div>
-    <%}else{%>
-    <!-- Play Button (deal cards) -->
+    <% if(winner!=null && winner!=0){
+        String message;
+        switch(winner) {
+            case 1: message = "It's a tie!"; break;
+            case 2: message = "Player wins!"; break;
+            case 3: message = "Dealer wins!"; break;
+            default: message = "Unexpected game outcome."; break;
+        }
+        out.println("<h3>" + message + "</h3>");
+
+    }else if (game != null && game.getPlayerHand().size() > 0) {
+        if (game.getPlayerHand().size()==2 && (game.playerTotal() == 9 || game.playerTotal() == 10 || game.playerTotal() ==11)){%>
+    <!-- Double Down -->
     <div class="col-1 d-grid">
-        <a href="StartServlet" class="btn btn-primary">Play</a>
+        <a href="DoubleDownServlet" class="btn btn-warning">Double</a>
     </div>
+    <% } %>
+
+    <%}else{%>
+
     <%}%>
 </div>
 
