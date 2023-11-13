@@ -33,10 +33,11 @@ public class UserDAOTest {
         dao.setDbTypeOutput(GenericDAO.DbType.TEST);
     }
 
+    /*
     @BeforeEach public void clearBefore(){
         dao.deleteAll();
     }
-
+    */
 
     @Test public void createUserTest(){
         User newUser = createUserEntity();

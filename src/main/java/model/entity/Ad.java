@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Blob;
 
 @Entity
 public class Ad extends BaseEntity
@@ -15,6 +16,8 @@ public class Ad extends BaseEntity
 
     @Column
     private String filename;
+
+    @Column Blob filecontents;
 
 
     public Ad()
@@ -48,6 +51,15 @@ public class Ad extends BaseEntity
         this.filename = filename;
     }
 
+    public Blob getFilecontents()
+    {
+        return filecontents;
+    }
+
+    public void setFilecontents(Blob blob)
+    {
+        this.filecontents = blob;
+    }
 
 
 }

@@ -1,73 +1,50 @@
 package controller.servlet;
 
-import jakarta.servlet.RequestDispatcher;
 import model.entity.Ad;
-import controller.Passwords;
+import model.dao.AdDAO;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.sql.Blob;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
-@WebServlet (name = "FileUploadServlet", urlPatterns = {"/fileuploadservlet"})
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 1,
-        maxFileSize = 1024 * 1024 * 10,
-        maxRequestSize = 1024 * 1024 * 100
-)
+@WebServlet("/FileUploadServlet")
+@MultipartConfig
 public class FileUploadServlet extends HttpServlet
 {
-    private static final String url = "jdbc:mysql://localhost:3306/Ad";
-
-    public Ad ad;
-    protected Passwords pw;
-    String myuser;
-    String mypw;
-
-    public FileUploadServlet() throws ServletException
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ad = new Ad();
+        try {
+            Part filePart = request.getPart("file");
 
-        pw = new Passwords();
-        myuser = pw.getUser();
-        mypw = pw.getPass();
-    }
-    @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
-        processRequest(request, response);
-    }
+            InputStream fileContent = filePart.getInputStream();
+            byte[] fileBytes = fileContent.readAllBytes();
+            Blob fileBlob = new javax.sql.rowset.serial.SerialBlob(fileBytes);
 
-    public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
-        String filename = request.getParameter("filename");
-        this.ad.setFilename(filename);
-        System.out.println(this.ad.getFilename());
+            Ad ad = new Ad();
+            ad.setFilename("EMMA.png");
+            ad.setFilecontents(fileBlob);
 
-        Ad ad = new Ad(filename);
+            AdDAO adDAO = new AdDAO();
+            adDAO.create(ad);
 
-        try(Connection connection = DriverManager.getConnection(url, myuser, mypw))
-        {
-            String sql = "INSERT INTO Ad (filename) VALUES (?, ?)";
-            try(PreparedStatement statement = connection.prepareStatement(sql))
-            {
-                statement.setString(1, ad.getFilename());
-                statement.executeUpdate();
-            }
+            response.sendRedirect("temppage.jsp"); // Redirect to a success page
         }
-        catch (SQLException e)
+        catch (Exception e)
         {
             e.printStackTrace();
+            response.sendRedirect("adCreate.jsp"); // Redirect to an error page
         }
-
-        response.sendRedirect("adDelete.jsp");
-
     }
-
 }
+
