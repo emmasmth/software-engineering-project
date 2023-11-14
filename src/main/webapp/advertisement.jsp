@@ -89,7 +89,7 @@
         <!-- https://www.w3schools.com/css/css3_animations.asp -->
         <!-- https://stackoverflow.com/questions/21993661/css-auto-hide-elements-after-5-seconds -->
 
-        <button class="button-click" onclick="window.location.href = 'continue.jsp';">Continue</button>
+        <button class="button-click" onclick="window.location.href = 'betting.jsp';">Continue</button>
     </div>
 
     <jsp:include page="components/footer.jsp"/>
