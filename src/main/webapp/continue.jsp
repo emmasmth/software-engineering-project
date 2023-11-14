@@ -137,7 +137,8 @@
         }
         out.println("<h3>" + message + "</h3>");
 
-    }else if (game != null && game.getPlayerHand().size() > 0) {
+    }
+    if (game != null && game.getPlayerHand().size() > 0) {
         if (game.getPlayerHand().size()==2 && (game.playerTotal() == 9 || game.playerTotal() == 10 || game.playerTotal() ==11)){%>
     <!-- Double Down -->
     <div class="col-1 d-grid">

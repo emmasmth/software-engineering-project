@@ -7,6 +7,7 @@
 --%>
 
 <%@ page import="controller.Passwords" %>
+<%@ page import="model.entity.User" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -57,29 +58,41 @@
     <jsp:include page="components/background.jsp"/>
     <jsp:include page="components/menu.jsp"/>
 
-    <div class="box-container">
-        <div class="white-box">
-            <h2>Edit Users</h2>
-            <div class="button-container">
-                <!-- https://www.w3schools.com/css/css3_buttons.asp -->
-                <button class="button-click" onclick="window.location.href = 'userCreate.jsp';">Create</button>
-                <button class="button-click" onclick="window.location.href = 'userRead.jsp';">Read</button>
-                <button class="button-click" onclick="window.location.href = 'userUpdate.jsp';">Update</button>
-                <button class="button-click" onclick="window.location.href = 'userDelete.jsp';">Delete</button>
+    <% User logged = (User) session.getAttribute("User"); %>
+    <% if (logged != null && logged.getPermission() == 2)
+    { %>
+        <div class="box-container">
+            <div class="white-box">
+                <h2>Edit Users</h2>
+                <div class="button-container">
+                    <!-- https://www.w3schools.com/css/css3_buttons.asp -->
+                    <button class="button-click" onclick="window.location.href = 'userCreate.jsp';">Create</button>
+                    <button class="button-click" onclick="window.location.href = 'userRead.jsp';">Read</button>
+                    <button class="button-click" onclick="window.location.href = 'userUpdate.jsp';">Update</button>
+                    <button class="button-click" onclick="window.location.href = 'userDelete.jsp';">Delete</button>
+                </div>
+            </div>
+
+            <div class="white-box">
+                <h2>Edit Advertisements</h2>
+                <div class="button-container">
+                    <!-- https://www.w3schools.com/css/css3_buttons.asp -->
+                    <button class="button-click" onclick="window.location.href = 'adCreate.jsp';">Create</button>
+                    <button class="button-click" onclick="window.location.href = 'adRead.jsp';">Read</button>
+                    <button class="button-click" onclick="window.location.href = 'adUpdate.jsp';">Update</button>
+                    <button class="button-click" onclick="window.location.href = 'adDelete.jsp';">Delete</button>
+                </div>
             </div>
         </div>
-
-        <div class="white-box">
-            <h2>Edit Advertisements</h2>
-            <div class="button-container">
-                <!-- https://www.w3schools.com/css/css3_buttons.asp -->
-                <button class="button-click" onclick="window.location.href = 'adCreate.jsp';">Create</button>
-                <button class="button-click" onclick="window.location.href = 'adRead.jsp';">Read</button>
-                <button class="button-click" onclick="window.location.href = 'adUpdate.jsp';">Update</button>
-                <button class="button-click" onclick="window.location.href = 'adDelete.jsp';">Delete</button>
-            </div>
+    <% } else { %>
+    <div class="box-container">
+        <h1>You are not an admin.</h1>
+        <div class="button-container">
+            <button class="button-click" onclick="window.location.href = 'index.jsp';">Back</button>
         </div>
     </div>
+
+    <% } %>
 
     <jsp:include page="components/footer.jsp"/>
 </body>
