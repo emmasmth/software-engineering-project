@@ -26,13 +26,14 @@ public class FileUploadServlet extends HttpServlet
     {
         try {
             Part filePart = request.getPart("file");
+            String filename = request.getParameter("filename");
 
             InputStream fileContent = filePart.getInputStream();
             byte[] fileBytes = fileContent.readAllBytes();
             Blob fileBlob = new javax.sql.rowset.serial.SerialBlob(fileBytes);
 
             Ad ad = new Ad();
-            ad.setFilename("EMMA.png");
+            ad.setFilename(filename);
             ad.setFilecontents(fileBlob);
 
             AdDAO adDAO = new AdDAO();

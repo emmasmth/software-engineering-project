@@ -37,6 +37,9 @@
         <!-- https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Java-File-Upload-Servlet-Ajax-Example -->
         <form action="FileUploadServlet" method="post" enctype="multipart/form-data">
             <input type="file" class="form-control" id="file" name="file"/>
+            <br>
+            <p>Enter Filename:</p>
+            <input type="text" class="form-control" id="filename" name="filename"/>
             <input type="submit" value="Upload"/>
         </form>
 
