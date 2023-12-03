@@ -35,7 +35,6 @@ public class EditUserServlet extends HttpServlet {
         editedUser.setLoses(Integer.parseInt(editedLosses));
 
 
-        Registration registration = new Registration();
         registration.editUser(editedUser);
         response.sendRedirect("manageUser.jsp");
 

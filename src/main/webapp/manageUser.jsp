@@ -28,11 +28,6 @@
     <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#CreateNewUser">Create New User</button>
   </div>
 
-
-
-  <div class="col-1 mt-3 d-grid">
-    <a class="btn btn-success" type="button" href="index.jsp">Delete User</a>
-  </div>
 </div>
 
 <div class="container mt-3">
@@ -57,9 +52,10 @@
           <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#editUserModal_<%= u.getID() %>">
             <i class="bi bi-pencil-square"></i>
           </button>
+
         </td>
         <td>
-          <a href="../user/edituser.jsp?id=<%= u.getID()%>&login=<%= u.getLogin()%>&perm=<%= u.getPermission()%>">Delete</a>
+          <a href="DeleteUserServlet?id=<%= u.getID()%>"><i class="bi bi-trash3-fill"></i></a>
         </td>
         <td><%=u.getID()%></td>
         <td><%=u.getName()%></td>

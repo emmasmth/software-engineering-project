@@ -48,7 +48,7 @@ public class Registration {
         return lstUser;
     }
 
-    public static void deleteUser(int id)
+    public void deleteUser(int id)
     {
         dao.delete(id);
     }
