@@ -42,7 +42,7 @@
             text-align: center;
             width: 50%;
             height: 50%;
-            margin-top: 10%;
+            margin-top: 6%;
         }
 
         @media screen and (max-width: 768px)
@@ -80,9 +80,9 @@
     <jsp:include page="components/menu.jsp"/>
 
     <div class="box-container">
-        <h1>Delete An Advertisement: </h1>
-
         <div class="white-box">
+            <h2>Choose an Advertisement to Delete: </h2>
+            <br>
             <form action="DeleteAdServlet" method="post">
                 <table>
                     <tr>
@@ -117,6 +117,10 @@
                 </div>
 
             </form>
+        </div>
+
+        <div class="button-container">
+            <button class="button-click" onclick="window.location.href = 'admin.jsp';">Back</button>
         </div>
 
     </div>

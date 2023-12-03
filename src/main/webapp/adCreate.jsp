@@ -22,6 +22,29 @@
             align-items: center;
             height: 80vh;
         }
+
+        .white-box
+        {
+            -ms-overflow-style: scrollbar;
+            scrollbar-width: thin;
+            overflow-y: scroll;
+            scroll-behavior: auto;
+            background-color: white;
+            border: 5px solid black;
+            padding: 5%;
+            text-align: center;
+            width: 50%;
+            height: 50%;
+            margin-top: 10%;
+        }
+
+        @media screen and (max-width: 768px)
+        {
+            .white-box
+            {
+                margin-top: 50px;
+            }
+        }
     </style>
 
     <link rel="stylesheet" type="text/css" href="button.css">
@@ -32,20 +55,23 @@
     <jsp:include page="components/menu.jsp"/>
     <!-- https://blog.filestack.com/api/everything-need-know-bootstrap-file-upload/ -->
     <div class="box-container">
-        <h1>Create!</h1>
-        <h1></h1>
-        <!-- https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Java-File-Upload-Servlet-Ajax-Example -->
-        <form action="FileUploadServlet" method="post" enctype="multipart/form-data">
-            <input type="file" class="form-control" id="file" name="file"/>
-            <br>
-            <p>Enter Filename:</p>
-            <input type="text" class="form-control" id="filename" name="filename"/>
-            <input type="submit" value="Upload"/>
-        </form>
+        <div class="white-box">
+            <h1>Create!</h1>
+            <h1></h1>
+            <!-- https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Java-File-Upload-Servlet-Ajax-Example -->
+            <form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+                <input type="file" class="form-control" id="file" name="file"/>
+                <br>
+                <p>Enter Filename:</p>
+                <input type="text" class="form-control" id="filename" name="filename"/>
+                <input type="submit" value="Upload"/>
+            </form>
+        </div>
 
         <div class="button-container">
             <button class="button-click" onclick="window.location.href = 'admin.jsp';">Back</button>
         </div>
+
     </div>
 
     <jsp:include page="components/footer.jsp"/>

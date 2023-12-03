@@ -85,6 +85,9 @@
                     <button class="button-click" onclick="window.location.href = 'adDelete.jsp';">Delete</button>
                 </div>
             </div>
+            <div class="button-container">
+                <button class="button-click" onclick="window.location.href = 'index.jsp';">Back</button>
+            </div>
         </div>
     <% } else { %>
     <div class="box-container">
