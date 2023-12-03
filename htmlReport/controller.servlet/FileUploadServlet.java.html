@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileUploadServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">FileUploadServlet.java</span></div><h1>FileUploadServlet.java</h1><pre class="source lang-java linenums">package controller.servlet;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileUploadServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results, DeleteUserServletTest.deleteUserServletTest Coverage Results, DeleteUserServletTest Coverage Results, EditUserServletTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">FileUploadServlet.java</span></div><h1>FileUploadServlet.java</h1><pre class="source lang-java linenums">package controller.servlet;
 
 import model.entity.Ad;
 import model.dao.AdDAO;
@@ -26,26 +26,27 @@ import jakarta.servlet.http.Part;
     {
         try {
 <span class="fc" id="L28">            Part filePart = request.getPart(&quot;file&quot;);</span>
+<span class="fc" id="L29">            String filename = request.getParameter(&quot;filename&quot;);</span>
 
-<span class="fc" id="L30">            InputStream fileContent = filePart.getInputStream();</span>
-<span class="nc" id="L31">            byte[] fileBytes = fileContent.readAllBytes();</span>
-<span class="nc" id="L32">            Blob fileBlob = new javax.sql.rowset.serial.SerialBlob(fileBytes);</span>
+<span class="fc" id="L31">            InputStream fileContent = filePart.getInputStream();</span>
+<span class="nc" id="L32">            byte[] fileBytes = fileContent.readAllBytes();</span>
+<span class="nc" id="L33">            Blob fileBlob = new javax.sql.rowset.serial.SerialBlob(fileBytes);</span>
 
-<span class="nc" id="L34">            Ad ad = new Ad();</span>
-<span class="nc" id="L35">            ad.setFilename(&quot;EMMA.png&quot;);</span>
-<span class="nc" id="L36">            ad.setFilecontents(fileBlob);</span>
+<span class="nc" id="L35">            Ad ad = new Ad();</span>
+<span class="nc" id="L36">            ad.setFilename(filename);</span>
+<span class="nc" id="L37">            ad.setFilecontents(fileBlob);</span>
 
-<span class="nc" id="L38">            AdDAO adDAO = new AdDAO();</span>
-<span class="nc" id="L39">            adDAO.create(ad);</span>
+<span class="nc" id="L39">            AdDAO adDAO = new AdDAO();</span>
+<span class="nc" id="L40">            adDAO.create(ad);</span>
 
-<span class="nc" id="L41">            response.sendRedirect(&quot;temppage.jsp&quot;); // Redirect to a success page</span>
+<span class="nc" id="L42">            response.sendRedirect(&quot;temppage.jsp&quot;); // Redirect to a success page</span>
         }
-<span class="fc" id="L43">        catch (Exception e)</span>
+<span class="fc" id="L44">        catch (Exception e)</span>
         {
-<span class="fc" id="L45">            e.printStackTrace();</span>
-<span class="fc" id="L46">            response.sendRedirect(&quot;adCreate.jsp&quot;); // Redirect to an error page</span>
-<span class="nc" id="L47">        }</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L46">            e.printStackTrace();</span>
+<span class="fc" id="L47">            response.sendRedirect(&quot;adCreate.jsp&quot;); // Redirect to an error page</span>
+<span class="nc" id="L48">        }</span>
+<span class="fc" id="L49">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
