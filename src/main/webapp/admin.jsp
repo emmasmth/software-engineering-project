@@ -70,6 +70,8 @@
                     <button class="button-click" onclick="window.location.href = 'userRead.jsp';">Read</button>
                     <button class="button-click" onclick="window.location.href = 'userUpdate.jsp';">Update</button>
                     <button class="button-click" onclick="window.location.href = 'userDelete.jsp';">Delete</button>
+                    <button class="button-click" onclick="window.location.href = 'mangaeUser.jsp';">Manage Users</button>
+
                 </div>
             </div>
 

@@ -15,12 +15,16 @@ public class PlayGame {
     double payout = 0.00;
     Boolean isPlayersTurn = false;
     Boolean isDealerTurn = false;
+    Boolean isGamerOver = false;
 
     public void setIsPlayersTurn(Boolean isPlayersTurn){this.isPlayersTurn=isPlayersTurn;}
     public Boolean getIsPlayersTurn(){return isPlayersTurn;}
 
     public void setIsDealerTurn(Boolean isDealerTurn){this.isDealerTurn=isDealerTurn;}
     public Boolean getIsDealerTurn(){return isDealerTurn;}
+
+    public void setGameOver(Boolean isGamerOver){this.isGamerOver=isGamerOver;}
+    public Boolean getIsGamerOver(){return isGamerOver;}
 
     public void setGame(Blackjack game){
         this.game = game;
@@ -217,6 +221,8 @@ public class PlayGame {
 
         return cardValue;
     }
+
+
 
     /**
      * printHand

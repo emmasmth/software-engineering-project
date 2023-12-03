@@ -42,7 +42,7 @@ public class Registration {
         return null;
     }
 
-    public static List<User> listUsers(String order)
+    public List<User> listUsers(String order)
     {
         List<User> lstUser = dao.list(order);
         return lstUser;
@@ -53,7 +53,7 @@ public class Registration {
         dao.delete(id);
     }
 
-    public static User editUser(User u)
+    public User editUser(User u)
     {
         if(u.getPassword() == null || u.getPassword().trim().length() == 0)
         {
