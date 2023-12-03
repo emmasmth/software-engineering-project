@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DeleteUserServletTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AllTests Coverage Results, DeleteUserServletTest.deleteUserServletTest Coverage Results, DeleteUserServletTest Coverage Results, EditUserServletTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.servlet</a> &gt; <span class="el_source">DeleteUserServletTest.java</span></div><h1>DeleteUserServletTest.java</h1><pre class="source lang-java linenums">package controller.servlet;
+import controller.Registration;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import model.dao.UserDAO;
+import model.entity.User;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+<span class="nc" id="L14">public class DeleteUserServletTest {</span>
+
+    @Test public void deleteUserServletTest() throws IOException{
+<span class="nc" id="L17">        HttpServletRequest request = mock(HttpServletRequest.class);</span>
+<span class="nc" id="L18">        HttpServletResponse response = mock(HttpServletResponse.class);</span>
+<span class="nc" id="L19">        DeleteUserServlet servlet = new DeleteUserServlet();</span>
+<span class="nc" id="L20">        Registration register = mock(Registration.class);</span>
+<span class="nc" id="L21">        servlet.setRegistration(register);</span>
+
+<span class="nc" id="L23">        when(request.getParameter(&quot;id&quot;)).thenReturn(&quot;81&quot;);</span>
+<span class="nc" id="L24">        doNothing().when(register).deleteUser(anyInt());</span>
+
+<span class="nc" id="L26">        servlet.doGet(request, response);</span>
+
+<span class="nc" id="L28">        verify(register, times(1)).deleteUser(81);</span>
+<span class="nc" id="L29">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
