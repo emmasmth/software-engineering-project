@@ -31,6 +31,7 @@ public class AdService
         {
             Ad og = dao.read(a.getID());
             a.setFilename(og.getFilename());
+            a.setFilepath(og.getFilepath());
 
             //@FIXME edit this to include fileContents
         }

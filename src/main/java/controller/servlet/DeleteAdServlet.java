@@ -10,6 +10,9 @@ import model.entity.Ad;
 import model.entity.User;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @WebServlet(name = "DeleteAdServlet", value="/DeleteAdServlet")
 public class DeleteAdServlet extends HttpServlet
@@ -19,7 +22,6 @@ public class DeleteAdServlet extends HttpServlet
     {
         int id = Integer.parseInt(request.getParameter("idAdUploads"));
 
-        Ad ad = (Ad) request.getSession().getAttribute("Ad");
         User logged = (User) request.getSession().getAttribute("User");
         if(logged != null && logged.getPermission() == User.ADMIN_PERMISSION)
         {

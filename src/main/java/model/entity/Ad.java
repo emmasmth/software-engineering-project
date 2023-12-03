@@ -17,6 +17,9 @@ public class Ad extends BaseEntity
     @Column
     private String filename;
 
+    @Column
+    private String filepath;
+
     @Column Blob filecontents;
 
 
@@ -51,6 +54,16 @@ public class Ad extends BaseEntity
         this.filename = filename;
     }
 
+    public String getFilepath()
+    {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath)
+    {
+        this.filepath = filepath;
+    }
+
     public Blob getFilecontents()
     {
         return filecontents;
@@ -60,6 +73,5 @@ public class Ad extends BaseEntity
     {
         this.filecontents = blob;
     }
-
 
 }
