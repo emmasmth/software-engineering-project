@@ -3,6 +3,9 @@ package controller;
 import model.dao.AdDAO;
 import model.entity.Ad;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class AdService
@@ -27,14 +30,36 @@ public class AdService
 
     public static Ad editAd(Ad a)
     {
+        Ad og = dao.read(a.getID());
+
+        String hardcode = "/Users/emmasmith/IdeaProjects/software-engineering-project/src/main/webapp/adimages/";
+
         if(a.getFilename().isEmpty())
         {
-            Ad og = dao.read(a.getID());
             a.setFilename(og.getFilename());
             a.setFilepath(og.getFilepath());
-
-            //@FIXME edit this to include fileContents
         }
+        else
+        {
+            a.setFilepath(hardcode + a.getFilename());
+        }
+
+        Path o = Paths.get(og.getFilepath());
+        Path n = Paths.get(a.getFilepath());
+        try
+        {
+            Files.move(o, n);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
         return dao.update(a);
+    }
+
+    public static Ad getAd(int id)
+    {
+        return dao.read(id);
     }
 }

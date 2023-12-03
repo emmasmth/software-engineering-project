@@ -26,6 +26,9 @@ public class FileUploadServlet extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+
+        //https://www.javatpoint.com/java-file-upload-to-a-folder
+
         try {
             Part filePart = request.getPart("file");
 

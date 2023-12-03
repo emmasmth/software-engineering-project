@@ -64,7 +64,10 @@
                 <br>
                 <p>Enter Filename:</p>
                 <input type="text" class="form-control" id="filename" name="filename"/>
-                <input type="submit" value="Upload"/>
+                <div class="button-container">
+                    <button class="button-click" type="submit">Upload</button>
+                </div>
+
             </form>
         </div>
 

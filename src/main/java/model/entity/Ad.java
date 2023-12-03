@@ -74,4 +74,9 @@ public class Ad extends BaseEntity
         this.filecontents = blob;
     }
 
+    public boolean isMyID(int otherid)
+    {
+        return getID() == otherid;
+    }
+
 }

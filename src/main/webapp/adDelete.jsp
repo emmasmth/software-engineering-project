@@ -102,7 +102,6 @@
 
                         <td>
                             <input  type="radio" id="idAdUploads" name="idAdUploads" value="<%=a.getID()%>">
-                            <label id = "nameAd" name="nameAd" value = "<%=a.getFilename()%>"></label>
                         </td>
                     </tr>
 
