@@ -9,7 +9,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Registration registration = new Registration();
-  List<User> lstUsers = registration.listUsers(null); %>
+  List<User> lstUsers = registration.listUsers(null);
+  User logged = (User) session.getAttribute("User");
+  if (logged != null && logged.getPermission() == 2)
+{ %>
 
 <html>
 <head>
@@ -210,7 +213,15 @@
     </div>
   </div>
 </div>
+<% } else { %>
+<div class="box-container">
+  <h1>You are not an admin.</h1>
+  <div class="button-container">
+    <button class="button-click" onclick="window.location.href = 'index.jsp';">Back</button>
+  </div>
+</div>
 
+<% } %>
 
 
 

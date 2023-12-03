@@ -8,12 +8,12 @@ import model.dao.UserDAO;
 import model.entity.User;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
-public class RegistrationServletTest {
-
+public class CreateNewUserServletTest {
     @Test
     public void testPost() throws IOException, ServletException {
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -21,19 +21,22 @@ public class RegistrationServletTest {
         Registration register = mock(Registration.class);
         when(register.registerUser(any(User.class))).thenReturn(new User());
 
-        RegistrationServlet servlet = new RegistrationServlet();
+        CreateNewUserServlet servlet = new CreateNewUserServlet();
         servlet.setRegistration(register);
 
         when(request.getParameter("name")).thenReturn("Test");
         when(request.getParameter("username")).thenReturn("test@gmail.com");
         when(request.getParameter("password")).thenReturn("Test123");
+        when(request.getParameter("permission")).thenReturn("2");
+        when(request.getParameter("wins")).thenReturn("2");
+        when(request.getParameter("losses")).thenReturn("2");
 
         doNothing().when(response).sendRedirect(anyString());
 
         servlet.doPost(request, response);
 
         assertDoesNotThrow(
-                () -> verify(response).sendRedirect("advertisement.jsp")
+                () -> verify(response).sendRedirect("manageUser.jsp")
         );
     }
 
@@ -43,22 +46,25 @@ public class RegistrationServletTest {
         Registration register = mock(Registration.class);
         when(register.registerUser(any(User.class))).thenReturn(null);
 
-        RegistrationServlet servlet = new RegistrationServlet();
+        CreateNewUserServlet servlet = new CreateNewUserServlet();
         servlet.setRegistration(register);
 
         when(request.getParameter("name")).thenReturn("Test");
         when(request.getParameter("username")).thenReturn("test@gmail.com");
         when(request.getParameter("password")).thenReturn("Test123");
+        when(request.getParameter("permission")).thenReturn("2");
+        when(request.getParameter("wins")).thenReturn("2");
+        when(request.getParameter("losses")).thenReturn("2");
+
 
         doNothing().when(response).sendRedirect(anyString());
 
         servlet.doPost(request, response);
 
         assertDoesNotThrow(
-                () -> verify(response).sendRedirect("registration.jsp?error=1")
+                () -> verify(response).sendRedirect("manageUser.jsp?error=1")
         );
     }
-
 
 
 }

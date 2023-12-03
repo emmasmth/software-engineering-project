@@ -10,6 +10,11 @@ import model.entity.User;
 
 @WebServlet(name = "EditUserServlet", value = "/EditUserServlet")
 public class EditUserServlet extends HttpServlet {
+    public Registration registration = new Registration();
+
+    public void setRegistration(Registration register){
+        this.registration = register;
+    }
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String editedID = request.getParameter("editedID");

@@ -65,13 +65,7 @@
             <div class="white-box">
                 <h2>Edit Users</h2>
                 <div class="button-container">
-                    <!-- https://www.w3schools.com/css/css3_buttons.asp -->
-                    <button class="button-click" onclick="window.location.href = 'userCreate.jsp';">Create</button>
-                    <button class="button-click" onclick="window.location.href = 'userRead.jsp';">Read</button>
-                    <button class="button-click" onclick="window.location.href = 'userUpdate.jsp';">Update</button>
-                    <button class="button-click" onclick="window.location.href = 'userDelete.jsp';">Delete</button>
-                    <button class="button-click" onclick="window.location.href = 'mangaeUser.jsp';">Manage Users</button>
-
+                    <button class="button-click" onclick="window.location.href = 'manageUser.jsp';">Manage Users</button>
                 </div>
             </div>
 
