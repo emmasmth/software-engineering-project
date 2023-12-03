@@ -24,4 +24,16 @@ public class AdService
     {
         dao.delete(id);
     }
+
+    public static Ad editAd(Ad a)
+    {
+        if(a.getFilename().isEmpty())
+        {
+            Ad og = dao.read(a.getID());
+            a.setFilename(og.getFilename());
+
+            //@FIXME edit this to include fileContents
+        }
+        return dao.update(a);
+    }
 }
