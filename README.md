@@ -14,3 +14,6 @@ https://studentsloyola-my.sharepoint.com/:x:/g/personal/oakoch-paiz_loyola_edu/E
 
 # Sequence Diagram Play Scenario
 https://github.com/emmasmth/software-engineering-project/commit/bf5c1cd1d437bf1f49f7d3d60adfcddde43e1139
+
+# Simplified Class Diagram
+https://github.com/emmasmth/software-engineering-project/commit/e47f60e7e47497c55d26e5d9d6f27d61fd74c90a
