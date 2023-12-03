@@ -28,7 +28,7 @@ public class AdService
         dao.delete(id);
     }
 
-    public static Ad editAd(Ad a)
+    public static Ad editAd(Ad a, String sTarg)
     {
         Ad og = dao.read(a.getID());
 
@@ -46,9 +46,14 @@ public class AdService
 
         Path o = Paths.get(og.getFilepath());
         Path n = Paths.get(a.getFilepath());
+
+        Path oTarg = Path.of(sTarg, og.getFilename());
+        Path nTarg = Path.of(sTarg, a.getFilename());
+
         try
         {
             Files.move(o, n);
+            Files.move(oTarg, nTarg);
         }
         catch(Exception e)
         {

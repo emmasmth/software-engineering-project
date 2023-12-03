@@ -25,8 +25,13 @@ public class DeleteAdServlet extends HttpServlet
         User logged = (User) request.getSession().getAttribute("User");
         if(logged != null && logged.getPermission() == User.ADMIN_PERMISSION)
         {
+            Ad ad = AdService.getAd(id);
             AdService.deleteAd(id);
-            response.sendRedirect("admin.jsp");
+            String sTarg = getServletContext().getRealPath("/adimages/");
+            Path pTarg = Path.of(sTarg, ad.getFilename());
+            Files.deleteIfExists(pTarg);
+
+            response.sendRedirect("adRead.jsp");
         }
         else
         {

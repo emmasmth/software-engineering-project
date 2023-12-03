@@ -43,7 +43,11 @@ public class FileUploadServlet extends HttpServlet
             String uploadString = "/Users/emmasmith/IdeaProjects/software-engineering-project/src/main/webapp/adimages/";
             Path imgPath = Path.of(uploadString, filename);
 
+            String p = getServletContext().getRealPath("/adimages/");
+            Path imgPathTarg = Path.of(p, filename);
+
             ImageIO.write(bufferedImage, "png", imgPath.toFile());
+            ImageIO.write(bufferedImage, "png", imgPathTarg.toFile());
 
             byte[] fileBytes = fileContent.readAllBytes();
             Blob fileBlob = new javax.sql.rowset.serial.SerialBlob(fileBytes);
@@ -56,12 +60,12 @@ public class FileUploadServlet extends HttpServlet
             AdDAO adDAO = new AdDAO();
             adDAO.create(ad);
 
-            response.sendRedirect("admin.jsp"); // Redirect to a success page
+            response.sendRedirect("adRead.jsp"); // Redirect to a success page
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            response.sendRedirect("adCreate.jsp"); // Redirect to an error page
+            response.sendRedirect("index.jsp"); // Redirect to an error page
         }
 
     }

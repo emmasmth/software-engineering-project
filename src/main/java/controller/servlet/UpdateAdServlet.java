@@ -12,6 +12,7 @@ import model.entity.Ad;
 import model.entity.User;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 @WebServlet(name = "UpdateAdServlet", value = "/UpdateAdServlet")
 @MultipartConfig
@@ -27,8 +28,12 @@ public class UpdateAdServlet extends HttpServlet
         {
             Ad ad = AdService.getAd(id);
             ad.setFilename(newname);
-            AdService.editAd(ad);
-            repsonse.sendRedirect("admin.jsp");
+
+            String sTarg = getServletContext().getRealPath("/adimages/");
+
+            AdService.editAd(ad, sTarg);
+
+            repsonse.sendRedirect("adRead.jsp");
         }
         else
         {
