@@ -23,9 +23,14 @@ public class DoubleDownServlet extends HttpServlet {
                 session.setAttribute("betAmount", game.getBet());
                 session.setAttribute("game", game);
                 response.sendRedirect("continue.jsp");
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+
+                //Check Bust
+                if (game.playerTotal() > 21) {
+                    int winner = game.determineWinner();
+                    game.setIsPlayersTurn(false);
+                    game.setIsDealerTurn(false);
+                    session.setAttribute("winner", winner);
+                }
         } else {
             // Handle case where game is null - redirect to start page or show error
             response.sendRedirect("index.jsp");

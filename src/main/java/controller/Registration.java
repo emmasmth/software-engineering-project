@@ -68,5 +68,14 @@ public class Registration {
         return dao.update(u);
     }
 
+    public User updateUser(User u){
+        if(u.getPassword() == null || u.getPassword().trim().length() == 0) {
+            User originalUser = dao.read(u.getID());
+            u.setPassword(originalUser.getPassword());
+        }
+        return dao.update(u);
+    }
+
+
 }
 

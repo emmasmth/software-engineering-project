@@ -4,10 +4,15 @@ import java.io.*;
 import controller.PlayGame;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import model.entity.User;
+import controller.Registration;
+import model.dao.UserDAO;
+
 
 @WebServlet(name = "BetServlet", value = "/BetServlet")
 public class BetServlet extends HttpServlet {
-
+    public Registration registration = new Registration();
+    public static UserDAO dao = new UserDAO();
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         PlayGame game = new PlayGame();
@@ -21,7 +26,11 @@ public class BetServlet extends HttpServlet {
                 game.setBet(betAmount);
                 session.setAttribute("game", game);
                 session.setAttribute("betAmount", betAmount); // Storing the bet amount in session
-//                response.sendRedirect("continue.jsp"); // Redirect to continue.jsp
+
+                User user = (User) session.getAttribute("User");
+                user.subFromBank(betAmount);
+                registration.updateUser(user);
+
                 response.sendRedirect("StartServlet");
 
             } catch (NumberFormatException e) {

@@ -5,7 +5,7 @@
   Time: 7:05 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="controller.PlayGame" %>
+<%@ page import="model.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,6 +20,8 @@
 <div class="container">
     <div class="row text-center mt-3">
         <h2>Place Your Bet</h2>
+       <% User user = (User) session.getAttribute("User");%>
+        <h2>Bank: <%=user.getBank() %></h2>
         <form method="post" action="BetServlet">
             <div class="form-group">
                 <label for="betAmount">Bet Amount:</label>

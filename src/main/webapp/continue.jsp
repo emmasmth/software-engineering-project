@@ -1,4 +1,4 @@
-<%@ page import="controller.Blackjack" %>
+<%@ page import="model.entity.User" %>
 <%@ page import="controller.Card" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="controller.PlayGame" %><%--
@@ -38,15 +38,20 @@
 <div class="container">
     <div class="row text-center mt-3">
         <%
+            User user = (User) session.getAttribute("User");
             PlayGame game = (PlayGame) session.getAttribute("game");
             Integer winner = (Integer) session.getAttribute("winner");
+
 
             //game not started - only show play button, leads to bet page
             if (game == null){
                 %>
                 <p>No game started. Click "Play" to start your game session.</p>
                 <form action="NewGameServlet" method="post">
-                    <button type="submit">Play</button>
+                    <button type="submit" class="btn btn-success">Play</button>
+                </form>
+                <form method="get" action="LeaderboardServlet">
+                    <button type="submit" class="btn btn-warning">Leaderboard</button>
                 </form>
                 <%
             //game started, continue with play
@@ -62,6 +67,7 @@
                     } else {
                         out.println("<p>No bet placed.</p>");
                     }
+                    out.println(user.getBank());
                 %>
 
                 <div>
@@ -71,6 +77,7 @@
                     <% } else {%>
                             <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
                     <% }
+                        session.setAttribute("dealerTotal", game.dealerTotal());
                      int cardIndex = 0;
                      for (Card card : dealerHand) {
                         String imageFileName;
@@ -91,7 +98,8 @@
                 <div>
                     <% //show player's hand%>
                     <h3>Player's Hand: <%= game.playerTotal() %></h3>
-                    <% for (Card card : playerHand) { %>
+                    <% session.setAttribute("playerTotal", game.playerTotal());
+                        for (Card card : playerHand) { %>
                     <%
                         String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
                     %>
@@ -114,7 +122,16 @@
             <button type="submit" class="btn btn-danger">Stand</button>
         </form>
     </div>
+    <%-- Double Down Button--%> <%
+    if (game != null && game.getPlayerHand().size() > 0) {
+    if (game.getPlayerHand().size()==2){%>
+    <div class="col-1 d-grid">
+        <a href="DoubleDownServlet" class="btn btn-warning">Double</a>
+    </div>
+        <% } }%>
     <% if(winner!=null && winner!=0){
+        session.setAttribute("dealerHand", game.getDealerHand());
+        session.setAttribute("playerHand", game.getPlayerHand());
         String message;
         switch(winner) {
             case 1: message = "It's a tie!"; break;
@@ -130,19 +147,8 @@
         response.sendRedirect("outcome.jsp");
         return;
     }
-
-    if (game != null && game.getPlayerHand().size() > 0) {
-        if (game.getPlayerHand().size()==2 && (game.playerTotal() == 9 || game.playerTotal() == 10 || game.playerTotal() ==11)){%>
-    <!-- Double Down -->
-    <div class="col-1 d-grid">
-        <a href="DoubleDownServlet" class="btn btn-warning">Double</a>
+    %>
     </div>
-    <% } %>
-
-    <%}else{%>
-
-    <%}%>
-</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

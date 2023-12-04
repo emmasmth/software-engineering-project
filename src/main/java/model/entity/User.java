@@ -15,6 +15,7 @@ public class User extends BaseEntity
     private int Permission;
     private int Wins;
     private int Loses;
+    private double Bank;
 
     // keyword transient, meaning that the data member will not be serialized.
     public transient static final int USER_PERMISSION = 1;
@@ -148,6 +149,13 @@ public class User extends BaseEntity
     public void setLoses(int loses){Loses=loses;}
     public void incLoses(){Loses++;}
     public int getLoses(){return Loses;}
+
+
+    //Bank
+    public void setBank(double bank){Bank = bank;}
+    public void addToBank(double add){Bank = Bank + add;}
+    public void subFromBank(double sub){Bank = Bank -sub;}
+    public double getBank(){return Bank;}
 
 }
 

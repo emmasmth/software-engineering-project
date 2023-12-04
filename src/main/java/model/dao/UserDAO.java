@@ -4,6 +4,7 @@ import model.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import java.util.List;
 
 public class UserDAO extends GenericDAO<User> {
 
@@ -25,5 +26,15 @@ public class UserDAO extends GenericDAO<User> {
             entityManager.close();
         }
         return located;
+    }
+
+    public List<User> getUsersSortedByWins() {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery("SELECT u FROM " + getTableName() + " u ORDER BY u.Wins DESC", User.class)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
     }
 }
