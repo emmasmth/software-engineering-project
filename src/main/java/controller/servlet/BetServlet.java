@@ -21,10 +21,11 @@ public class BetServlet extends HttpServlet {
                 game.setBet(betAmount);
                 session.setAttribute("game", game);
                 session.setAttribute("betAmount", betAmount); // Storing the bet amount in session
-                response.sendRedirect("continue.jsp"); // Redirect to continue.jsp
+//                response.sendRedirect("continue.jsp"); // Redirect to continue.jsp
+                response.sendRedirect("StartServlet");
+
             } catch (NumberFormatException e) {
-                // Handle invalid bet amount (e.g., not a number)
-                // Optionally redirect to an error page or back to the betting page with an error message
+                // Handle invalid bet amount (e.g., not a number - redirect back to the betting page with an error message
                 response.sendRedirect("betting.jsp?error=InvalidBetAmount");
             }
 //        } else {

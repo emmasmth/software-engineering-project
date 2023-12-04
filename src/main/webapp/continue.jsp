@@ -36,90 +36,79 @@
 <jsp:include page="components/menu.jsp"/>
 
 <div class="container">
-
     <div class="row text-center mt-3">
         <%
             PlayGame game = (PlayGame) session.getAttribute("game");
             Integer winner = (Integer) session.getAttribute("winner");
-            if (game != null) {
-                ArrayList<Card> dealerHand = game.getDealerHand();
-                ArrayList<Card> playerHand = game.getPlayerHand();
 
-                Double betAmount = (Double) session.getAttribute("betAmount");
-                if (betAmount != null) {
-                    out.println("<p>Your bet amount: " + betAmount + "</p>");
-                } else {
-                    out.println("<p>No bet placed.</p>");
-                }
-        %>
+            //game not started - only show play button, leads to bet page
+            if (game == null){
+                %>
+                <p>No game started. Click "Play" to start your game session.</p>
+                <form action="NewGameServlet" method="post">
+                    <button type="submit">Play</button>
+                </form>
+                <%
+            //game started, continue with play
+            } else {
+                    //deal cards
+                    ArrayList<Card> dealerHand = game.getDealerHand();
+                    ArrayList<Card> playerHand = game.getPlayerHand();
 
-        <div>
+                    //show bet amount
+                    Double betAmount = (Double) session.getAttribute("betAmount");
+                    if (betAmount != null) {
+                        out.println("<p>Your bet amount: " + betAmount + "</p>");
+                    } else {
+                        out.println("<p>No bet placed.</p>");
+                    }
+                %>
 
-            <% if (game.getIsPlayersTurn()) { %>
-            <h3>Dealer's Hand: <%= game.dealerFirstCardValue() %></h3>
-            <% } else {%>
-            <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
-            <% } %>
+                <div>
+                    <% //show dealer hand
+                        if (game.getIsPlayersTurn()) { %>
+                            <h3>Dealer's Hand: <%= game.dealerFirstCardValue() %></h3>
+                    <% } else {%>
+                            <h3>Dealer's Hand: <%= game.dealerTotal() %></h3>
+                    <% }
+                     int cardIndex = 0;
+                     for (Card card : dealerHand) {
+                        String imageFileName;
+                        if (cardIndex == 1 && game.getIsPlayersTurn()) {
+                            // Display the back of the card if it's the second card and it's still the player's turn
+                            imageFileName = "card_back.png";
 
-
-
-            <% int cardIndex = 0; %>
-            <% for (Card card : dealerHand) { %>
-            <%
-                String imageFileName;
-                if (cardIndex == 1 && game.getIsPlayersTurn()) {
-                    // Display the back of the card if it's the second card and it's still the player's turn
-                    imageFileName = "card_back.png";
-
-                } else {
-                    imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
-                }
-                cardIndex++;
-            %>
-
-            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> "width="75" height="75">
-            <% } %>
-        </div>
-
-
-        <div>
-            <h3>Player's Hand: <%= game.playerTotal() %></h3>
-            <% for (Card card : playerHand) { %>
-            <%
-                String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
-            %>
-
-            <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
-            <% } %>
-        </div>
-
-        <%
-        } else {
-        %>
-        <p>No game started. Click "Play" to start your game session.</p>
-        <%
-            }
-        %>
+                        } else {
+                            imageFileName = card.getNumber() + "_of_" + card.getSuit() + ".png";
+                        }
+                        cardIndex++;
+                    %>
+                    <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> "width="75" height="75">
+                    <% } %>
+                </div>
 
 
+                <div>
+                    <% //show player's hand%>
+                    <h3>Player's Hand: <%= game.playerTotal() %></h3>
+                    <% for (Card card : playerHand) { %>
+                    <%
+                        String imageFileName = card.getNumber() + "_of_" + card.getSuit()+ ".png";
+                    %>
+
+                    <img src="images/<%= imageFileName %>" alt="<%= card.getNumber() %>_of_<%= card.getSuit() %> " class="blackjack-card drawing" width="75" height="75">
+                    <% } %>
+                </div>
     </div>
 </div>
 
 <!-- Game Controls -->
 <div class="row justify-content-center mt-3">
-    <%
-        if (game == null || (!game.getIsPlayersTurn() && !game.getIsDealerTurn())) {
-    %>
-    <!-- Play Button (deal cards) -->
-    <div class="col-1 d-grid">
-        <a href="StartServlet" class="btn btn-primary">Play</a>
-    </div>
-    <%
-        }
-    %>
     <!-- Hit Button -->
     <div class="col-1 d-grid">
-        <a href="HitServlet" class="btn btn-success">Hit</a>
+        <form method="post" action="HitServlet">
+            <button type="submit" class="btn btn-success">Hit</button>
+        </form>
     </div>
     <!-- Stand Button -->
     <div class="col-1 d-grid">
@@ -135,9 +124,15 @@
             case 3: message = "Dealer wins!"; break;
             default: message = "Unexpected game outcome."; break;
         }
-        out.println("<h3>" + message + "</h3>");
-
+//        out.println("<h3>" + message + "</h3>");
+        session.setAttribute("outcomeMessage", message);
+        game.calcPayOut();
+        double payout = game.getPayout();
+        session.setAttribute("payout", payout);
+        response.sendRedirect("outcome.jsp");
+        return;
     }
+
     if (game != null && game.getPlayerHand().size() > 0) {
         if (game.getPlayerHand().size()==2 && (game.playerTotal() == 9 || game.playerTotal() == 10 || game.playerTotal() ==11)){%>
     <!-- Double Down -->
@@ -153,6 +148,8 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<%}%>
+
 
 </body>
 </html>

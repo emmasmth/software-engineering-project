@@ -11,7 +11,6 @@
 <head>
     <jsp:include page="components/header.jsp"/>
     <style>
-        /* Add any specific styles for your betting page here */
     </style>
 </head>
 <body>
