@@ -38,6 +38,7 @@ public class PlayGame {
      */
     public PlayGame() {
         deck = new Deck();
+        deck.initializeDeck();
         game = new Blackjack();
     }
 

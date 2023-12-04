@@ -1,5 +1,6 @@
 package controller.servlet;
 
+import controller.PlayGame;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -12,10 +13,15 @@ public class NewGameServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         // Clear the game-related attributes
+
+
         session.removeAttribute("game");
         session.removeAttribute("betAmount");
         session.removeAttribute("winner");
         session.removeAttribute("payout");
+
+        PlayGame game = new PlayGame();
+        session.setAttribute("game",game);
 
         // Redirect to the initial page to start a new game
         response.sendRedirect("betting.jsp");

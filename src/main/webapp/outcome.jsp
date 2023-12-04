@@ -21,19 +21,11 @@
             <p>Payout: $ <%= session.getAttribute("payout") %></p>
 
             <!-- New Game Button (resets game and redirects to beginning)-->
-<%--            <form action="NewGameServlet" method="post">--%>
-<%--                <button type="submit">New Game</button>--%>
-<%--            </form>--%>
-
             <form method="post" action="NewGameServlet">
                 <button type="submit" class="btn btn-success">New Game</button>
             </form>
 
             <!-- Leaderboard Button-->
-<%--            <form action="LeaderboardServlet" method="post">--%>
-<%--                <button type="submit">Leaderboard</button>--%>
-<%--            </form>--%>
-
             <form method="post" action="LeaderboardServlet">
                 <button type="submit" class="btn btn-warning">Leaderboard</button>
             </form>

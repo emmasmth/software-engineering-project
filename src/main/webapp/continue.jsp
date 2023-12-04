@@ -106,9 +106,7 @@
 <div class="row justify-content-center mt-3">
     <!-- Hit Button -->
     <div class="col-1 d-grid">
-        <form method="post" action="HitServlet">
-            <button type="submit" class="btn btn-success">Hit</button>
-        </form>
+        <a href="HitServlet" class="btn btn-success">Hit</a>
     </div>
     <!-- Stand Button -->
     <div class="col-1 d-grid">
