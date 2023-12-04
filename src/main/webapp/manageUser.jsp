@@ -42,6 +42,7 @@
         <th>Permission</th>
         <th>Wins</th>
         <th>Losses</th>
+        <th>Balance</th>
       </tr>
     </thead>
 
@@ -63,6 +64,8 @@
         <td><%=u.getPermissionAsString()%></td>
         <td><%=u.getWins()%></td>
         <td><%=u.getLoses()%></td>
+        <td><%=u.getBank()%></td>
+
       </tr>
 
       <div class="modal" id="editUserModal_<%= u.getID() %>">
@@ -123,6 +126,13 @@
                   <label class="col-md-2" for="editedLosses">Losses: </label>
                   <div class="col-8">
                     <input class="form-control" type="text" id="editedLosses" name="editedLosses" value="<%= u.getLoses()%>"/>
+                  </div>
+                </div>
+
+                <div class="row mb-1">
+                  <label class="col-md-2" for="editedBalance">Balance: </label>
+                  <div class="col-8">
+                    <input class="form-control" type="text" id="editedBalance" name="editedBalance" value="<%= u.getBank()%>"/>
                   </div>
                 </div>
 

@@ -24,6 +24,7 @@ public class EditUserServlet extends HttpServlet {
         String editedPermission = request.getParameter("editedPermission");
         String editedWins = request.getParameter("editedWins");
         String editedLosses = request.getParameter("editedLosses");
+        String editedBalance = request.getParameter("editedBalance");
 
         User editedUser = new User();
         editedUser.setID(Integer.parseInt(editedID));
@@ -33,7 +34,7 @@ public class EditUserServlet extends HttpServlet {
         editedUser.setPermission(Integer.parseInt(editedPermission));
         editedUser.setWins(Integer.parseInt(editedWins));
         editedUser.setLoses(Integer.parseInt(editedLosses));
-
+        editedUser.setBank(Double.parseDouble(editedBalance));
 
         registration.editUser(editedUser);
         response.sendRedirect("manageUser.jsp");
