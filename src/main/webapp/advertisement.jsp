@@ -1,3 +1,9 @@
+<%@ page import="model.entity.Ad" %>
+<%@ page import="java.util.List" %>
+<%@ page import="controller.AdService" %>
+
+
+
 <%--
   Created by IntelliJ IDEA.
   User: emmasmith
@@ -50,27 +56,45 @@
     <jsp:include page="components/background.jsp"/>
     <jsp:include page="components/menu.jsp"/>
 
+
+    <%
+        List<Ad> lstAds = AdService.listAds(null);
+        int sz = lstAds.size();
+    %>
+
+
     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
         <!-- Indicators -->
         <ol class="carousel-indicators">
+            <%
+                int count = 0;
+            %>
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <% for(int j = 1; j < sz; j++) { %>
+            <li data-target="#myCarousel" data-slide-to="<%=j%>"></li>
+            <% } %>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
+
+        <%
+            for(int j = 0; j < sz; j++) {
+
+                if(j == 0)
+                {
+        %>
             <div class="item active">
-                <img src="adimages/fakead1.PNG" alt="fake image 1">
+                <img src="adimages/<%=lstAds.get(j).getFilename()%>" alt="<%=lstAds.get(j).getFilename()%> Advertisement">
             </div>
 
+        <% } else { %>
             <div class="item">
-                <img src="adimages/fakead2.png" alt="fake image 2">
+                <img src="adimages/<%=lstAds.get(j).getFilename()%>" alt="<%=lstAds.get(j).getFilename()%> Advertisement">
             </div>
 
-            <div class="item">
-                <img src="adimages/fakead3.PNG" alt="fake image 3">
-            </div>
+        <% } }%>
+
         </div>
 
         <!-- Left and right controls -->
