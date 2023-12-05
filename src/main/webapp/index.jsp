@@ -118,12 +118,35 @@
                 <p>glhf!</p>
             </div>
         </div>
+
+        <% User logged = (User) session.getAttribute("User"); %>
+        <% if (logged != null)
+        {
+            if (logged.getPermission() == 1)
+            { // this is user%>
+        <div class="button-container">
+            <!-- https://www.w3schools.com/css/css3_buttons.asp -->
+            <button class="button-click" onclick="window.location.href = 'advertisement.jsp';">Game</button>
+        </div>
+            <%
+            }
+            else if(logged.getPermission() == 2)
+            { // this is an admin %>
+        <div class="button-container">
+            <!-- https://www.w3schools.com/css/css3_buttons.asp -->
+            <button class="button-click" onclick="window.location.href = 'admin.jsp';">Admin Page</button>
+        </div>
+            <%
+            }
+
+        }
+        else { %>
         <div class="button-container">
             <!-- https://www.w3schools.com/css/css3_buttons.asp -->
             <button class="button-click" onclick="window.location.href = 'registration.jsp';">Register</button>
             <button class="button-click" onclick="window.location.href = 'login.jsp';">Log In</button>
-
         </div>
+        <% } %>
     </div>
     <!-- need to work on spacing -->
     <!-- if we want a footer, put it here -->
