@@ -1,5 +1,6 @@
 package controller.servlet;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.entity.Ad;
@@ -12,14 +13,13 @@ import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 
-public class DeleteAdServletTest {
+public class UpdateAdServletTest {
 
     @Test
-    public void deleteAdServletTest() throws IOException
-    {
+    public void updateAdServletTest() throws IOException, ServletException {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
-        DeleteAdServlet servlet = new DeleteAdServlet();
+        UpdateAdServlet servlet = new UpdateAdServlet();
         Ad ad = mock(Ad.class);
         servlet.doPost(request, response);
 
@@ -28,11 +28,10 @@ public class DeleteAdServletTest {
     }
 
     @Test
-    public void deleteAdServletTestGet() throws IOException
-    {
+    public void updateAdServletTestGet() throws IOException, ServletException {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
-        DeleteAdServlet servlet = new DeleteAdServlet();
+        UpdateAdServlet servlet = new UpdateAdServlet();
         Ad ad = mock(Ad.class);
         servlet.doGet(request, response);
 
